@@ -1360,7 +1360,7 @@
         </a>
       </div>
       <div class="nav-links">
-        <a class="nav-visual-link nav-projects-link" href="#projects">
+        <a class="nav-visual-link nav-projects-link" href="#projects" data-projects-jump>
           <span>Projects</span>
           <span class="nav-icon" aria-hidden="true">
             <img class="icon-off" src="assets/nav-bulb-off.png" alt="">
@@ -2014,6 +2014,7 @@
     const typingTarget = document.querySelector(".typing-text");
     const scrollCue = document.querySelector(".scroll-cue");
     const introStoryLinks = document.querySelectorAll("[data-intro-story]");
+    const projectJumpLinks = document.querySelectorAll("[data-projects-jump]");
     const storyIndicator = document.querySelector(".story-scroll-indicator");
     const greetingLines = [
       "Hi,",
@@ -2104,6 +2105,17 @@
       });
     }
 
+    function scrollToProjects(event) {
+      event.preventDefault();
+      const projects = document.querySelector("#projects");
+      if (!projects) return;
+      const curveClearance = Math.round(2.4 * 37.795);
+      window.scrollTo({
+        top: projects.offsetTop + curveClearance,
+        behavior: reducedMotion ? "auto" : "smooth"
+      });
+    }
+
     async function runTypingLoop() {
       if (!typingTarget) return;
       if (reducedMotion) {
@@ -2164,6 +2176,9 @@
     });
     introStoryLinks.forEach((link) => {
       link.addEventListener("click", scrollToIntroStory);
+    });
+    projectJumpLinks.forEach((link) => {
+      link.addEventListener("click", scrollToProjects);
     });
     runTypingLoop();
 
