@@ -2008,6 +2008,7 @@
     const banner = document.querySelector(".banner");
     const intro = document.querySelector(".intro");
     const introCopy = document.querySelector(".intro-copy");
+    const projectsSection = document.querySelector(".project-start");
     const taglineCallout = document.querySelector(".tagline-callout");
     const calloutTrack = document.querySelector(".callout-track");
     const storyParagraphs = Array.from(document.querySelectorAll(".intro-body-callout p"));
@@ -2050,8 +2051,11 @@
       const storyRange = Math.max(1, trackDistance - indicatorStart);
       const projectStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
       const releaseStart = trackDistance + gapToProjects;
-      const projectNestOverlap = 30;
-      const openingHeight = Math.max(window.innerHeight, projectStart + navHeight + bannerHeight - projectNestOverlap);
+      const projectMarginTop = projectsSection
+        ? parseFloat(getComputedStyle(projectsSection).marginTop) || 0
+        : 0;
+      const projectNestOverlap = 0;
+      const openingHeight = Math.max(window.innerHeight, projectStart + navHeight - projectMarginTop - projectNestOverlap);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
       openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
       openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
