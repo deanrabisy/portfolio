@@ -1,0 +1,2140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dean Rabisy | Portfolio</title>
+  <meta name="description" content="Portfolio of Dean Rabisy: design, product thinking, and hands-on learning tools.">
+  <style>
+    :root {
+      --ink: #172224;
+      --muted: #607176;
+      --soft: #899aa0;
+      --paper: #f7fbfa;
+      --surface: #ffffff;
+      --wash: #e6f3f3;
+      --line: #d2e3e3;
+      --moss: #213b40;
+      --aqua: #54bfd0;
+      --cyan: #bfe5e7;
+      --clay: #c26f56;
+      --blue: #4f8199;
+      --gold: #d6a64b;
+      --plum: #756986;
+      --shadow: 0 22px 70px rgba(23, 34, 36, .12);
+      --max: 1180px;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 16px/1.6 Aptos, "Aptos Display", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      width: 100%;
+    }
+
+    button,
+    a {
+      color: inherit;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(23, 26, 24, .08);
+      background: rgba(247, 251, 250, .9);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      width: min(var(--max), calc(100% - 32px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .mail-icon {
+      flex: 0 0 auto;
+      position: relative;
+      display: block;
+      width: 66px;
+      height: 54px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .72);
+      text-decoration: none;
+      filter: drop-shadow(0 7px 9px rgba(23, 34, 36, .18));
+      transition: transform .22s ease, filter .22s ease;
+    }
+
+    .mail-icon:hover,
+    .mail-icon:focus-visible {
+      transform: translateY(-2px);
+      filter: drop-shadow(0 11px 14px rgba(23, 34, 36, .24));
+      outline: none;
+    }
+
+    .mail-icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity .22s ease, transform .28s ease;
+    }
+
+    .mail-icon .mail-open {
+      opacity: 0;
+      transform: translateY(8px) scale(.9);
+    }
+
+    .mail-icon:hover .mail-closed,
+    .mail-icon:focus-visible .mail-closed,
+    .nav-contact:hover .mail-closed,
+    .nav-contact:focus-visible .mail-closed {
+      opacity: 0;
+      transform: translateY(8px) scale(.92);
+    }
+
+    .mail-icon:hover .mail-open,
+    .mail-icon:focus-visible .mail-open,
+    .nav-contact:hover .mail-open,
+    .nav-contact:focus-visible .mail-open {
+      opacity: 1;
+      transform: translateY(-6px) scale(1.06) rotate(-3deg);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      line-height: 1.2;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand strong {
+      font-size: clamp(1.45rem, 2.1vw, 1.9rem);
+      letter-spacing: 0;
+      font-weight: 780;
+    }
+
+    .brand strong::after {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      margin-left: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      vertical-align: .18em;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .nav-links a {
+      padding: 7px 11px;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--ink);
+      background: var(--wash);
+      outline: none;
+    }
+
+    .nav-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 0 2px 9px;
+      margin-left: 4px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-contact .mail-icon {
+      width: 50px;
+      height: 42px;
+    }
+
+    .opening {
+      --nav-height: 64px;
+      --banner-height: clamp(220px, 32svh, 330px);
+      --intro-top-gap: clamp(24px, 4vw, 48px);
+      --callout-sticky-top: calc(var(--nav-height) + var(--banner-height) + var(--intro-top-gap));
+      --intro-stage-lift: 2cm;
+      --callout-width: 760px;
+      --release-offset: 0px;
+      --intro-track-y: 0px;
+      --opening-height: 260svh;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .opening.pinned,
+    .opening.releasing {
+      padding-top: var(--banner-height);
+    }
+
+    .banner {
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 4;
+      min-height: var(--banner-height);
+      background: var(--wash);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .opening.pinned .banner,
+    .opening.releasing .banner {
+      position: fixed;
+      left: 0;
+      right: 0;
+      transform: translateY(calc(var(--release-offset) * -1));
+    }
+
+    .banner img {
+      height: var(--banner-height);
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .intro {
+      position: relative;
+      z-index: 1;
+      height: var(--opening-height);
+      min-height: 0;
+      padding: var(--intro-top-gap) 0 0;
+      background: var(--paper);
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .intro-copy {
+      width: min(780px, 66.666%);
+      margin: 0 auto;
+    }
+
+    .intro-callout {
+      --callout-height: clamp(350px, 44svh, 460px);
+      width: min(760px, 100%);
+      margin: 0 auto;
+      min-height: var(--callout-height);
+      padding: 0;
+    }
+
+    .tagline-callout {
+      position: sticky;
+      top: calc(var(--callout-sticky-top) - var(--intro-stage-lift));
+      z-index: 2;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .opening.pinned .tagline-callout,
+    .opening.releasing .tagline-callout {
+      position: fixed;
+      left: 50%;
+      width: min(var(--callout-width), calc(100% - 32px));
+      transform: translateX(-50%) translateY(calc(var(--release-offset) * -1));
+    }
+
+    .callout-track {
+      position: absolute;
+      top: calc(var(--intro-track-y) * -1);
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(46px, 8svh, 86px);
+    }
+
+    .tagline-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 0 0 var(--callout-height);
+      gap: 6px;
+      padding-bottom: clamp(18px, 3svh, 38px);
+      transform: translateY(.5cm);
+    }
+
+    .typing-text {
+      width: 100%;
+      display: block;
+      color: #245e68;
+      font-size: clamp(1.24rem, 2.15vw, 1.68rem);
+      line-height: 1.48;
+      font-weight: 650;
+      white-space: pre-wrap;
+      overflow-wrap: normal;
+      word-break: normal;
+      transition: opacity .38s ease;
+    }
+
+    .typing-text.is-fading {
+      opacity: 0;
+    }
+
+    .typing-cursor {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      margin-left: 4px;
+      background: var(--blue);
+      animation: blink .55s steps(2, start) infinite;
+      transform: translateY(2px);
+      vertical-align: -0.15em;
+    }
+
+    .scroll-cue {
+      position: relative;
+      width: 48px;
+      min-width: 48px;
+      min-height: 50px;
+      margin: calc(24px - 1cm) auto 0;
+      display: inline-grid;
+      place-items: center;
+      opacity: 0;
+      color: #527077;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity .36s ease, transform .36s ease, color .22s ease;
+    }
+
+    .scroll-cue.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-cue span {
+      position: relative;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 13px solid #4f9fa8;
+      filter: drop-shadow(0 0 6px rgba(84, 191, 208, .32)) drop-shadow(0 8px 10px rgba(23, 34, 36, .16));
+      animation: scrollDotPulse 1.5s ease-in-out infinite;
+    }
+
+    .scroll-cue span::before {
+      content: "";
+      position: absolute;
+      left: -17px;
+      top: -22px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 229, 231, .46), rgba(84, 191, 208, .2) 42%, rgba(84, 191, 208, 0) 72%);
+      z-index: -1;
+    }
+
+    .scroll-cue:hover,
+    .scroll-cue:focus-visible {
+      color: #245e68;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    @keyframes scrollDotPulse {
+      0%,
+      100% {
+        opacity: .46;
+        transform: translateY(-5px) scale(.84);
+      }
+
+      48% {
+        opacity: 1;
+        transform: translateY(7px) scale(1.04);
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .intro-body-callout {
+      flex: 0 0 auto;
+      padding-bottom: 0;
+    }
+
+    .intro-body-callout p {
+      max-width: min(690px, 100%);
+      margin: 0 0 calc(clamp(92px, 13svh, 150px) + 1cm);
+      padding: clamp(8px, 1.2svh, 14px) 0 0;
+      color: #172224;
+      font-size: clamp(1.04rem, 1.34vw, 1.17rem);
+      line-height: 1.58;
+      font-weight: 400;
+      opacity: 1;
+      text-rendering: geometricPrecision;
+    }
+
+    .story-scroll-indicator {
+      --story-progress: 0;
+      position: absolute;
+      top: 52%;
+      right: 0;
+      z-index: 3;
+      width: 40px;
+      height: clamp(118px, 20svh, 172px);
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: opacity .24s ease;
+    }
+
+    .story-scroll-indicator::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 20px;
+      width: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, rgba(79, 129, 153, .15), rgba(84, 191, 208, .55), rgba(79, 129, 153, .15));
+    }
+
+    .story-scroll-indicator::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: calc(var(--story-progress) * (100% - 12px));
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 12px solid #4f9fa8;
+      filter: drop-shadow(0 0 5px rgba(84, 191, 208, .28)) drop-shadow(0 7px 12px rgba(23, 34, 36, .14));
+    }
+
+    .story-scroll-indicator .story-glow {
+      position: absolute;
+      left: 2px;
+      top: calc(var(--story-progress) * (100% - 12px) - 12px);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 229, 231, .42), rgba(84, 191, 208, .18) 44%, rgba(84, 191, 208, 0) 74%);
+    }
+
+    .opening.story-active .story-scroll-indicator {
+      opacity: 1;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--blue);
+      font-size: .78rem;
+      font-weight: 820;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .intro p:not(.eyebrow):not(.intro-lede):not(.typing-text) {
+      max-width: 730px;
+      margin: 14px 0 0;
+      color: #333b37;
+      font-size: clamp(.96rem, 1.15vw, 1.04rem);
+    }
+
+    .intro .intro-body-callout p {
+      max-width: min(690px, 100%);
+      margin: 0 0 calc(clamp(92px, 13svh, 150px) + 1cm);
+      color: #172224;
+      font-size: clamp(1.04rem, 1.34vw, 1.17rem);
+    }
+
+    .intro .intro-body-callout p:last-child {
+      font-weight: 700;
+    }
+
+    .project-start {
+      position: relative;
+      z-index: 6;
+      min-height: 100svh;
+      display: grid;
+      align-items: start;
+      padding: clamp(86px, 13svh, 128px) 0;
+      color: #f4fbfb;
+      background: linear-gradient(135deg, #1f5964, #48aebe);
+    }
+
+    .project-start-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: clamp(28px, 5vw, 72px);
+      align-items: start;
+    }
+
+    .project-start-copy {
+      min-width: 0;
+    }
+
+    .project-start h2,
+    .closing h2 {
+      max-width: 900px;
+      font-size: clamp(2.8rem, 7vw, 6.4rem);
+      font-weight: 760;
+      letter-spacing: -.01em;
+    }
+
+    .project-start p {
+      max-width: 690px;
+      margin: calc(24px + 1cm) 0 0;
+      color: #d8eeee;
+      font-size: 1.16rem;
+    }
+
+    .project-logo-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 14px;
+      max-width: 340px;
+      padding-top: clamp(10px, 1.8vw, 24px);
+    }
+
+    .project-logo-link {
+      display: grid;
+      place-items: center;
+      width: clamp(108px, 10.5vw, 150px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: 0 12px 28px rgba(23, 34, 36, .16);
+      overflow: hidden;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .project-logo-link:hover,
+    .project-logo-link:focus-visible {
+      transform: translateY(-3px);
+      outline: none;
+      box-shadow: 0 16px 34px rgba(23, 34, 36, .22);
+    }
+
+    .project-logo-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .project-flow-bg {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(248, 252, 252, .34), rgba(248, 252, 252, .44)),
+        url("assets/project-background-option-2.png") center top / 100% 100% no-repeat,
+        var(--paper);
+    }
+
+    .project-strip {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: clamp(86px, 11svh, 118px) 0;
+      background: transparent;
+    }
+
+    .project-strip:nth-of-type(odd) {
+      background: rgba(238, 247, 247, .08);
+    }
+
+    .project-strip > .wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.22fr) minmax(300px, .78fr);
+      gap: clamp(24px, 4vw, 52px);
+      align-items: center;
+    }
+
+    .project-strip.reverse .project-grid {
+      grid-template-columns: minmax(300px, .78fr) minmax(0, 1.22fr);
+    }
+
+    .project-strip.reverse .project-media {
+      order: 2;
+    }
+
+    .project-strip.reverse .project-copy {
+      order: 1;
+    }
+
+    .project-media {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .project-media:has(video) {
+      width: calc(100% + 3cm);
+      max-width: calc(100vw - 32px);
+      justify-self: center;
+    }
+
+    .project-media video,
+    .project-media img {
+      aspect-ratio: 16 / 9;
+      height: auto;
+      background: var(--wash);
+    }
+
+    .project-media video {
+      aspect-ratio: 18.8 / 8.2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .project-media img {
+      object-fit: contain;
+    }
+
+    .project-media.portrait img {
+      aspect-ratio: 5 / 6;
+      object-fit: contain;
+      padding: 22px;
+      background: #f8fcfc;
+    }
+
+    .media-caption {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      padding: 13px 15px;
+      border-top: 1px solid var(--line);
+      color: #46575c;
+      background: #ffffff;
+      font-size: .92rem;
+      line-height: 1.45;
+    }
+
+    .open-hit {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .project-copy {
+      max-width: 610px;
+      padding-left: 1.5cm;
+    }
+
+    .project-number {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: var(--clay);
+      font-size: .78rem;
+      font-weight: 820;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .project-copy h2 {
+      color: #245e68;
+      font-size: clamp(2.6rem, 6vw, 5.6rem);
+      font-weight: 780;
+      letter-spacing: -.01em;
+    }
+
+    .tagline {
+      margin: 18px 0 0;
+      color: #38423e;
+      font-size: clamp(1.12rem, 2vw, 1.34rem);
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: #f4fbfb;
+      background: var(--ink);
+      font: inherit;
+      font-weight: 760;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: transparent;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+      box-shadow: 0 8px 18px rgba(23, 26, 24, .12);
+    }
+
+    .case-study-button {
+      position: relative;
+      width: auto;
+      min-width: 158px;
+      height: 44px;
+      min-height: 0;
+      padding: 0 18px;
+      border: 1px solid rgba(36, 94, 104, .28);
+      border-radius: 999px;
+      color: #245e68;
+      background-color: rgba(255, 255, 255, .22);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 0 8px 18px rgba(36, 94, 104, .08);
+      backdrop-filter: blur(2px) saturate(1.1);
+      font-size: .88rem;
+      line-height: 1;
+      font-weight: 680;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .72);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .case-study-button::before {
+      content: none;
+    }
+
+    .case-study-button::after {
+      content: none;
+    }
+
+    .case-study-button:hover,
+    .case-study-button:focus-visible {
+      color: #1f5964;
+      border-color: rgba(36, 94, 104, .46);
+      background-color: rgba(255, 255, 255, .34);
+      box-shadow: 0 10px 22px rgba(36, 94, 104, .14);
+    }
+
+    .case-button-1 {
+      background-image: none;
+    }
+
+    .case-button-2 {
+      background-image: none;
+    }
+
+    .case-button-3 {
+      background-image: none;
+    }
+
+    .case-button-4 {
+      background-image: none;
+    }
+
+    .project-next {
+      position: relative;
+      grid-column: 1;
+      order: 3;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      margin: clamp(16px, 2.5svh, 26px) auto 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      text-decoration: none;
+      background: rgba(255, 255, 255, .22);
+      backdrop-filter: blur(2px) saturate(1.1);
+      transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+      animation: scrollDotPulse 1.5s ease-in-out infinite;
+    }
+
+    .project-next::before {
+      content: "";
+      position: relative;
+      z-index: 1;
+      width: 0;
+      height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 14px solid #4f9fa8;
+      filter: drop-shadow(0 0 7px rgba(84, 191, 208, .34));
+    }
+
+    .project-next::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 229, 231, .5), rgba(84, 191, 208, .22) 44%, rgba(84, 191, 208, 0) 74%);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .project-strip.reverse .project-next {
+      grid-column: 2;
+    }
+
+    .project-next:hover,
+    .project-next:focus-visible {
+      outline: none;
+      background: rgba(255, 255, 255, .36);
+      box-shadow: 0 10px 22px rgba(36, 94, 104, .14);
+      transform: translateY(2px);
+    }
+
+    .closing {
+      min-height: 58svh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      padding: clamp(62px, 9svh, 86px) 0;
+      overflow: hidden;
+      color: #172224;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
+        linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
+    }
+
+    .closing-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .closing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(26px, 4vw, 46px);
+      align-items: end;
+    }
+
+    .closing h2 {
+      max-width: 760px;
+      font-size: clamp(2.1rem, 4.6vw, 4.2rem);
+    }
+
+    .closing p {
+      max-width: 650px;
+      margin: 16px 0 0;
+      color: #3c4b43;
+      font-size: 1.02rem;
+    }
+
+    .built-corner-mark {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: min(430px, 48vw);
+      opacity: .94;
+      pointer-events: none;
+      filter: drop-shadow(0 12px 22px rgba(36, 94, 104, .08));
+    }
+
+    .built-corner-mark img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .signoff {
+      margin-top: 22px;
+      color: #4b6155;
+      font-style: italic;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      background: rgba(17, 19, 18, .64);
+    }
+
+    .modal.active {
+      display: block;
+    }
+
+    .modal-panel {
+      position: absolute;
+      inset: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .28);
+      overflow: hidden;
+    }
+
+    .modal-top {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 251, 250, .96);
+    }
+
+    .modal-title {
+      min-width: 0;
+    }
+
+    .modal-title b {
+      display: block;
+      line-height: 1.2;
+    }
+
+    .modal-title span {
+      display: block;
+      color: var(--muted);
+      font-size: .86rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .close-modal {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 1.45rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .close-modal:hover,
+    .close-modal:focus-visible {
+      background: #edece4;
+      outline: none;
+    }
+
+    .modal-content {
+      overflow-y: auto;
+    }
+
+    .case-hero {
+      display: grid;
+      grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+      gap: 42px;
+      align-items: end;
+      padding: clamp(28px, 5vw, 58px);
+      border-bottom: 1px solid var(--line);
+      background: #f4f2ea;
+    }
+
+    .case-hero h2 {
+      font-size: clamp(2.8rem, 6vw, 6rem);
+      font-weight: 780;
+      letter-spacing: -.01em;
+    }
+
+    .case-hero p {
+      margin: 20px 0 0;
+      color: #343d39;
+      font-size: 1.12rem;
+    }
+
+    .case-body {
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 54px 0 70px;
+    }
+
+    .case-section {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 40px;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-section h3 {
+      color: var(--blue);
+      font-size: .82rem;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    #gophish-modal .modal-top {
+      min-height: 58px;
+      background: rgba(232, 247, 247, .96);
+    }
+
+    #gophish-modal .modal-title b {
+      color: #245e68;
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    #gophish-modal .modal-title span {
+      display: none;
+    }
+
+    #gophish-modal .case-hero {
+      border-bottom: 0;
+      color: #f4fbfb;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 36%),
+        linear-gradient(135deg, #2b6d76, #63bec4);
+    }
+
+    #gophish-modal .case-hero .eyebrow,
+    #gophish-modal .case-hero p {
+      color: rgba(244, 251, 251, .86);
+    }
+
+    #gophish-modal .case-body {
+      position: relative;
+      width: min(1080px, calc(100% - 32px));
+      padding-top: 44px;
+    }
+
+    #gophish-modal .case-body::before {
+      content: "";
+      position: absolute;
+      top: 48px;
+      bottom: 70px;
+      left: 108px;
+      width: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, rgba(79, 159, 168, .08), rgba(79, 159, 168, .34), rgba(79, 159, 168, .08));
+    }
+
+    #gophish-modal .case-section {
+      position: relative;
+      grid-template-columns: 220px minmax(0, 1fr);
+      border-bottom: 0;
+      padding: 42px 0;
+    }
+
+    #gophish-modal .case-section h3 {
+      position: sticky;
+      top: 84px;
+      align-self: start;
+      padding-left: 28px;
+      color: #245e68;
+      z-index: 1;
+    }
+
+    #gophish-modal .case-section h3::before {
+      content: "";
+      position: absolute;
+      left: 100px;
+      top: 2px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 13px solid #4f9fa8;
+      filter: drop-shadow(0 0 7px rgba(84, 191, 208, .34));
+    }
+
+    #gophish-modal .case-section h3::after {
+      content: "";
+      position: absolute;
+      left: 89px;
+      top: -9px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191, 229, 231, .48), rgba(84, 191, 208, .2) 44%, rgba(84, 191, 208, 0) 74%);
+      z-index: -1;
+    }
+
+    #gophish-modal .case-section > div {
+      padding: clamp(18px, 2.4vw, 28px);
+      border: 1px solid rgba(79, 159, 168, .12);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .62);
+      box-shadow: 0 14px 32px rgba(36, 94, 104, .06);
+    }
+
+    .case-section p,
+    .case-section li {
+      color: #37413d;
+      font-size: 1.02rem;
+    }
+
+    .case-section p {
+      margin: 0 0 14px;
+    }
+
+    .case-section ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    .media-item {
+      width: min(760px, 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .media-item:has(video) {
+      width: min(calc(880px + 3cm), 100%);
+    }
+
+    .media-grid .media-item:nth-child(even) {
+      margin-left: auto;
+    }
+
+    .media-item video,
+    .media-item img {
+      aspect-ratio: 16 / 9;
+      height: auto;
+      background: var(--wash);
+    }
+
+    .media-item video {
+      aspect-ratio: 18.8 / 8.2;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .media-item img {
+      object-fit: cover;
+    }
+
+    .media-item.contain img {
+      object-fit: contain;
+      padding: 16px;
+      background: #f8fcfc;
+    }
+
+    .media-item figcaption {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: .9rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 940px) {
+      .project-grid,
+      .project-strip.reverse .project-grid,
+      .case-hero,
+      .closing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-strip.reverse .project-media,
+      .project-strip.reverse .project-copy {
+        order: initial;
+      }
+
+      .project-copy {
+        padding-left: 0;
+      }
+
+      .project-strip {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .brand {
+        flex-wrap: wrap;
+        white-space: normal;
+      }
+
+      .intro-copy {
+        width: min(100%, 780px);
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .project-start,
+      .closing {
+        padding: 58px 0;
+      }
+
+      .project-start {
+        min-height: 100svh;
+      }
+
+      .project-start-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .project-logo-nav {
+        justify-content: flex-start;
+        max-width: none;
+      }
+
+      .project-strip {
+        padding: 54px 0;
+      }
+
+      .case-section,
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .media-grid .media-item:nth-child(even) {
+        margin-left: 0;
+      }
+
+      .modal-panel {
+        inset: 0;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <div class="brand-group">
+        <a class="brand" href="#top">
+          <strong>Dean Rabisy</strong>
+          <span>Learning Design / Product Thinking / Hands-on Building</span>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#intro-story" data-intro-story>Next</a>
+        <a class="nav-contact" href="mailto:adaptive.dean@gmail.com" aria-label="Email Dean">
+          <span>Contact</span>
+          <span class="mail-icon" aria-hidden="true">
+            <img class="mail-closed" src="assets/email-envelope-closed.png" alt="">
+            <img class="mail-open" src="assets/email-letter.png" alt="">
+          </span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="opening" aria-label="Introduction">
+      <div class="banner" aria-label="Portfolio banner">
+        <img src="assets/banner-structured-option-3.png" alt="Portfolio banner with project visuals">
+      </div>
+
+      <div class="intro" aria-labelledby="intro-title">
+        <div class="wrap">
+          <div class="intro-copy">
+            <div class="intro-callout tagline-callout" aria-labelledby="intro-title">
+              <div class="callout-track">
+                <div class="tagline-stage">
+                  <p class="typing-text" id="intro-title" aria-live="polite"></p>
+                  <a class="scroll-cue" href="#intro-story" data-intro-story aria-label="scroll to continue">
+                    <span aria-hidden="true"></span>
+                  </a>
+                </div>
+
+                <div class="intro-body-callout" id="intro-story">
+                  <p>My background is a mix of teaching, operations, and psychological research. The projects here come from my work as an English as a second language (ESL) tutor.</p>
+                  <p>I kept running into the same problem: students needed repeated practice, but the tools I had often made that practice feel too passive or mechanical. I knew that feeling from the other side too. As a student, I disliked learning that felt like going through the motions, and as a teacher, I hated becoming the person asking students to do it.</p>
+                  <p>So I started building my own tools, usually games, to help students speak more, stay engaged, and repeat language in a way that felt natural. Everything here was built independently, tested in real lessons, and shaped by what students actually did with it.</p>
+                  <p>I am now looking for work where I can keep improving my skills, solve meaningful problems, and be a part of making people's lives a little better.</p>
+                </div>
+              </div>
+              <div class="story-scroll-indicator" aria-hidden="true">
+                <span class="story-glow"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-start" id="projects" aria-labelledby="projects-title">
+      <div class="wrap project-start-layout">
+        <div class="project-start-copy">
+          <p class="eyebrow">Projects</p>
+          <h2 id="projects-title">Products built to make learning engaging.</h2>
+          <p>Across these projects, I designed, built, tested, and improved learning tools through real student use, identifying usability problems, edge cases, synchronization issues, and unclear interaction states. Open a project to read the full case study.</p>
+        </div>
+        <div class="project-logo-nav" aria-label="Jump to a project">
+          <a class="project-logo-link" href="#gophish" aria-label="Jump to GoPhish project">
+            <img src="GoPhish/GoPhishlogo.png" alt="GoPhish">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="project-flow-bg">
+      <section class="project-strip" id="gophish" aria-labelledby="gophish-title">
+        <div class="wrap project-grid">
+          <div class="project-media" role="group" aria-label="Open GoPhish case study">
+            <video src="GoPhish/GoPhish Passing Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <p class="media-caption">Players pass requested cards in real time, keeping the phonics pattern practice connected to live interaction.</p>
+            <button class="open-hit" type="button" data-modal="gophish-modal" aria-label="Open GoPhish case study"></button>
+          </div>
+          <div class="project-copy gophish-copy">
+            <h2 id="gophish-title">GoPhish</h2>
+            <p class="tagline">An online multiplayer card game that helps students practice phonics through play.</p>
+            <div class="project-actions">
+              <button class="button case-study-button case-button-1" type="button" data-modal="gophish-modal" aria-label="Open GoPhish case study">Open case study</button>
+            </div>
+          </div>
+          <a class="project-next" href="#ihave" aria-label="Jump to I-have project"></a>
+        </div>
+      </section>
+
+      <section class="project-strip reverse" id="ihave" aria-labelledby="ihave-title">
+        <div class="wrap project-grid">
+          <div class="project-media" role="group" aria-label="Open I-have case study">
+            <video src="I-have/Ihave - Hero - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <p class="media-caption">Players compete to empty their hand first by linking cards correctly into a shared chain.</p>
+            <button class="open-hit" type="button" data-modal="ihave-modal" aria-label="Open I-have case study"></button>
+          </div>
+          <div class="project-copy">
+            <h2 id="ihave-title">I-have</h2>
+            <p class="tagline">An online game that gets students speaking quickly.</p>
+            <div class="project-actions">
+              <button class="button case-study-button case-button-2" type="button" data-modal="ihave-modal" aria-label="Open I-have case study">Open case study</button>
+            </div>
+          </div>
+          <a class="project-next" href="#progressing" aria-label="Jump to Progressing project"></a>
+        </div>
+      </section>
+
+      <section class="project-strip" id="progressing" aria-labelledby="progressing-title">
+        <div class="wrap project-grid">
+          <div class="project-media" role="group" aria-label="Open Progressing case study">
+            <img src="Progressing/Progressing Brand Logo.png" alt="Progressing brand illustration">
+            <p class="media-caption">Progressing brand illustration showing sentence parts added step by step, echoing the game's core sentence-building mechanic.</p>
+            <button class="open-hit" type="button" data-modal="progressing-modal" aria-label="Open Progressing case study"></button>
+          </div>
+          <div class="project-copy">
+            <h2 id="progressing-title">Progressing</h2>
+            <p class="tagline">A physical sentence-building card game that makes grammar practice feel more natural.</p>
+            <div class="project-actions">
+              <button class="button case-study-button case-button-3" type="button" data-modal="progressing-modal" aria-label="Open Progressing case study">Open case study</button>
+            </div>
+          </div>
+          <a class="project-next" href="#recall" aria-label="Jump to Re-Call project"></a>
+        </div>
+      </section>
+
+      <section class="project-strip reverse" id="recall" aria-labelledby="recall-title">
+        <div class="wrap project-grid">
+          <div class="project-media" role="group" aria-label="Open Re-Call case study">
+            <video src="Re-call/Re-call hero final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <p class="media-caption">Players take turns verbally recalling and expanding a growing vocabulary sequence.</p>
+            <button class="open-hit" type="button" data-modal="recall-modal" aria-label="Open Re-Call case study"></button>
+          </div>
+          <div class="project-copy">
+            <h2 id="recall-title">Re-Call</h2>
+            <p class="tagline">A memory-based vocabulary game built around repetition and active recall.</p>
+            <div class="project-actions">
+              <button class="button case-study-button case-button-4" type="button" data-modal="recall-modal" aria-label="Open Re-Call case study">Open case study</button>
+            </div>
+          </div>
+          <a class="project-next" href="#next" aria-label="Jump to next section"></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="closing" id="next" aria-labelledby="next-title">
+      <div class="closing-inner">
+        <div class="wrap closing-grid">
+          <div>
+            <p class="eyebrow">What I am looking for next</p>
+            <h2 id="next-title">Practical problems, thoughtful products, and work that helps people move forward.</h2>
+            <p>I am looking for work where I can combine design, product thinking, and hands-on building to solve practical problems.</p>
+            <p>I am especially interested in tools that help people learn, communicate, practice, or make progress in ways that feel clearer and more motivating.</p>
+            <p>If something here feels relevant, I would be happy to talk.</p>
+            <div class="signoff">Thanks for taking a look,<br>Dean</div>
+          </div>
+        </div>
+      </div>
+      <div class="built-corner-mark" aria-hidden="true">
+        <img src="assets/built-by-dean-corner.png" alt="">
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="gophish-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="gophish-modal-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="gophish-modal-title">Case Study</b>
+          <span>GoPhish</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close case study">x</button>
+      </div>
+      <div class="modal-content">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Case Study</p>
+            <h2>GoPhish</h2>
+          </div>
+          <p>A familiar card game adapted into a real-time phonics tool, designed to make repeated sound practice feel natural and engadging.</p>
+        </section>
+        <div class="case-body">
+          <section class="case-section">
+            <h3>Problem</h3>
+            <div>
+              <p>A lot of online teaching ends up feeling passive by using worksheets, slides, and a lot of "teacher explains / student listens". <br> Students lose focus quickly, while teachers do not always have flexible tools that make practice feel interactive and keep everyone engaged.</br></p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Idea</h3>
+            <div>
+              <p>Take a game students already know, Go Fish for example, and turn it into a learning tool. The goal was to make repetition feel natural, fun, and engaging.<br><br> Instead of solving worksheets, students would: </p>
+              <ul>
+                <li>Play and compete</li>
+                <li>Repeat patterns without it feeling like an exercise</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Built</h3>
+            <div>
+              <p>I broke phonics into smaller groups, such as short vowels and digraphs, and turned each group into a card set. Each card includes four words, visuals, and one clear spelling pattern, so repetition happens naturally during gameplay but can still be used as a focused tool for teaching.</p>
+              <p>From there, I built a multiplayer web app where players can hold cards, organize their hand, pass cards, and complete sets. All actions sync in real time through Firebase.</p>
+              <figure class="media-item contain">
+                <img src="GoPhish/GoPhish Sets for PORT (Medium Banner (US) (Landscape)) (28 x 55 in).png" alt="GoPhish phonics card sets">
+                <figcaption>GoPhish card sets organized by phonics pattern, helping students repeat target sounds through gameplay.</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Practice</h3>
+            <div>
+              <p>The goal is to complete the most phonics sets out of all other players. Players ask each other for cards, pass cards back and forth, and complete matching phonics sets. Repeated requests create repetition without making practice feel repetitive.</p>
+              <div class="media-grid">
+                <figure class="media-item">
+                  <video src="GoPhish/GoPhish - Hand Arrangement - Final.mp4" controls preload="metadata"></video>
+                  <figcaption>Manual card arrangement helps students manage larger hands while visually grouping related sound patterns.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="GoPhish/Go Phish Set Completion Final1.mp4" controls preload="metadata"></video>
+                  <figcaption>A larger card display helps players manage more cards, identify matching patterns, and complete sets clearly.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="GoPhish/GoPhish Passing Final.mp4" controls preload="metadata"></video>
+                  <figcaption>Players pass requested cards in real time, keeping the phonics pattern practice connected to live interaction.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Worked</h3>
+            <div>
+              <ul>
+                <li>Students stayed focused for full sessions</li>
+                <li>Repetition happened naturally</li>
+                <li>Vocabulary and spelling patterns stuck more reliably over time</li>
+                <li>The system scaled easily by swapping card sets in and out</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Hard</h3>
+            <div>
+              <ul>
+                <li><strong>Large hands and screen space:</strong> testing showed that as players collected more cards, it became harder to find, select, and manage specific cards without slowing the game down.</li>
+                <li><strong>Usability for younger students:</strong> some actions needed stronger visual feedback, clearer selection states, and larger previews so students could understand what was happening without extra explanation.</li>
+                <li><strong>Translating physical play online:</strong> physical card games rely on touch, visibility, and table layout, so the digital version needed extra feedback systems to replace those cues.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Not Yet</h3>
+            <div>
+              <p>I explored replacing individual cards with shared boards and tokens. This would reduce visual clutter, but it would also completely change the feel of the game. I decided to validate the existing system first.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Learned</h3>
+            <div>
+              <ul>
+                <li>Test core assumptions before building around them</li>
+                <li>Translating a physical game online means redesigning the interaction, not copying it</li>
+                <li>Digital feedback has to replace the satisfaction of physical play</li>
+                <li>Screen space is not just a UI constraint; it shapes the learning system</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Outcome</h3>
+            <div>
+              <p>This became a reliable tool for phonics practice: higher participation, smoother repetition, and more consistent exposure to spelling patterns.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="ihave-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="ihave-modal-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="ihave-modal-title">I-have</b>
+          <span>An online game that gets students speaking quickly.</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close case study">x</button>
+      </div>
+      <div class="modal-content">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Case Study</p>
+            <h2>I-have</h2>
+          </div>
+          <p>A fast reaction game that gives the start of an online lesson momentum by turning simple speaking prompts into a shared card chain.</p>
+        </section>
+        <div class="case-body">
+          <section class="case-section">
+            <h3>Problem</h3>
+            <div>
+              <p>Online lessons can feel awkward, especially with younger or quieter students. Without early momentum, students hesitate to speak, energy stays low, and the rest of the lesson becomes harder to build.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Idea</h3>
+            <div>
+              <p>Create something fast, simple, and competitive. The focus was to create an intuitive and compelling game for all levels that gets students speaking immediately. This helps break the ice and gives students a positive experience.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Built</h3>
+            <div>
+              <p>I created a closed loop system of 24 cards: 8 different items, each repeated 3 times. Each card contains "I have [X]" and "Who has [Y]". Every card connects to another card, so the game can begin anywhere.</p>
+              <p>To bring this online, I built a shared real-time interface where both players can see all cards, cards snap into a central chain, and actions sync in real time.</p>
+              <p>Testing led me to add a tie-break mechanic for near-simultaneous plays, a chain-break state to prevent deadlocks, manual card arrangement, and clearer animations.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Practice</h3>
+            <div>
+              <p>One player begins: "I have a lion." They reveal: "Who has a horse?" Players race to find the matching card. The first player to react discards their card and continues the chain.</p>
+              <p>Because the game rewards speed, students stay focused, speaking happens naturally, and mistakes do not interrupt the flow. Rounds usually last 2 to 3 minutes and can be repeated multiple times.</p>
+              <div class="media-grid">
+                <figure class="media-item">
+                  <video src="I-have/Ihave - Hero - Final.mp4" controls preload="metadata"></video>
+                  <figcaption>Players compete to empty their hand first by linking cards correctly into a shared chain.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="I-have/Ihave - Battle - Final.mp4" controls preload="metadata"></video>
+                  <figcaption>Near-simultaneous plays trigger a quick battle UI to decide who gets to continue the chain.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="I-have/Ihave - Arranging - Final.mp4" controls preload="metadata"></video>
+                  <figcaption>Players arrange their cards before the round begins, making it easier to scan their hand and react quickly during play.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="I-have/Ihave - Endgame - Final.mp4" controls preload="metadata"></video>
+                  <figcaption>End of a round showing the winning player with an empty hand and the opponent's final loss state.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Worked</h3>
+            <div>
+              <ul>
+                <li>Students spoke almost immediately</li>
+                <li>Competition increased energy and removed awkwardness</li>
+                <li>Students often wanted to replay it</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Hard</h3>
+            <div>
+              <ul>
+                <li><strong>Real-time syncing:</strong> simultaneous player actions exposed timing and fairness issues, especially when two players tried to play a card at nearly the same moment.</li>
+                <li><strong>Architecture:</strong> early technical decisions created delays in state updates, which made the battle mechanic feel less reliable and required rethinking the real-time interaction model.</li>
+                <li><strong>Game-state edge cases:</strong> testing revealed moments where the chain could stall if the required card had already been played, so I added a clear visual state showing that any card could now be used.</li>
+                <li><strong>Digital feedback:</strong> physical games naturally provide visual and tactile cues; online, these had to be replaced with animations, timing cues, and clearer interaction states.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Not Yet</h3>
+            <div>
+              <ul>
+                <li>Expand content significantly</li>
+                <li>Entire rebranding, including name and visual design</li>
+              </ul>
+              <p>These are currently in the works.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Learned</h3>
+            <div>
+              <ul>
+                <li>Reaction-based games need feedback that feels immediate and decisive</li>
+                <li>Animation is not decoration; it helps players understand timing, conflict, and reward</li>
+                <li>Digital products need sensory cues to create a feeling of impact</li>
+                <li>Branding should be considered before too much interface work becomes fixed</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Outcome</h3>
+            <div>
+              <p>This became a reliable tool for lesson warmups: faster engagement, more speaking early on, and smoother lesson transitions.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="progressing-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="progressing-modal-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="progressing-modal-title">Progressing</b>
+          <span>A physical sentence-building card game that makes grammar practice feel more natural.</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close case study">x</button>
+      </div>
+      <div class="modal-content">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Case Study</p>
+            <h2>Progressing</h2>
+          </div>
+          <p>A sentence-building card game where students use visual structure, repetition, and gameplay to practice present progressive grammar.</p>
+        </section>
+        <div class="case-body">
+          <section class="case-section">
+            <h3>Problem</h3>
+            <div>
+              <p>Grammar is often taught through drills and explanations. For many students, that feels unnatural and is difficult to retain.</p>
+              <ul>
+                <li>Students do not get enough meaningful repetition</li>
+                <li>When they do, it often feels disengaging</li>
+                <li>Students struggle to use English grammar correctly in real-life conversation</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Idea</h3>
+            <div>
+              <p>Instead of explaining grammar, I wanted students to use it naturally. I focused on present progressive because it is common, confusing for ESL students, and structured enough to turn into a repeatable system.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Built</h3>
+            <div>
+              <p>I started with a simple sentence structure: subject, "to be", verb, "-ing" form, and time expression. Then I created roughly 20 sentences and broke them into modular cards.</p>
+              <p>Cards are color-coded by role, each card includes a visual, and guide cards show correct sentence structure. This allowed students to build correctly before fully understanding grammar rules.</p>
+              <div class="media-grid">
+                <figure class="media-item contain">
+                  <img src="Progressing/Progressing Sentence Guide Card.png" alt="Progressing positive sentence guide card">
+                  <figcaption>Guide card showing the structure players use to build positive sentences independently.</figcaption>
+                </figure>
+                <figure class="media-item contain">
+                  <img src="Progressing/Progressing Sentence Example.png" alt="Progressing sentence example">
+                  <figcaption>A completed sentence sequence built from color-coded cards, making grammar roles visible during play.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Practice</h3>
+            <div>
+              <p>The goal is to be the first player to score 5 points. Players earn points by completing sentences correctly while slowing their opponent down. Over multiple turns, players build sentences step by step.</p>
+              <p>To make gameplay engaging, I added turn-based gameplay, multiple action types, ability cards that let players disrupt each other or gain advantages, and a spelling layer where correctly modifying verbs earned bonus actions.</p>
+              <p>Players can steal cards, pull from discard piles, and earn double points. This creates a balance between building correctly, managing your hand, and reacting to your opponent.</p>
+              <div class="media-grid">
+                <figure class="media-item contain">
+                  <img src="Progressing/13.png" alt="Progressing extra point ability card">
+                  <figcaption>Ability card that rewards a completed sentence with an extra point, adding strategy to grammar practice.</figcaption>
+                </figure>
+                <figure class="media-item contain">
+                  <img src="Progressing/15.png" alt="Progressing recover from discard pile ability card">
+                  <figcaption>Ability card that lets players recover a used card, giving them more options while building sentences.</figcaption>
+                </figure>
+                <figure class="media-item contain">
+                  <img src="Progressing/14.png" alt="Progressing steal card ability card">
+                  <figcaption>Ability card that lets a player steal from an opponent, adding interaction and tension.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Worked</h3>
+            <div>
+              <ul>
+                <li>Students formed correct sentences more independently</li>
+                <li>Repetition felt natural</li>
+                <li>Participation increased</li>
+                <li>Students began self-correcting</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Hard</h3>
+            <div>
+              <ul>
+                <li><strong>Complexity vs usability:</strong> every new mechanic made the game more interesting and gave players more freedom, but also increased complexity and drifted away from the original goal. Finding the right balance required repeated testing and simplification.</li>
+                <li><strong>Hand management:</strong> larger hands created clutter and slowed decision-making. Through testing, I adjusted card counts and game flow to keep the experience focused and easy to follow.</li>
+                <li><strong>Scoring systems:</strong> early versions used more detailed scoring, but testing showed that this created bulk by forcing players to run calculations and keep tabs. The scoring system was simplified to reduce friction.</li>
+                <li><strong>Physical iteration speed:</strong> unlike digital projects, every major change required updating and reprinting materials, making it harder to test multiple variations quickly.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Not Yet</h3>
+            <div>
+              <ul>
+                <li>Expand into more complex sentence structures</li>
+                <li>Build a full tense system</li>
+                <li>Create a digital version</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Learned</h3>
+            <div>
+              <ul>
+                <li>Simplicity is usually stronger than feature richness</li>
+                <li>Motivation changes how repetition feels</li>
+                <li>Interaction is just as important as content</li>
+                <li>Systems need natural endpoints</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Outcome</h3>
+            <div>
+              <p>This became a reliable tool for grammar practice: stronger sentence accuracy and better retention, more confidence using grammar in conversation, and higher engagement than traditional grammar exercises.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="recall-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="recall-modal-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="recall-modal-title">Re-Call</b>
+          <span>A memory-based vocabulary game built around repetition and active recall.</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close case study">x</button>
+      </div>
+      <div class="modal-content">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Case Study</p>
+            <h2>Re-Call</h2>
+          </div>
+          <p>A vocabulary game where players build a growing spoken sequence, moving from recognition toward active recall.</p>
+        </section>
+        <div class="case-body">
+          <section class="case-section">
+            <h3>Problem</h3>
+            <div>
+              <p>Most vocabulary practice focuses on recognition: matching words to images, translation, or multiple-choice exercises. This helps in the short term, but students often struggle to quickly recall vocabulary during real conversations.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Idea</h3>
+            <div>
+              <p>Turn vocabulary practice into a competitive memory game. Instead of matching pairs, players build a growing chain they need to remember and repeat. Everything stays within one category, which helps students build stronger connections between words.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Built</h3>
+            <div>
+              <p>The system includes vocabulary cards with visuals, a growing sequence, and turn-based gameplay. I also added second chance cards and a visual legend.</p>
+              <p>The platform handles visual interactions, while speaking happens through live conversation.</p>
+              <div class="media-grid">
+                <figure class="media-item">
+                  <video src="Re-call/Re-call - Second Chance - Final .mp4" controls preload="metadata"></video>
+                  <figcaption>A player receives a second chance card and later uses it to recover from a mistake, keeping the round forgiving without removing consequences.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="Re-call/Re-call Legend Final.mp4" controls preload="metadata"></video>
+                  <figcaption>The visual legend opens on demand, giving players a quick reference for the vocabulary items in the round.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Practice</h3>
+            <div>
+              <p>The goal is to be the last player remaining. One player starts: "I would like some water." The next player continues: "I would like some water and sauce." The sequence continues growing until someone makes a mistake.</p>
+              <p>A single word might be repeated more than ten times in one round. Games usually last around 10 to 15 minutes.</p>
+              <div class="media-grid">
+                <figure class="media-item">
+                  <video src="Re-call/Re-call hero final.mp4" controls preload="metadata"></video>
+                  <figcaption>Players take turns verbally recalling and expanding a growing vocabulary sequence.</figcaption>
+                </figure>
+                <figure class="media-item">
+                  <video src="Re-call/Re-call - WinLose - Final.mp4" controls preload="metadata"></video>
+                  <figcaption>Mistake challenge flow showing how the game validates an incorrect sequence and resolves the round.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Worked</h3>
+            <div>
+              <ul>
+                <li>High repetition without repetitive feeling</li>
+                <li>Better recall than simple matching games</li>
+                <li>Students stayed engaged</li>
+                <li>The visual legend helped weaker learners participate</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Hard</h3>
+            <div>
+              <ul>
+                <li><strong>Sequence accuracy:</strong> because the game relies on a growing sequence, even small inconsistencies in card order could disrupt gameplay. Maintaining an accurate game state required careful tracking of revealed cards and turn progression.</li>
+                <li><strong>Player-state mapping:</strong> the system needed to consistently associate actions, cards, and turns with the correct player. Several iterations were required to ensure the interface reflected the actual game state.</li>
+                <li><strong>Balancing support and challenge:</strong> the visual legend needed to help students participate without removing the memory challenge entirely. Finding that balance required testing with students of different ability levels.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Not Yet</h3>
+            <div>
+              <ul>
+                <li>Expand with more semantic categories</li>
+                <li>Create a fully synchronized online multiplayer version</li>
+              </ul>
+              <p>The current system is designed for players to interact through a shared interface and handle validation naturally, so extra systems are not necessary yet.</p>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Learned</h3>
+            <div>
+              <ul>
+                <li>Interface layout becomes easier when the game state is clearly defined</li>
+                <li>Turn changes, timing, and feedback need to be mapped as part of the design</li>
+                <li>Some physical learning activities become stronger when supported digitally</li>
+                <li>Animation works best when it clarifies what just happened and what happens next</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section">
+            <h3>Outcome</h3>
+            <div>
+              <p>This became a reliable tool for learning and practicing vocabulary, speaking English in a structured way, and creating active participation and engagement.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const openingSection = document.querySelector(".opening");
+    const siteNav = document.querySelector(".site-nav");
+    const banner = document.querySelector(".banner");
+    const intro = document.querySelector(".intro");
+    const introCopy = document.querySelector(".intro-copy");
+    const taglineCallout = document.querySelector(".tagline-callout");
+    const calloutTrack = document.querySelector(".callout-track");
+    const storyParagraphs = Array.from(document.querySelectorAll(".intro-body-callout p"));
+    const typingTarget = document.querySelector(".typing-text");
+    const scrollCue = document.querySelector(".scroll-cue");
+    const introStoryLinks = document.querySelectorAll("[data-intro-story]");
+    const storyIndicator = document.querySelector(".story-scroll-indicator");
+    const greetingLines = [
+      "Hi,",
+      "Welcome to my portfolio."
+    ];
+    const taglineLines = [
+      "I notice when a product, lesson, or interaction is not\nworking as optimally as it should, and I enjoy investigating why, testing solutions, and improving the experience."
+    ];
+    const storyLandingLift = Math.round(7 * 37.795) - 120;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function syncOpeningLayout() {
+      if (!openingSection || !siteNav || !banner || !intro || !introCopy || !taglineCallout || !calloutTrack) return;
+      const wasPinned = openingSection.classList.contains("pinned");
+      const wasReleasing = openingSection.classList.contains("releasing");
+      openingSection.classList.remove("pinned", "releasing", "after-opening");
+      const navHeight = siteNav.getBoundingClientRect().height;
+      const bannerHeight = banner.getBoundingClientRect().height;
+      const introTopGap = parseFloat(getComputedStyle(intro).paddingTop) || 0;
+      const calloutRect = taglineCallout.getBoundingClientRect();
+      const calloutTop = navHeight + bannerHeight + introTopGap;
+      const lastParagraph = storyParagraphs[storyParagraphs.length - 1];
+      const lastParagraphBottom = lastParagraph
+        ? lastParagraph.offsetTop + lastParagraph.offsetHeight
+        : calloutTrack.scrollHeight;
+      const trackDistance = Math.max(1, lastParagraphBottom + 12);
+      const gapToProjects = Math.round(1.25 * 37.795);
+      const releaseDistance = 1;
+      const openingHeight = Math.max(window.innerHeight, window.innerHeight + trackDistance + gapToProjects - bannerHeight);
+      openingSection.style.setProperty("--nav-height", `${navHeight}px`);
+      openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
+      openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
+      openingSection.style.setProperty("--track-distance", `${trackDistance}px`);
+      openingSection.style.setProperty("--intro-project-gap", `${gapToProjects}px`);
+      openingSection.style.setProperty("--opening-height", `${openingHeight}px`);
+      if (wasPinned) openingSection.classList.add("pinned");
+      if (wasReleasing) openingSection.classList.add("releasing");
+    }
+
+    function updateOpeningState() {
+      if (!openingSection) return;
+      const rect = openingSection.getBoundingClientRect();
+      const progress = Math.max(0, -rect.top);
+      const trackDistance = parseFloat(getComputedStyle(openingSection).getPropertyValue("--track-distance")) || window.innerHeight;
+      const gapToProjects = parseFloat(getComputedStyle(openingSection).getPropertyValue("--intro-project-gap")) || Math.round(1.25 * 37.795);
+      const releaseDistance = 1;
+      const releaseStart = trackDistance + gapToProjects;
+      const total = releaseStart + releaseDistance;
+      const releaseOffset = Math.max(0, progress - releaseStart);
+      const trackY = Math.min(progress, trackDistance);
+      openingSection.style.setProperty("--intro-track-y", `${trackY}px`);
+      openingSection.style.setProperty("--release-offset", `${releaseOffset}px`);
+      openingSection.classList.toggle("pinned", progress < releaseStart);
+      openingSection.classList.toggle("releasing", progress >= releaseStart && progress < total);
+      openingSection.classList.toggle("after-opening", progress >= total);
+
+      const calloutHeight = taglineCallout ? taglineCallout.getBoundingClientRect().height : window.innerHeight * 0.45;
+      const firstStoryPoint = storyParagraphs[0] ? storyParagraphs[0].offsetTop - calloutHeight * 0.82 : trackDistance;
+      const indicatorStart = Math.max(0, storyParagraphs[0].offsetTop - calloutHeight * 0.6 + storyLandingLift);
+      const dotGonePoint = scrollCue ? scrollCue.offsetTop + scrollCue.offsetHeight : indicatorStart;
+      const storyRange = Math.max(1, trackDistance - indicatorStart);
+      const storyProgress = Math.min(1, Math.max(0, (trackY - indicatorStart) / storyRange));
+      openingSection.classList.toggle("story-active", trackY > dotGonePoint && storyProgress < .98 && progress < releaseStart);
+      if (storyIndicator) {
+        storyIndicator.style.setProperty("--story-progress", storyProgress.toFixed(3));
+      }
+    }
+
+    function scrollToIntroStory(event) {
+      event.preventDefault();
+      if (!openingSection || !taglineCallout || !storyParagraphs.length) return;
+      syncOpeningLayout();
+      const calloutHeight = taglineCallout.getBoundingClientRect().height || window.innerHeight * 0.45;
+      const targetProgress = Math.max(0, storyParagraphs[0].offsetTop - calloutHeight * 0.6 + storyLandingLift);
+      window.scrollTo({
+        top: openingSection.offsetTop + targetProgress,
+        behavior: reducedMotion ? "auto" : "smooth"
+      });
+    }
+
+    async function runTypingLoop() {
+      if (!typingTarget) return;
+      if (reducedMotion) {
+        typingTarget.textContent = taglineLines.join("\n");
+        if (scrollCue) scrollCue.classList.add("visible");
+        return;
+      }
+
+      const cursor = document.createElement("span");
+      cursor.className = "typing-cursor";
+      const linePause = 1400;
+      const typeLines = async (lines) => {
+        for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+          const line = lines[lineIndex];
+          for (let index = 0; index <= line.length; index += 1) {
+            const previousLines = lines.slice(0, lineIndex).join("\n");
+            const prefix = previousLines ? `${previousLines}\n` : "";
+            typingTarget.textContent = prefix + line.slice(0, index);
+            typingTarget.appendChild(cursor);
+            await new Promise((resolve) => setTimeout(resolve, line.length < 8 ? 90 : 38));
+          }
+          await new Promise((resolve) => setTimeout(resolve, linePause));
+          if (lineIndex < lines.length - 1) {
+            typingTarget.textContent = lines.slice(0, lineIndex + 1).join("\n") + "\n";
+            typingTarget.appendChild(cursor);
+          }
+        }
+      };
+
+      if (scrollCue) scrollCue.classList.remove("visible");
+      typingTarget.classList.remove("is-fading");
+      typingTarget.style.opacity = "";
+      typingTarget.textContent = "";
+
+      await typeLines(greetingLines);
+      typingTarget.textContent = greetingLines.join("\n");
+      await new Promise((resolve) => setTimeout(resolve, 780));
+      typingTarget.classList.add("is-fading");
+      await new Promise((resolve) => setTimeout(resolve, 520));
+      typingTarget.classList.remove("is-fading");
+      typingTarget.textContent = "";
+      await new Promise((resolve) => setTimeout(resolve, 160));
+      await typeLines(taglineLines);
+      typingTarget.textContent = taglineLines.join("\n");
+      if (scrollCue) scrollCue.classList.add("visible");
+    }
+
+    syncOpeningLayout();
+    updateOpeningState();
+    window.addEventListener("load", () => {
+      syncOpeningLayout();
+      updateOpeningState();
+    });
+    window.addEventListener("scroll", updateOpeningState, { passive: true });
+    window.addEventListener("resize", () => {
+      syncOpeningLayout();
+      updateOpeningState();
+    });
+    introStoryLinks.forEach((link) => {
+      link.addEventListener("click", scrollToIntroStory);
+    });
+    runTypingLoop();
+
+    const modalButtons = document.querySelectorAll("[data-modal]");
+    const modals = document.querySelectorAll(".modal");
+    let activeModal = null;
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      activeModal = modal;
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      const closeButton = modal.querySelector(".close-modal");
+      if (closeButton) closeButton.focus();
+    }
+
+    function closeModal(modal) {
+      if (!modal) return;
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      activeModal = null;
+    }
+
+    modalButtons.forEach((button) => {
+      button.addEventListener("click", () => openModal(button.dataset.modal));
+    });
+
+    modals.forEach((modal) => {
+      modal.querySelector(".close-modal").addEventListener("click", () => closeModal(modal));
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal(modal);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && activeModal) closeModal(activeModal);
+    });
+  </script>
+</body>
+</html>
