@@ -287,7 +287,7 @@
       background: var(--wash);
       border-bottom: 1px solid var(--line);
       overflow: hidden;
-      clip-path: ellipse(116% 100% at 50% 0);
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 92% 90%, 82% 94%, 68% 98%, 50% 100%, 32% 98%, 18% 94%, 8% 90%, 0 86%);
     }
 
     .opening.pinned .banner,
@@ -579,9 +579,11 @@
       min-height: 100svh;
       display: grid;
       align-items: start;
-      padding: clamp(86px, 13svh, 128px) 0;
+      padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
+      clip-path: polygon(0 7%, 8% 5%, 18% 3%, 32% 1%, 50% 0, 68% 1%, 82% 3%, 92% 5%, 100% 7%, 100% 100%, 0 100%);
+      margin-top: -30px;
     }
 
     .project-start-layout {
