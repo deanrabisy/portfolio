@@ -582,7 +582,7 @@
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
       clip-path: url("#banner-top-arc-clip");
-      margin-top: -30px;
+      margin-top: -70px;
     }
 
     .project-start-layout {
@@ -2112,7 +2112,7 @@
       event.preventDefault();
       const projects = document.querySelector("#projects");
       if (!projects) return;
-      const curveClearance = Math.round(3.4 * 37.795);
+      const curveClearance = Math.round(2.7 * 37.795);
       window.scrollTo({
         top: projects.offsetTop + curveClearance,
         behavior: reducedMotion ? "auto" : "smooth"
