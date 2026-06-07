@@ -1274,6 +1274,170 @@
       display: block;
     }
 
+    #gophish-modal .case-body {
+      width: min(1180px, calc(100% - 32px));
+    }
+
+    #gophish-modal .case-body::before {
+      display: none;
+    }
+
+    .case-flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(280px, .74fr) minmax(0, 1fr);
+      gap: clamp(28px, 4vw, 58px);
+      min-height: 640px;
+      padding: 10px 0 20px;
+    }
+
+    .case-map {
+      position: sticky;
+      top: 22px;
+      min-height: 580px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 24% 22%, rgba(191, 229, 231, .64), rgba(191, 229, 231, 0) 28%),
+        linear-gradient(145deg, rgba(247, 251, 250, .86), rgba(232, 247, 247, .6));
+      overflow: hidden;
+    }
+
+    .case-map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .case-map path {
+      fill: none;
+      stroke: rgba(79, 129, 153, .42);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 8 12;
+    }
+
+    .case-node {
+      --x: 50%;
+      --y: 50%;
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 74px;
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid rgba(79, 129, 153, .24);
+      border-radius: 999px;
+      color: #245e68;
+      background: rgba(255, 255, 255, .82);
+      box-shadow: 0 12px 28px rgba(23, 34, 36, .1);
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 780;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .case-node:hover,
+    .case-node:focus-visible,
+    .case-node.active {
+      outline: none;
+      background: rgba(232, 247, 247, .96);
+      box-shadow: 0 16px 36px rgba(36, 94, 104, .16);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .case-detail {
+      min-width: 0;
+      padding-top: 10px;
+    }
+
+    .case-detail-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .case-detail-label {
+      margin: 0;
+      color: #245e68;
+      font-size: clamp(2rem, 4.6vw, 4.1rem);
+      line-height: 1;
+      font-weight: 780;
+    }
+
+    .case-map-return,
+    .case-flow-arrow {
+      border: 1px solid rgba(79, 129, 153, .24);
+      border-radius: 999px;
+      color: #245e68;
+      background: rgba(255, 255, 255, .78);
+      font: inherit;
+      cursor: pointer;
+      transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+
+    .case-map-return {
+      padding: 9px 13px;
+      font-size: .9rem;
+    }
+
+    .case-flow-arrow {
+      width: 44px;
+      height: 44px;
+      font-size: 1.3rem;
+    }
+
+    .case-map-return:hover,
+    .case-map-return:focus-visible,
+    .case-flow-arrow:hover,
+    .case-flow-arrow:focus-visible {
+      outline: none;
+      background: #e8f7f7;
+      box-shadow: 0 10px 22px rgba(36, 94, 104, .12);
+      transform: translateY(-1px);
+    }
+
+    .case-flow-content .case-section {
+      display: none;
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
+
+    .case-flow-content .case-section.active {
+      display: grid;
+    }
+
+    .case-flow-content .case-section h3 {
+      display: none;
+    }
+
+    .case-flow-content .case-section > div {
+      grid-column: 1;
+    }
+
+    .case-flow-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .case-flow-counter {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
     .case-section p,
     .case-section li {
       color: #37413d;
@@ -1362,10 +1526,17 @@
       .project-grid,
       .project-strip.reverse .project-grid,
       .case-hero,
+      .case-flow,
       .pipeline-inner,
       .research-inner,
       .closing-grid {
         grid-template-columns: 1fr;
+      }
+
+      .case-map {
+        position: relative;
+        top: auto;
+        min-height: 440px;
       }
 
       .pipeline-grid {
@@ -1693,14 +1864,34 @@
           </div>
           <p>A familiar card game adapted into a real-time phonics tool, designed to make repeated sound practice feel natural and engadging.</p>
         </section>
-        <div class="case-body">
-          <section class="case-section">
+        <div class="case-body case-flow" data-case-flow>
+          <div class="case-map" aria-label="GoPhish case study map">
+            <svg viewBox="0 0 360 560" aria-hidden="true" focusable="false">
+              <path d="M72 78 C178 30 276 72 242 138 C204 214 90 166 104 250 C120 348 294 250 282 354 C272 442 134 388 104 494" />
+            </svg>
+            <button class="case-node active" style="--x:20%; --y:14%" type="button" data-case-node="problem">Problem</button>
+            <button class="case-node" style="--x:70%; --y:23%" type="button" data-case-node="idea">Idea</button>
+            <button class="case-node" style="--x:32%; --y:38%" type="button" data-case-node="built">Built</button>
+            <button class="case-node" style="--x:76%; --y:50%" type="button" data-case-node="practice">Practice</button>
+            <button class="case-node" style="--x:34%; --y:62%" type="button" data-case-node="worked">Worked</button>
+            <button class="case-node" style="--x:72%; --y:72%" type="button" data-case-node="hard">Hard</button>
+            <button class="case-node" style="--x:30%; --y:82%" type="button" data-case-node="not-yet">Not Yet</button>
+            <button class="case-node" style="--x:64%; --y:86%" type="button" data-case-node="learned">Learned</button>
+            <button class="case-node" style="--x:30%; --y:94%" type="button" data-case-node="outcome">Outcome</button>
+          </div>
+          <div class="case-detail">
+            <div class="case-detail-head">
+              <h3 class="case-detail-label" data-case-label>Problem</h3>
+              <button class="case-map-return" type="button" data-case-map-return>Map</button>
+            </div>
+            <div class="case-flow-content">
+          <section class="case-section active" data-case-step="problem">
             <h3>Problem</h3>
             <div>
               <p>A lot of online teaching ends up feeling passive by using worksheets, slides, and a lot of "teacher explains / student listens". <br> Students lose focus quickly, while teachers do not always have flexible tools that make practice feel interactive and keep everyone engaged.</br></p>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="idea">
             <h3>Idea</h3>
             <div>
               <p>Take a game students already know, Go Fish for example, and turn it into a learning tool. The goal was to make repetition feel natural, fun, and engaging.<br><br> Instead of solving worksheets, students would: </p>
@@ -1710,7 +1901,7 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="built">
             <h3>Built</h3>
             <div>
               <p>I broke phonics into smaller groups, such as short vowels and digraphs, and turned each group into a card set. Each card includes four words, visuals, and one clear spelling pattern, so repetition happens naturally during gameplay but can still be used as a focused tool for teaching.</p>
@@ -1721,7 +1912,7 @@
               </figure>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="practice">
             <h3>Practice</h3>
             <div>
               <p>The goal is to complete the most phonics sets out of all other players. Players ask each other for cards, pass cards back and forth, and complete matching phonics sets. Repeated requests create repetition without making practice feel repetitive.</p>
@@ -1741,7 +1932,7 @@
               </div>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="worked">
             <h3>Worked</h3>
             <div>
               <ul>
@@ -1752,7 +1943,7 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="hard">
             <h3>Hard</h3>
             <div>
               <ul>
@@ -1762,13 +1953,13 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="not-yet">
             <h3>Not Yet</h3>
             <div>
               <p>I explored replacing individual cards with shared boards and tokens. This would reduce visual clutter, but it would also completely change the feel of the game. I decided to validate the existing system first.</p>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="learned">
             <h3>Learned</h3>
             <div>
               <ul>
@@ -1779,12 +1970,19 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
+          <section class="case-section" data-case-step="outcome">
             <h3>Outcome</h3>
             <div>
               <p>This became a reliable tool for phonics practice: higher participation, smoother repetition, and more consistent exposure to spelling patterns.</p>
             </div>
           </section>
+            </div>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 9</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2327,6 +2525,53 @@
       link.addEventListener("click", scrollToProjects);
     });
     runTypingLoop();
+
+    function initCaseFlows() {
+      document.querySelectorAll("[data-case-flow]").forEach((flow) => {
+        const nodes = Array.from(flow.querySelectorAll("[data-case-node]"));
+        const sections = Array.from(flow.querySelectorAll("[data-case-step]"));
+        const label = flow.querySelector("[data-case-label]");
+        const counter = flow.querySelector("[data-case-counter]");
+        const prev = flow.querySelector("[data-case-prev]");
+        const next = flow.querySelector("[data-case-next]");
+        const mapReturn = flow.querySelector("[data-case-map-return]");
+        if (!nodes.length || !sections.length) return;
+
+        const labels = sections.map((section) => {
+          const heading = section.querySelector("h3");
+          return heading ? heading.textContent.trim() : "";
+        });
+        let activeIndex = 0;
+
+        function setActive(index) {
+          activeIndex = (index + sections.length) % sections.length;
+          const activeId = sections[activeIndex].dataset.caseStep;
+          sections.forEach((section) => {
+            section.classList.toggle("active", section.dataset.caseStep === activeId);
+          });
+          nodes.forEach((node) => {
+            node.classList.toggle("active", node.dataset.caseNode === activeId);
+          });
+          if (label) label.textContent = labels[activeIndex];
+          if (counter) counter.textContent = `${activeIndex + 1} / ${sections.length}`;
+        }
+
+        nodes.forEach((node, index) => {
+          node.addEventListener("click", () => setActive(index));
+        });
+        if (prev) prev.addEventListener("click", () => setActive(activeIndex - 1));
+        if (next) next.addEventListener("click", () => setActive(activeIndex + 1));
+        if (mapReturn) {
+          mapReturn.addEventListener("click", () => {
+            const activeNode = nodes[activeIndex];
+            if (activeNode) activeNode.focus();
+          });
+        }
+        setActive(0);
+      });
+    }
+
+    initCaseFlows();
 
     const modalButtons = document.querySelectorAll("[data-modal]");
     const modals = document.querySelectorAll(".modal");
