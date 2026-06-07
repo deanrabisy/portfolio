@@ -243,6 +243,11 @@
       filter: drop-shadow(0 0 10px rgba(84, 191, 208, .42));
     }
 
+    .nav-text-link {
+      color: var(--ink);
+      font-weight: 560;
+    }
+
     .nav-contact {
       display: inline-flex;
       align-items: center;
@@ -928,6 +933,97 @@
       transform: translateY(2px);
     }
 
+    .pipeline-section,
+    .research-section {
+      position: relative;
+      padding: clamp(82px, 12svh, 132px) 0;
+    }
+
+    .pipeline-section {
+      color: #172224;
+    }
+
+    .pipeline-inner,
+    .research-inner {
+      display: grid;
+      grid-template-columns: minmax(260px, .72fr) minmax(0, 1fr);
+      gap: clamp(30px, 5vw, 76px);
+      align-items: start;
+    }
+
+    .pipeline-section h2,
+    .research-section h2 {
+      max-width: 640px;
+      font-size: clamp(2.2rem, 5.2vw, 4.8rem);
+      line-height: 1.04;
+      font-weight: 760;
+      color: #245e68;
+    }
+
+    .pipeline-section p,
+    .research-section p {
+      margin: 16px 0 0;
+      max-width: 650px;
+      color: #38423e;
+      font-size: 1.04rem;
+    }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .pipeline-card {
+      min-height: 190px;
+      padding: 22px;
+      border: 1px solid rgba(79, 129, 153, .18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .58);
+      box-shadow: 0 18px 42px rgba(23, 34, 36, .08);
+    }
+
+    .pipeline-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      color: #245e68;
+      background: radial-gradient(circle, rgba(191, 229, 231, .82), rgba(84, 191, 208, .2) 68%, rgba(84, 191, 208, 0));
+      font-size: .78rem;
+      font-weight: 820;
+    }
+
+    .pipeline-card h3 {
+      margin: 0;
+      color: #172224;
+      font-size: 1.08rem;
+      line-height: 1.2;
+    }
+
+    .pipeline-card p {
+      margin-top: 10px;
+      color: #506166;
+      font-size: .94rem;
+      line-height: 1.5;
+    }
+
+    .research-section {
+      color: #172224;
+      background:
+        radial-gradient(circle at 80% 16%, rgba(191, 229, 231, .58), rgba(191, 229, 231, 0) 34%),
+        linear-gradient(135deg, #f7fbfa, #e8f5f2 58%, #dcefe5);
+    }
+
+    .research-note {
+      max-width: 690px;
+      padding: 24px 26px;
+      border-left: 2px solid rgba(79, 129, 153, .42);
+      background: rgba(255, 255, 255, .46);
+    }
+
     .closing {
       min-height: 58svh;
       position: relative;
@@ -1266,7 +1362,13 @@
       .project-grid,
       .project-strip.reverse .project-grid,
       .case-hero,
+      .pipeline-inner,
+      .research-inner,
       .closing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1374,13 +1476,14 @@
             <img class="icon-on" src="assets/nav-bulb-on.png" alt="">
           </span>
         </a>
-        <a class="nav-visual-link nav-next-link" href="#next">
-          <span>What's Next</span>
+        <a class="nav-visual-link nav-next-link" href="#research">
+          <span>Research</span>
           <span class="nav-icon" aria-hidden="true">
             <img class="icon-off" src="assets/nav-brain-off.png" alt="">
             <img class="icon-on" src="assets/nav-brain-on.png" alt="">
           </span>
         </a>
+        <a class="nav-text-link" href="#next">What's Next</a>
         <a class="nav-contact" href="mailto:adaptive.dean@gmail.com" aria-label="Email Dean">
           <span>Contact</span>
           <span class="mail-icon" aria-hidden="true">
@@ -1510,10 +1613,50 @@
               <button class="button case-study-button case-button-4" type="button" data-modal="recall-modal" aria-label="Open Re-Call case study">Open case study</button>
             </div>
           </div>
-          <a class="project-next" href="#next" aria-label="Jump to next section"></a>
+          <a class="project-next" href="#pipeline" aria-label="Jump to pipeline section"></a>
+        </div>
+      </section>
+
+      <section class="pipeline-section" id="pipeline" aria-labelledby="pipeline-title">
+        <div class="wrap pipeline-inner">
+          <div>
+            <p class="eyebrow">Stay tuned for</p>
+            <h2 id="pipeline-title">A few things still taking shape.</h2>
+            <p>Some work is still in progress, some is being tested, and some needs a clearer story before it belongs here properly.</p>
+          </div>
+          <div class="pipeline-grid" aria-label="Portfolio pipeline">
+            <article class="pipeline-card">
+              <span class="pipeline-icon" aria-hidden="true">01</span>
+              <h3>Research notes</h3>
+              <p>Shorter write-ups on learning, motivation, repetition, and how students actually respond to different tools.</p>
+            </article>
+            <article class="pipeline-card">
+              <span class="pipeline-icon" aria-hidden="true">02</span>
+              <h3>New prototypes</h3>
+              <p>Early experiments that are not ready for a full case study yet, but are already shaping the next round of work.</p>
+            </article>
+            <article class="pipeline-card">
+              <span class="pipeline-icon" aria-hidden="true">03</span>
+              <h3>More evidence</h3>
+              <p>Updates from testing, clearer before-and-after decisions, and more detail on what changed after real use.</p>
+            </article>
+          </div>
         </div>
       </section>
     </div>
+
+    <section class="research-section" id="research" aria-labelledby="research-title">
+      <div class="wrap research-inner">
+        <div>
+          <p class="eyebrow">Research</p>
+          <h2 id="research-title">The thinking behind the tools.</h2>
+        </div>
+        <div class="research-note">
+          <p>This section will hold research notes, observations from lessons, and the reasoning behind design decisions.</p>
+          <p>For now, it gives the portfolio a place for the psychological and teaching side of the work, not only the finished products.</p>
+        </div>
+      </div>
+    </section>
 
     <section class="closing" id="next" aria-labelledby="next-title">
       <div class="closing-inner">
