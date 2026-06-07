@@ -266,6 +266,7 @@
       --callout-width: 760px;
       --release-offset: 0px;
       --intro-track-y: 0px;
+      --intro-release-start: 0px;
       --opening-height: 260svh;
       position: relative;
       border-bottom: 1px solid var(--line);
@@ -2052,12 +2053,19 @@
       const trackDistance = Math.max(1, lastParagraphReleasePoint);
       const gapToProjects = 0;
       const releaseDistance = 1;
-      const openingHeight = Math.max(window.innerHeight, window.innerHeight + trackDistance + gapToProjects - bannerHeight);
+      const calloutHeight = taglineCallout.getBoundingClientRect().height || window.innerHeight * 0.45;
+      const indicatorStart = storyParagraphs[0]
+        ? Math.max(0, storyParagraphs[0].offsetTop - calloutHeight * 0.6 + storyLandingLift)
+        : 0;
+      const storyRange = Math.max(1, trackDistance - indicatorStart);
+      const releaseStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
+      const openingHeight = Math.max(window.innerHeight, window.innerHeight + releaseStart + releaseDistance - bannerHeight);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
       openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
       openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
       openingSection.style.setProperty("--track-distance", `${trackDistance}px`);
       openingSection.style.setProperty("--intro-project-gap", `${gapToProjects}px`);
+      openingSection.style.setProperty("--intro-release-start", `${releaseStart}px`);
       openingSection.style.setProperty("--opening-height", `${openingHeight}px`);
       if (wasPinned) openingSection.classList.add("pinned");
       if (wasReleasing) openingSection.classList.add("releasing");
@@ -2070,7 +2078,7 @@
       const trackDistance = parseFloat(getComputedStyle(openingSection).getPropertyValue("--track-distance")) || window.innerHeight;
       const gapToProjects = parseFloat(getComputedStyle(openingSection).getPropertyValue("--intro-project-gap")) || Math.round(1.25 * 37.795);
       const releaseDistance = 1;
-      const releaseStart = trackDistance + gapToProjects;
+      const releaseStart = parseFloat(getComputedStyle(openingSection).getPropertyValue("--intro-release-start")) || (trackDistance + gapToProjects);
       const total = releaseStart + releaseDistance;
       const releaseOffset = Math.max(0, progress - releaseStart);
       const trackY = Math.min(progress, trackDistance);
