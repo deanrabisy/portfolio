@@ -1002,18 +1002,18 @@
       display: grid;
       grid-template-rows: auto 1fr;
       border-radius: var(--radius);
-      background: var(--paper);
+      background: #ffffff;
       box-shadow: 0 30px 90px rgba(0, 0, 0, .28);
       overflow: hidden;
     }
 
     .modal-top {
-      min-height: 68px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 14px 18px;
+      padding: 8px 16px;
       border-bottom: 1px solid var(--line);
       background: rgba(247, 251, 250, .96);
     }
@@ -1056,118 +1056,82 @@
 
     .modal-content {
       overflow-y: auto;
+      background: #ffffff;
     }
 
     .case-hero {
       display: grid;
       grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
-      gap: 42px;
+      gap: clamp(24px, 4vw, 42px);
       align-items: end;
-      padding: clamp(28px, 5vw, 58px);
-      border-bottom: 1px solid var(--line);
-      background: #f4f2ea;
+      padding: clamp(24px, 3.6vw, 42px) clamp(28px, 5vw, 58px);
+      border-bottom: 0;
+      color: #f4fbfb;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(255, 255, 255, .18), rgba(255, 255, 255, 0) 36%),
+        linear-gradient(135deg, #2b6d76, #63bec4);
+    }
+
+    .case-hero .eyebrow {
+      display: none;
     }
 
     .case-hero h2 {
-      font-size: clamp(2.8rem, 6vw, 6rem);
+      font-size: clamp(2.3rem, 5vw, 4.8rem);
       font-weight: 780;
       letter-spacing: -.01em;
     }
 
     .case-hero p {
-      margin: 20px 0 0;
-      color: #343d39;
-      font-size: 1.12rem;
+      margin: 0;
+      color: rgba(244, 251, 251, .86);
+      font-size: clamp(1rem, 1.4vw, 1.12rem);
     }
 
     .case-body {
-      width: min(1040px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 54px 0 70px;
-    }
-
-    .case-section {
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 40px;
-      padding: 34px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .case-section h3 {
-      color: var(--blue);
-      font-size: .82rem;
-      font-weight: 850;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    #gophish-modal .modal-top {
-      min-height: 58px;
-      background: rgba(232, 247, 247, .96);
-    }
-
-    #gophish-modal .modal-title b {
-      color: #245e68;
-      font-size: .78rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    #gophish-modal .modal-title span {
-      display: none;
-    }
-
-    #gophish-modal .case-hero {
-      border-bottom: 0;
-      color: #f4fbfb;
-      background:
-        radial-gradient(circle at 16% 18%, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 36%),
-        linear-gradient(135deg, #2b6d76, #63bec4);
-    }
-
-    #gophish-modal .case-hero .eyebrow,
-    #gophish-modal .case-hero p {
-      color: rgba(244, 251, 251, .86);
-    }
-
-    #gophish-modal .case-body {
       position: relative;
-      width: min(1080px, calc(100% - 32px));
-      padding-top: 44px;
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 44px 0 70px;
+      background: #ffffff;
     }
 
-    #gophish-modal .case-body::before {
+    .case-body::before {
       content: "";
       position: absolute;
       top: 48px;
       bottom: 70px;
-      left: 108px;
+      left: 15px;
       width: 2px;
       border-radius: 999px;
       background: linear-gradient(to bottom, rgba(79, 159, 168, .08), rgba(79, 159, 168, .34), rgba(79, 159, 168, .08));
     }
 
-    #gophish-modal .case-section {
-      position: relative;
-      grid-template-columns: 220px minmax(0, 1fr);
+    .case-section {
+      display: grid;
+      grid-template-columns: 42px 170px minmax(0, 1fr);
+      gap: 24px;
+      padding: 34px 0;
       border-bottom: 0;
-      padding: 42px 0;
     }
 
-    #gophish-modal .case-section h3 {
+    .case-section h3 {
       position: sticky;
-      top: 84px;
+      top: 72px;
+      grid-column: 2;
       align-self: start;
-      padding-left: 28px;
-      color: #245e68;
+      color: var(--blue);
+      font-size: .82rem;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
       z-index: 1;
     }
 
-    #gophish-modal .case-section h3::before {
+    .case-section h3::before {
       content: "";
       position: absolute;
-      left: 100px;
+      left: -56px;
       top: 2px;
       width: 0;
       height: 0;
@@ -1177,10 +1141,10 @@
       filter: drop-shadow(0 0 7px rgba(84, 191, 208, .34));
     }
 
-    #gophish-modal .case-section h3::after {
+    .case-section h3::after {
       content: "";
       position: absolute;
-      left: 89px;
+      left: -67px;
       top: -9px;
       width: 38px;
       height: 38px;
@@ -1189,12 +1153,25 @@
       z-index: -1;
     }
 
-    #gophish-modal .case-section > div {
-      padding: clamp(18px, 2.4vw, 28px);
-      border: 1px solid rgba(79, 159, 168, .12);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, .62);
-      box-shadow: 0 14px 32px rgba(36, 94, 104, .06);
+    .case-section > div {
+      grid-column: 3;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    #gophish-modal .modal-top {
+      background: rgba(232, 247, 247, .96);
+    }
+
+    #gophish-modal .modal-title b {
+      color: #245e68;
+    }
+
+    #gophish-modal .modal-title span {
+      display: block;
     }
 
     .case-section p,
@@ -1554,8 +1531,8 @@
     <div class="modal-panel">
       <div class="modal-top">
         <div class="modal-title">
-          <b id="gophish-modal-title">Case Study</b>
-          <span>GoPhish</span>
+          <b id="gophish-modal-title">GoPhish</b>
+          <span>An online multiplayer card game that helps students practice phonics through play.</span>
         </div>
         <button class="close-modal" type="button" aria-label="Close case study">x</button>
       </div>
