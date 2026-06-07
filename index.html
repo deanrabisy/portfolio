@@ -259,7 +259,7 @@
 
     .opening {
       --nav-height: 64px;
-      --banner-height: clamp(220px, 32svh, 330px);
+      --banner-height: calc(clamp(220px, 32svh, 330px) + 2cm);
       --intro-top-gap: clamp(24px, 4vw, 48px);
       --callout-sticky-top: calc(var(--nav-height) + var(--banner-height) + var(--intro-top-gap));
       --intro-stage-lift: 2cm;
@@ -270,7 +270,6 @@
       --intro-project-start: 0px;
       --opening-height: 260svh;
       position: relative;
-      border-bottom: 1px solid var(--line);
       background: var(--paper);
     }
 
@@ -285,7 +284,6 @@
       z-index: 4;
       min-height: var(--banner-height);
       background: var(--wash);
-      border-bottom: 1px solid var(--line);
       overflow: hidden;
       clip-path: url("#banner-arc-clip");
     }
@@ -2074,7 +2072,8 @@
       const storyRange = Math.max(1, trackDistance - indicatorStart);
       const projectStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
       const releaseStart = trackDistance + gapToProjects;
-      const openingHeight = Math.max(window.innerHeight, window.innerHeight + projectStart + releaseDistance - bannerHeight);
+      const projectNestOverlap = 30;
+      const openingHeight = Math.max(window.innerHeight, projectStart + navHeight + bannerHeight - projectNestOverlap);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
       openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
       openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
