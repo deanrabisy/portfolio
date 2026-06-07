@@ -287,7 +287,7 @@
       background: var(--wash);
       border-bottom: 1px solid var(--line);
       overflow: hidden;
-      clip-path: polygon(0 0, 100% 0, 100% 86%, 92% 90%, 82% 94%, 68% 98%, 50% 100%, 32% 98%, 18% 94%, 8% 90%, 0 86%);
+      clip-path: url("#banner-arc-clip");
     }
 
     .opening.pinned .banner,
@@ -582,7 +582,7 @@
       padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
-      clip-path: polygon(0 7%, 8% 5%, 18% 3%, 32% 1%, 50% 0, 68% 1%, 82% 3%, 92% 5%, 100% 7%, 100% 100%, 0 100%);
+      clip-path: url("#project-arc-clip");
       margin-top: -30px;
     }
 
@@ -1366,6 +1366,16 @@
   </style>
 </head>
 <body>
+  <svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
+    <defs>
+      <clipPath id="banner-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0 H1 V1 C0.72,0.78 0.28,0.78 0,1 Z" />
+      </clipPath>
+      <clipPath id="project-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
+      </clipPath>
+    </defs>
+  </svg>
   <header class="site-nav">
     <nav class="nav-inner" aria-label="Main navigation">
       <div class="brand-group">
