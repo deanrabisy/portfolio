@@ -199,9 +199,11 @@
       flex: 0 0 auto;
       position: relative;
       display: block;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
+      width: 50px;
+      height: 42px;
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 8px 18px rgba(23, 34, 36, .1);
       transition: transform .24s ease, filter .24s ease;
     }
 
@@ -211,6 +213,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      image-rendering: auto;
       transition: opacity .22s ease, transform .3s ease, filter .3s ease;
     }
 
@@ -229,7 +232,7 @@
     .nav-visual-link:focus-visible .icon-on {
       opacity: 1;
       transform: translateY(-3px) scale(1.08);
-      filter: drop-shadow(0 0 8px rgba(84, 191, 208, .38));
+      filter: drop-shadow(0 5px 9px rgba(36, 94, 104, .16));
     }
 
     .nav-visual-link:hover .nav-icon,
@@ -240,12 +243,7 @@
     .nav-next-link:hover .icon-on,
     .nav-next-link:focus-visible .icon-on {
       transform: translateY(-3px) scale(1.12) rotate(-1deg);
-      filter: drop-shadow(0 0 10px rgba(84, 191, 208, .42));
-    }
-
-    .nav-text-link {
-      color: var(--ink);
-      font-weight: 560;
+      filter: drop-shadow(0 5px 9px rgba(36, 94, 104, .16));
     }
 
     .nav-contact {
@@ -1654,7 +1652,13 @@
             <img class="icon-on" src="assets/nav-brain-on.png" alt="">
           </span>
         </a>
-        <a class="nav-text-link" href="#next">What's Next</a>
+        <a class="nav-visual-link nav-whats-next-link" href="#next">
+          <span>What's Next</span>
+          <span class="nav-icon" aria-hidden="true">
+            <img class="icon-off" src="assets/nav-network-off.svg" alt="">
+            <img class="icon-on" src="assets/nav-network-on.svg" alt="">
+          </span>
+        </a>
         <a class="nav-contact" href="mailto:adaptive.dean@gmail.com" aria-label="Email Dean">
           <span>Contact</span>
           <span class="mail-icon" aria-hidden="true">
