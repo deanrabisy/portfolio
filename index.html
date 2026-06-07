@@ -201,9 +201,9 @@
       display: block;
       width: 50px;
       height: 42px;
-      border-radius: 16px;
-      background: #ffffff;
-      box-shadow: 0 8px 18px rgba(23, 34, 36, .1);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .72);
+      filter: drop-shadow(0 7px 9px rgba(23, 34, 36, .18));
       transition: transform .24s ease, filter .24s ease;
     }
 
@@ -238,6 +238,7 @@
     .nav-visual-link:hover .nav-icon,
     .nav-visual-link:focus-visible .nav-icon {
       transform: translateY(-1px);
+      filter: drop-shadow(0 11px 14px rgba(23, 34, 36, .24));
     }
 
     .nav-next-link:hover .icon-on,
@@ -1641,8 +1642,8 @@
         <a class="nav-visual-link nav-projects-link" href="#projects" data-projects-jump>
           <span>Projects</span>
           <span class="nav-icon" aria-hidden="true">
-            <img class="icon-off" src="assets/nav-bulb-off.png" alt="">
-            <img class="icon-on" src="assets/nav-bulb-on.png" alt="">
+            <img class="icon-off" src="assets/nav-bulb-object-off.png" alt="">
+            <img class="icon-on" src="assets/nav-bulb-object-on.png" alt="">
           </span>
         </a>
         <a class="nav-visual-link nav-next-link" href="#research">
