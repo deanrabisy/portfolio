@@ -2046,11 +2046,11 @@
       const calloutRect = taglineCallout.getBoundingClientRect();
       const calloutTop = navHeight + bannerHeight + introTopGap;
       const lastParagraph = storyParagraphs[storyParagraphs.length - 1];
-      const lastParagraphBottom = lastParagraph
-        ? lastParagraph.offsetTop + lastParagraph.offsetHeight
+      const lastParagraphReleasePoint = lastParagraph
+        ? lastParagraph.offsetTop + lastParagraph.offsetHeight * 0.48
         : calloutTrack.scrollHeight;
-      const trackDistance = Math.max(1, lastParagraphBottom + 12);
-      const gapToProjects = Math.round(1.25 * 37.795);
+      const trackDistance = Math.max(1, lastParagraphReleasePoint);
+      const gapToProjects = 0;
       const releaseDistance = 1;
       const openingHeight = Math.max(window.innerHeight, window.innerHeight + trackDistance + gapToProjects - bannerHeight);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
