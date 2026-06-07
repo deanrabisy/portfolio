@@ -1627,7 +1627,7 @@
         <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
       </clipPath>
       <clipPath id="banner-top-arc-clip" clipPathUnits="objectBoundingBox">
-        <path d="M0,0.22 C0.28,0 0.72,0 1,0.22 V1 H0 Z" />
+        <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
       </clipPath>
     </defs>
   </svg>
@@ -2453,7 +2453,7 @@
       event.preventDefault();
       const projects = document.querySelector("#projects");
       if (!projects) return;
-      const curveClearance = Math.round(2.7 * 37.795);
+      const curveClearance = Math.round(1 * 37.795);
       window.scrollTo({
         top: projects.offsetTop + curveClearance,
         behavior: reducedMotion ? "auto" : "smooth"
