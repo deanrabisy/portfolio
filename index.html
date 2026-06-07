@@ -575,10 +575,10 @@
     .project-start {
       position: relative;
       z-index: 6;
-      min-height: 100svh;
+      min-height: 112svh;
       display: grid;
       align-items: start;
-      padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
+      padding: clamp(112px, 16svh, 156px) 0 calc(clamp(86px, 13svh, 128px) + var(--section-curve-depth));
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
       clip-path: url("#banner-both-arc-clip");
@@ -656,21 +656,6 @@
         linear-gradient(rgba(248, 252, 252, .34), rgba(248, 252, 252, .44)),
         url("assets/project-background-option-2.png") center top / 100% 100% no-repeat,
         var(--paper);
-    }
-
-    .project-flow-bg::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
-      height: var(--section-curve-depth);
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
-        linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
-      clip-path: url("#banner-top-arc-clip");
     }
 
     .project-strip {
@@ -1335,7 +1320,8 @@
       }
 
       .project-start {
-        min-height: 100svh;
+        min-height: 112svh;
+        padding: 58px 0 calc(58px + var(--section-curve-depth));
       }
 
       .project-start-layout {
