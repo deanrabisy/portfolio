@@ -24,6 +24,7 @@
       --shadow: 0 22px 70px rgba(23, 34, 36, .12);
       --max: 1180px;
       --radius: 8px;
+      --section-curve-depth: clamp(72px, 10svh, 118px);
     }
 
     * {
@@ -580,7 +581,7 @@
       padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
-      clip-path: url("#project-arc-clip");
+      clip-path: url("#project-banner-arc-clip");
       margin-top: -30px;
     }
 
@@ -646,11 +647,15 @@
 
     .project-flow-bg {
       position: relative;
+      z-index: 5;
       overflow: hidden;
+      margin-top: calc(var(--section-curve-depth) * -1);
+      padding-top: var(--section-curve-depth);
       background:
         linear-gradient(rgba(248, 252, 252, .34), rgba(248, 252, 252, .44)),
         url("assets/project-background-option-2.png") center top / 100% 100% no-repeat,
         var(--paper);
+      clip-path: url("#project-flow-bottom-arc-clip");
     }
 
     .project-strip {
@@ -928,14 +933,17 @@
     .closing {
       min-height: 58svh;
       position: relative;
+      z-index: 4;
       display: grid;
       align-items: center;
-      padding: clamp(62px, 9svh, 86px) 0;
+      margin-top: calc(var(--section-curve-depth) * -1);
+      padding: calc(clamp(62px, 9svh, 86px) + var(--section-curve-depth)) 0 clamp(62px, 9svh, 86px);
       overflow: hidden;
       color: #172224;
       background:
         radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
         linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
+      clip-path: url("#closing-top-arc-clip");
     }
 
     .closing-inner {
@@ -1307,6 +1315,10 @@
         padding: 58px 0;
       }
 
+      .closing {
+        padding-top: calc(58px + var(--section-curve-depth));
+      }
+
       .project-start {
         min-height: 100svh;
       }
@@ -1348,6 +1360,15 @@
       </clipPath>
       <clipPath id="project-arc-clip" clipPathUnits="objectBoundingBox">
         <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
+      </clipPath>
+      <clipPath id="project-banner-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V0.88 C0.72,1 0.28,1 0,0.88 Z" />
+      </clipPath>
+      <clipPath id="project-flow-bottom-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0 H1 V0.97 C0.72,1 0.28,1 0,0.97 Z" />
+      </clipPath>
+      <clipPath id="closing-top-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.08 C0.28,0 0.72,0 1,0.08 V1 H0 Z" />
       </clipPath>
     </defs>
   </svg>
