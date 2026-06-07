@@ -581,7 +581,7 @@
       padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
-      clip-path: url("#project-banner-arc-clip");
+      clip-path: url("#banner-both-arc-clip");
       margin-top: -30px;
     }
 
@@ -648,6 +648,7 @@
     .project-flow-bg {
       position: relative;
       z-index: 5;
+      isolation: isolate;
       overflow: hidden;
       margin-top: calc(var(--section-curve-depth) * -1);
       padding-top: var(--section-curve-depth);
@@ -655,7 +656,21 @@
         linear-gradient(rgba(248, 252, 252, .34), rgba(248, 252, 252, .44)),
         url("assets/project-background-option-2.png") center top / 100% 100% no-repeat,
         var(--paper);
-      clip-path: url("#project-flow-bottom-arc-clip");
+    }
+
+    .project-flow-bg::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      height: var(--section-curve-depth);
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
+        linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
+      clip-path: url("#banner-top-arc-clip");
     }
 
     .project-strip {
@@ -943,7 +958,7 @@
       background:
         radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
         linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
-      clip-path: url("#closing-top-arc-clip");
+      clip-path: url("#banner-top-arc-clip");
     }
 
     .closing-inner {
@@ -1361,14 +1376,11 @@
       <clipPath id="project-arc-clip" clipPathUnits="objectBoundingBox">
         <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
       </clipPath>
-      <clipPath id="project-banner-arc-clip" clipPathUnits="objectBoundingBox">
-        <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V0.88 C0.72,1 0.28,1 0,0.88 Z" />
+      <clipPath id="banner-top-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.22 C0.28,0 0.72,0 1,0.22 V1 H0 Z" />
       </clipPath>
-      <clipPath id="project-flow-bottom-arc-clip" clipPathUnits="objectBoundingBox">
-        <path d="M0,0 H1 V0.97 C0.72,1 0.28,1 0,0.97 Z" />
-      </clipPath>
-      <clipPath id="closing-top-arc-clip" clipPathUnits="objectBoundingBox">
-        <path d="M0,0.08 C0.28,0 0.72,0 1,0.08 V1 H0 Z" />
+      <clipPath id="banner-both-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.22 C0.28,0 0.72,0 1,0.22 V1 C0.72,0.78 0.28,0.78 0,1 Z" />
       </clipPath>
     </defs>
   </svg>
@@ -2025,7 +2037,6 @@
     const banner = document.querySelector(".banner");
     const intro = document.querySelector(".intro");
     const introCopy = document.querySelector(".intro-copy");
-    const projectsSection = document.querySelector(".project-start");
     const taglineCallout = document.querySelector(".tagline-callout");
     const calloutTrack = document.querySelector(".callout-track");
     const storyParagraphs = Array.from(document.querySelectorAll(".intro-body-callout p"));
@@ -2068,11 +2079,8 @@
       const storyRange = Math.max(1, trackDistance - indicatorStart);
       const projectStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
       const releaseStart = trackDistance + gapToProjects;
-      const projectMarginTop = projectsSection
-        ? parseFloat(getComputedStyle(projectsSection).marginTop) || 0
-        : 0;
-      const projectNestOverlap = 0;
-      const openingHeight = Math.max(window.innerHeight, projectStart + navHeight - projectMarginTop - projectNestOverlap);
+      const projectNestOverlap = 30;
+      const openingHeight = Math.max(window.innerHeight, projectStart + navHeight + bannerHeight - projectNestOverlap);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
       openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
       openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
