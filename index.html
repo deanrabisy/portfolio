@@ -267,6 +267,7 @@
       --release-offset: 0px;
       --intro-track-y: 0px;
       --intro-release-start: 0px;
+      --intro-project-start: 0px;
       --opening-height: 260svh;
       position: relative;
       border-bottom: 1px solid var(--line);
@@ -286,6 +287,7 @@
       background: var(--wash);
       border-bottom: 1px solid var(--line);
       overflow: hidden;
+      clip-path: ellipse(116% 100% at 50% 0);
     }
 
     .opening.pinned .banner,
@@ -2047,10 +2049,10 @@
       const calloutRect = taglineCallout.getBoundingClientRect();
       const calloutTop = navHeight + bannerHeight + introTopGap;
       const lastParagraph = storyParagraphs[storyParagraphs.length - 1];
-      const lastParagraphReleasePoint = lastParagraph
-        ? lastParagraph.offsetTop + lastParagraph.offsetHeight * 0.48
+      const lastParagraphBottom = lastParagraph
+        ? lastParagraph.offsetTop + lastParagraph.offsetHeight + 12
         : calloutTrack.scrollHeight;
-      const trackDistance = Math.max(1, lastParagraphReleasePoint);
+      const trackDistance = Math.max(1, lastParagraphBottom);
       const gapToProjects = 0;
       const releaseDistance = 1;
       const calloutHeight = taglineCallout.getBoundingClientRect().height || window.innerHeight * 0.45;
@@ -2058,14 +2060,16 @@
         ? Math.max(0, storyParagraphs[0].offsetTop - calloutHeight * 0.6 + storyLandingLift)
         : 0;
       const storyRange = Math.max(1, trackDistance - indicatorStart);
-      const releaseStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
-      const openingHeight = Math.max(window.innerHeight, window.innerHeight + releaseStart + releaseDistance - bannerHeight);
+      const projectStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
+      const releaseStart = trackDistance + gapToProjects;
+      const openingHeight = Math.max(window.innerHeight, window.innerHeight + projectStart + releaseDistance - bannerHeight);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
       openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
       openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
       openingSection.style.setProperty("--track-distance", `${trackDistance}px`);
       openingSection.style.setProperty("--intro-project-gap", `${gapToProjects}px`);
       openingSection.style.setProperty("--intro-release-start", `${releaseStart}px`);
+      openingSection.style.setProperty("--intro-project-start", `${projectStart}px`);
       openingSection.style.setProperty("--opening-height", `${openingHeight}px`);
       if (wasPinned) openingSection.classList.add("pinned");
       if (wasReleasing) openingSection.classList.add("releasing");
