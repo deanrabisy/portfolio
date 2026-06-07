@@ -25,7 +25,6 @@
       --max: 1180px;
       --radius: 8px;
       --section-curve-depth: clamp(72px, 10svh, 118px);
-      --project-color-extension: clamp(72px, 10svh, 120px);
     }
 
     * {
@@ -576,13 +575,13 @@
     .project-start {
       position: relative;
       z-index: 6;
-      min-height: calc(112svh + (var(--project-color-extension) * 2));
+      min-height: 100svh;
       display: grid;
       align-items: start;
-      padding: calc(clamp(112px, 16svh, 156px) + var(--project-color-extension)) 0 calc(clamp(86px, 13svh, 128px) + var(--section-curve-depth) + var(--project-color-extension));
+      padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
       color: #f4fbfb;
       background: linear-gradient(135deg, #1f5964, #48aebe);
-      clip-path: url("#banner-both-arc-clip");
+      clip-path: url("#banner-top-arc-clip");
       margin-top: -30px;
     }
 
@@ -591,7 +590,6 @@
       grid-template-columns: minmax(0, 1fr) auto;
       gap: clamp(28px, 5vw, 72px);
       align-items: start;
-      transform: translateY(calc(var(--project-color-extension) * -1));
     }
 
     .project-start-copy {
@@ -652,8 +650,6 @@
       z-index: 5;
       isolation: isolate;
       overflow: hidden;
-      margin-top: calc(var(--section-curve-depth) * -1);
-      padding-top: var(--section-curve-depth);
       background:
         linear-gradient(rgba(248, 252, 252, .34), rgba(248, 252, 252, .44)),
         url("assets/project-background-option-2.png") center top / 100% 100% no-repeat,
@@ -938,14 +934,12 @@
       z-index: 4;
       display: grid;
       align-items: center;
-      margin-top: calc(var(--section-curve-depth) * -1);
-      padding: calc(clamp(62px, 9svh, 86px) + var(--section-curve-depth)) 0 clamp(62px, 9svh, 86px);
+      padding: clamp(62px, 9svh, 86px) 0;
       overflow: hidden;
       color: #172224;
       background:
         radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
         linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
-      clip-path: url("#banner-top-arc-clip");
     }
 
     .closing-inner {
@@ -1317,13 +1311,8 @@
         padding: 58px 0;
       }
 
-      .closing {
-        padding-top: calc(58px + var(--section-curve-depth));
-      }
-
       .project-start {
-        min-height: calc(112svh + (var(--project-color-extension) * 2));
-        padding: calc(58px + var(--project-color-extension)) 0 calc(58px + var(--section-curve-depth) + var(--project-color-extension));
+        min-height: 100svh;
       }
 
       .project-start-layout {
@@ -1366,9 +1355,6 @@
       </clipPath>
       <clipPath id="banner-top-arc-clip" clipPathUnits="objectBoundingBox">
         <path d="M0,0.22 C0.28,0 0.72,0 1,0.22 V1 H0 Z" />
-      </clipPath>
-      <clipPath id="banner-both-arc-clip" clipPathUnits="objectBoundingBox">
-        <path d="M0,0.22 C0.28,0 0.72,0 1,0.22 V1 C0.72,0.78 0.28,0.78 0,1 Z" />
       </clipPath>
     </defs>
   </svg>
@@ -2126,7 +2112,7 @@
       event.preventDefault();
       const projects = document.querySelector("#projects");
       if (!projects) return;
-      const curveClearance = Math.round(1.4 * 37.795);
+      const curveClearance = Math.round(3.4 * 37.795);
       window.scrollTo({
         top: projects.offsetTop + curveClearance,
         behavior: reducedMotion ? "auto" : "smooth"
