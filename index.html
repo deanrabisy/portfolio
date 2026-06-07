@@ -185,6 +185,63 @@
       outline: none;
     }
 
+    .nav-visual-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 7px 2px 10px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      flex: 0 0 auto;
+      position: relative;
+      display: block;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      transition: transform .24s ease, filter .24s ease;
+    }
+
+    .nav-icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity .22s ease, transform .3s ease, filter .3s ease;
+    }
+
+    .nav-icon .icon-on {
+      opacity: 0;
+      transform: translateY(4px) scale(.92);
+    }
+
+    .nav-visual-link:hover .icon-off,
+    .nav-visual-link:focus-visible .icon-off {
+      opacity: 0;
+      transform: translateY(5px) scale(.92);
+    }
+
+    .nav-visual-link:hover .icon-on,
+    .nav-visual-link:focus-visible .icon-on {
+      opacity: 1;
+      transform: translateY(-3px) scale(1.08);
+      filter: drop-shadow(0 0 8px rgba(84, 191, 208, .38));
+    }
+
+    .nav-visual-link:hover .nav-icon,
+    .nav-visual-link:focus-visible .nav-icon {
+      transform: translateY(-1px);
+    }
+
+    .nav-next-link:hover .icon-on,
+    .nav-next-link:focus-visible .icon-on {
+      transform: translateY(-3px) scale(1.12) rotate(-1deg);
+      filter: drop-shadow(0 0 10px rgba(84, 191, 208, .42));
+    }
+
     .nav-contact {
       display: inline-flex;
       align-items: center;
@@ -1313,8 +1370,20 @@
         </a>
       </div>
       <div class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#intro-story" data-intro-story>Next</a>
+        <a class="nav-visual-link nav-projects-link" href="#projects">
+          <span>Projects</span>
+          <span class="nav-icon" aria-hidden="true">
+            <img class="icon-off" src="assets/nav-bulb-off.png" alt="">
+            <img class="icon-on" src="assets/nav-bulb-on.png" alt="">
+          </span>
+        </a>
+        <a class="nav-visual-link nav-next-link" href="#next">
+          <span>What's Next</span>
+          <span class="nav-icon" aria-hidden="true">
+            <img class="icon-off" src="assets/nav-brain-off.png" alt="">
+            <img class="icon-on" src="assets/nav-brain-on.png" alt="">
+          </span>
+        </a>
         <a class="nav-contact" href="mailto:adaptive.dean@gmail.com" aria-label="Email Dean">
           <span>Contact</span>
           <span class="mail-icon" aria-hidden="true">
