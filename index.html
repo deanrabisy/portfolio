@@ -423,12 +423,10 @@
 
     .scroll-cue span {
       position: relative;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 13px solid #4f9fa8;
-      filter: drop-shadow(0 0 6px rgba(84, 191, 208, .32)) drop-shadow(0 8px 10px rgba(23, 34, 36, .16));
+      width: 24px;
+      height: 24px;
+      background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 8px rgba(84, 191, 208, .44)) drop-shadow(0 8px 10px rgba(23, 34, 36, .16));
       animation: scrollDotPulse 1.5s ease-in-out infinite;
     }
 
@@ -516,14 +514,12 @@
     .story-scroll-indicator::after {
       content: "";
       position: absolute;
-      left: 14px;
-      top: calc(var(--story-progress) * (100% - 12px));
-      width: 0;
-      height: 0;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-top: 12px solid #4f9fa8;
-      filter: drop-shadow(0 0 5px rgba(84, 191, 208, .28)) drop-shadow(0 7px 12px rgba(23, 34, 36, .14));
+      left: 8px;
+      top: calc(var(--story-progress) * (100% - 20px));
+      width: 24px;
+      height: 24px;
+      background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 8px rgba(84, 191, 208, .42)) drop-shadow(0 7px 12px rgba(23, 34, 36, .14));
     }
 
     .story-scroll-indicator .story-glow {
@@ -898,12 +894,10 @@
       content: "";
       position: relative;
       z-index: 1;
-      width: 0;
-      height: 0;
-      border-left: 9px solid transparent;
-      border-right: 9px solid transparent;
-      border-top: 14px solid #4f9fa8;
-      filter: drop-shadow(0 0 7px rgba(84, 191, 208, .34));
+      width: 26px;
+      height: 26px;
+      background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 9px rgba(84, 191, 208, .46)) drop-shadow(0 7px 12px rgba(23, 34, 36, .12));
     }
 
     .project-next::after {
@@ -1232,12 +1226,10 @@
       position: absolute;
       left: -56px;
       top: 2px;
-      width: 0;
-      height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 13px solid #4f9fa8;
-      filter: drop-shadow(0 0 7px rgba(84, 191, 208, .34));
+      width: 24px;
+      height: 24px;
+      background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 9px rgba(84, 191, 208, .46)) drop-shadow(0 7px 12px rgba(23, 34, 36, .12));
     }
 
     .case-section h3::after {
