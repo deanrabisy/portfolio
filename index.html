@@ -402,9 +402,9 @@
 
     .scroll-cue {
       position: relative;
-      width: 48px;
-      min-width: 48px;
-      min-height: 50px;
+      width: 72px;
+      min-width: 72px;
+      min-height: 75px;
       margin: calc(24px - 1cm) auto 0;
       display: inline-grid;
       place-items: center;
@@ -423,8 +423,8 @@
 
     .scroll-cue span {
       position: relative;
-      width: 24px;
-      height: 24px;
+      width: 36px;
+      height: 36px;
       background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
       filter: drop-shadow(0 0 8px rgba(84, 191, 208, .44)) drop-shadow(0 8px 10px rgba(23, 34, 36, .16));
       animation: scrollDotPulse 1.5s ease-in-out infinite;
@@ -433,12 +433,13 @@
     .scroll-cue span::before {
       content: "";
       position: absolute;
-      left: -17px;
-      top: -22px;
-      width: 34px;
-      height: 34px;
+      left: 50%;
+      top: 50%;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(191, 229, 231, .46), rgba(84, 191, 208, .2) 42%, rgba(84, 191, 208, 0) 72%);
+      transform: translate(-50%, -50%);
       z-index: -1;
     }
 
@@ -487,17 +488,22 @@
 
     .story-scroll-indicator {
       --story-progress: 0;
+      --story-marker-size: 29px;
+      --story-glow-size: 44px;
       position: absolute;
       top: 52%;
       right: 0;
       z-index: 3;
-      width: 40px;
+      width: 46px;
       height: clamp(118px, 20svh, 172px);
       border-radius: 999px;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-50%);
       transition: opacity .24s ease;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
     }
 
     .story-scroll-indicator::before {
@@ -514,26 +520,32 @@
     .story-scroll-indicator::after {
       content: "";
       position: absolute;
-      left: 8px;
-      top: calc(var(--story-progress) * (100% - 20px));
-      width: 24px;
-      height: 24px;
+      left: calc(50% - (var(--story-marker-size) / 2));
+      top: calc(var(--story-progress) * (100% - var(--story-marker-size)));
+      width: var(--story-marker-size);
+      height: var(--story-marker-size);
       background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
       filter: drop-shadow(0 0 8px rgba(84, 191, 208, .42)) drop-shadow(0 7px 12px rgba(23, 34, 36, .14));
     }
 
     .story-scroll-indicator .story-glow {
       position: absolute;
-      left: 2px;
-      top: calc(var(--story-progress) * (100% - 12px) - 12px);
-      width: 36px;
-      height: 36px;
+      left: calc(50% - (var(--story-glow-size) / 2));
+      top: calc((var(--story-progress) * (100% - var(--story-marker-size))) + (var(--story-marker-size) / 2) - (var(--story-glow-size) / 2));
+      width: var(--story-glow-size);
+      height: var(--story-glow-size);
       border-radius: 50%;
       background: radial-gradient(circle, rgba(191, 229, 231, .42), rgba(84, 191, 208, .18) 44%, rgba(84, 191, 208, 0) 74%);
+      pointer-events: none;
     }
 
     .opening.story-active .story-scroll-indicator {
       opacity: 1;
+      pointer-events: auto;
+    }
+
+    .story-scroll-indicator:active {
+      cursor: grabbing;
     }
 
     .eyebrow {
@@ -877,8 +889,8 @@
       grid-column: 1;
       order: 3;
       z-index: 2;
-      width: 42px;
-      height: 42px;
+      width: 50px;
+      height: 50px;
       margin: clamp(16px, 2.5svh, 26px) auto 0;
       display: grid;
       place-items: center;
@@ -894,8 +906,8 @@
       content: "";
       position: relative;
       z-index: 1;
-      width: 26px;
-      height: 26px;
+      width: 31px;
+      height: 31px;
       background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
       filter: drop-shadow(0 0 9px rgba(84, 191, 208, .46)) drop-shadow(0 7px 12px rgba(23, 34, 36, .12));
     }
@@ -905,8 +917,8 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 38px;
-      height: 38px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(191, 229, 231, .5), rgba(84, 191, 208, .22) 44%, rgba(84, 191, 208, 0) 74%);
       transform: translate(-50%, -50%);
@@ -1276,21 +1288,35 @@
     .case-flow {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(280px, .74fr) minmax(0, 1fr);
-      gap: clamp(28px, 4vw, 58px);
+      grid-template-columns: 1fr;
+      gap: 24px;
       min-height: 640px;
-      padding: 10px 0 20px;
+      padding: 22px 0 60px;
     }
 
     .case-map {
-      position: sticky;
-      top: 22px;
-      min-height: 580px;
+      position: relative;
+      min-height: 430px;
       border-radius: var(--radius);
       background:
-        radial-gradient(circle at 24% 22%, rgba(191, 229, 231, .64), rgba(191, 229, 231, 0) 28%),
-        linear-gradient(145deg, rgba(247, 251, 250, .86), rgba(232, 247, 247, .6));
+        radial-gradient(circle at 22% 36%, rgba(191, 229, 231, .68), rgba(191, 229, 231, 0) 30%),
+        radial-gradient(circle at 78% 64%, rgba(215, 232, 184, .38), rgba(215, 232, 184, 0) 28%),
+        linear-gradient(145deg, rgba(247, 251, 250, .92), rgba(232, 247, 247, .58));
       overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(79, 129, 153, .1);
+      transition: min-height .36s ease, border-radius .36s ease, background .36s ease;
+    }
+
+    .case-map::before {
+      content: "Vector flow";
+      position: absolute;
+      left: 24px;
+      top: 20px;
+      color: rgba(36, 94, 104, .66);
+      font-size: .78rem;
+      font-weight: 760;
+      letter-spacing: .1em;
+      text-transform: uppercase;
     }
 
     .case-map svg {
@@ -1306,7 +1332,7 @@
       stroke: rgba(79, 129, 153, .42);
       stroke-width: 3;
       stroke-linecap: round;
-      stroke-dasharray: 8 12;
+      stroke-dasharray: 10 13;
     }
 
     .case-node {
@@ -1346,8 +1372,56 @@
     }
 
     .case-detail {
+      display: none;
       min-width: 0;
-      padding-top: 10px;
+      width: min(860px, calc(100% - 110px));
+      margin: 0 auto;
+      padding-top: 18px;
+    }
+
+    .case-flow.detail-open .case-map {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      min-height: 132px;
+      border-radius: 0 0 var(--radius) var(--radius);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(191, 229, 231, .48), rgba(191, 229, 231, 0) 30%),
+        linear-gradient(145deg, rgba(247, 251, 250, .96), rgba(232, 247, 247, .72));
+    }
+
+    .case-flow.detail-open .case-map::before {
+      top: 14px;
+      font-size: .68rem;
+    }
+
+    .case-flow.detail-open .case-map path {
+      stroke-width: 2.4;
+      stroke-dasharray: 8 10;
+    }
+
+    .case-flow.detail-open .case-node {
+      min-width: 64px;
+      min-height: 34px;
+      padding: 7px 10px;
+      font-size: .66rem;
+      box-shadow: 0 8px 18px rgba(23, 34, 36, .08);
+    }
+
+    .case-flow.detail-open .case-detail {
+      display: block;
+      animation: caseDetailIn .28s ease both;
+    }
+
+    @keyframes caseDetailIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .case-detail-head {
@@ -1383,9 +1457,26 @@
     }
 
     .case-flow-arrow {
-      width: 44px;
-      height: 44px;
+      position: fixed;
+      top: 50%;
+      z-index: 85;
+      width: 48px;
+      height: 48px;
       font-size: 1.3rem;
+      box-shadow: 0 14px 30px rgba(23, 34, 36, .12);
+      transform: translateY(-50%);
+    }
+
+    .case-flow-arrow[data-case-prev] {
+      left: 40px;
+    }
+
+    .case-flow-arrow[data-case-next] {
+      right: 40px;
+    }
+
+    .case-flow-arrow[hidden] {
+      display: none;
     }
 
     .case-map-return:hover,
@@ -1396,6 +1487,11 @@
       background: #e8f7f7;
       box-shadow: 0 10px 22px rgba(36, 94, 104, .12);
       transform: translateY(-1px);
+    }
+
+    .case-flow-arrow:hover,
+    .case-flow-arrow:focus-visible {
+      transform: translateY(-50%) scale(1.04);
     }
 
     .case-flow-content .case-section {
@@ -1417,11 +1513,15 @@
     }
 
     .case-flow-controls {
-      display: flex;
+      display: none;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 14px;
       margin-top: 30px;
+    }
+
+    .case-flow.detail-open .case-flow-controls {
+      display: flex;
     }
 
     .case-flow-counter {
@@ -1528,6 +1628,22 @@
         position: relative;
         top: auto;
         min-height: 440px;
+      }
+
+      .case-flow.detail-open .case-map {
+        min-height: 150px;
+      }
+
+      .case-detail {
+        width: min(100%, calc(100% - 28px));
+      }
+
+      .case-flow-arrow[data-case-prev] {
+        left: 18px;
+      }
+
+      .case-flow-arrow[data-case-next] {
+        right: 18px;
       }
 
       .pipeline-grid {
@@ -1688,7 +1804,7 @@
                   <p>I am now looking for work where I can keep improving my skills, solve meaningful problems, and be a part of making people's lives a little better.</p>
                 </div>
               </div>
-              <div class="story-scroll-indicator" aria-hidden="true">
+              <div class="story-scroll-indicator" role="scrollbar" aria-label="Scroll intro text" aria-controls="intro-story" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
                 <span class="story-glow"></span>
               </div>
             </div>
@@ -1862,24 +1978,24 @@
           <p>A familiar card game adapted into a real-time phonics tool, designed to make repeated sound practice feel natural and engadging.</p>
         </section>
         <div class="case-body case-flow" data-case-flow>
-          <div class="case-map" aria-label="GoPhish case study map">
-            <svg viewBox="0 0 360 560" aria-hidden="true" focusable="false">
-              <path d="M72 78 C178 30 276 72 242 138 C204 214 90 166 104 250 C120 348 294 250 282 354 C272 442 134 388 104 494" />
+          <div class="case-map" aria-label="GoPhish case study vector flow">
+            <svg viewBox="0 0 960 300" aria-hidden="true" focusable="false">
+              <path d="M82 168 C164 78 246 78 306 146 C364 212 436 214 500 150 C568 82 650 90 704 158 C762 230 824 220 884 126" />
             </svg>
-            <button class="case-node active" style="--x:20%; --y:14%" type="button" data-case-node="problem">Problem</button>
-            <button class="case-node" style="--x:70%; --y:23%" type="button" data-case-node="idea">Idea</button>
-            <button class="case-node" style="--x:32%; --y:38%" type="button" data-case-node="built">Built</button>
-            <button class="case-node" style="--x:76%; --y:50%" type="button" data-case-node="practice">Practice</button>
-            <button class="case-node" style="--x:34%; --y:62%" type="button" data-case-node="worked">Worked</button>
-            <button class="case-node" style="--x:72%; --y:72%" type="button" data-case-node="hard">Hard</button>
-            <button class="case-node" style="--x:30%; --y:82%" type="button" data-case-node="not-yet">Not Yet</button>
-            <button class="case-node" style="--x:64%; --y:86%" type="button" data-case-node="learned">Learned</button>
-            <button class="case-node" style="--x:30%; --y:94%" type="button" data-case-node="outcome">Outcome</button>
+            <button class="case-node" style="--x:9%; --y:56%" type="button" data-case-node="problem">Problem</button>
+            <button class="case-node" style="--x:21%; --y:31%" type="button" data-case-node="idea">Idea</button>
+            <button class="case-node" style="--x:33%; --y:49%" type="button" data-case-node="built">Built</button>
+            <button class="case-node" style="--x:45%; --y:68%" type="button" data-case-node="practice">Practice</button>
+            <button class="case-node" style="--x:56%; --y:46%" type="button" data-case-node="worked">Worked</button>
+            <button class="case-node" style="--x:67%; --y:28%" type="button" data-case-node="hard">Hard</button>
+            <button class="case-node" style="--x:77%; --y:53%" type="button" data-case-node="not-yet">Not Yet</button>
+            <button class="case-node" style="--x:86%; --y:70%" type="button" data-case-node="learned">Learned</button>
+            <button class="case-node" style="--x:93%; --y:42%" type="button" data-case-node="outcome">Outcome</button>
           </div>
           <div class="case-detail">
             <div class="case-detail-head">
               <h3 class="case-detail-label" data-case-label>Problem</h3>
-              <button class="case-map-return" type="button" data-case-map-return>Map</button>
+              <button class="case-map-return" type="button" data-case-map-return>Vector flow</button>
             </div>
             <div class="case-flow-content">
           <section class="case-section active" data-case-step="problem">
@@ -2365,7 +2481,23 @@
       "I notice when a product, lesson, or interaction is not\nworking as optimally as it should, and I enjoy investigating why, testing solutions, and improving the experience."
     ];
     const storyLandingLift = Math.round(7 * 37.795) - 120;
+    const introProjectGap = Math.round(2 * 37.795);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function getStoryMetrics() {
+      const styles = openingSection ? getComputedStyle(openingSection) : null;
+      const trackDistance = styles
+        ? parseFloat(styles.getPropertyValue("--track-distance")) || window.innerHeight
+        : window.innerHeight;
+      const calloutHeight = taglineCallout
+        ? taglineCallout.getBoundingClientRect().height || window.innerHeight * 0.45
+        : window.innerHeight * 0.45;
+      const indicatorStart = storyParagraphs[0]
+        ? Math.max(0, storyParagraphs[0].offsetTop - calloutHeight * 0.6 + storyLandingLift)
+        : 0;
+      const storyRange = Math.max(1, trackDistance - indicatorStart);
+      return { calloutHeight, indicatorStart, storyRange, trackDistance };
+    }
 
     function syncOpeningLayout() {
       if (!openingSection || !siteNav || !banner || !intro || !introCopy || !taglineCallout || !calloutTrack) return;
@@ -2382,7 +2514,7 @@
         ? lastParagraph.offsetTop + lastParagraph.offsetHeight + 12
         : calloutTrack.scrollHeight;
       const trackDistance = Math.max(1, lastParagraphBottom);
-      const gapToProjects = 0;
+      const gapToProjects = introProjectGap;
       const releaseDistance = 1;
       const calloutHeight = taglineCallout.getBoundingClientRect().height || window.innerHeight * 0.45;
       const indicatorStart = storyParagraphs[0]
@@ -2392,7 +2524,7 @@
       const projectStart = Math.max(1, Math.round(indicatorStart + storyRange * 0.5));
       const releaseStart = trackDistance + gapToProjects;
       const projectNestOverlap = 30;
-      const openingHeight = Math.max(window.innerHeight, projectStart + navHeight + bannerHeight - projectNestOverlap);
+      const openingHeight = Math.max(window.innerHeight, projectStart + gapToProjects + navHeight + bannerHeight - projectNestOverlap);
       openingSection.style.setProperty("--nav-height", `${navHeight}px`);
       openingSection.style.setProperty("--callout-sticky-top", `${calloutTop}px`);
       openingSection.style.setProperty("--callout-width", `${calloutRect.width}px`);
@@ -2422,15 +2554,13 @@
       openingSection.classList.toggle("releasing", progress >= releaseStart && progress < total);
       openingSection.classList.toggle("after-opening", progress >= total);
 
-      const calloutHeight = taglineCallout ? taglineCallout.getBoundingClientRect().height : window.innerHeight * 0.45;
-      const firstStoryPoint = storyParagraphs[0] ? storyParagraphs[0].offsetTop - calloutHeight * 0.82 : trackDistance;
-      const indicatorStart = Math.max(0, storyParagraphs[0].offsetTop - calloutHeight * 0.6 + storyLandingLift);
+      const { indicatorStart, storyRange } = getStoryMetrics();
       const dotGonePoint = scrollCue ? scrollCue.offsetTop + scrollCue.offsetHeight : indicatorStart;
-      const storyRange = Math.max(1, trackDistance - indicatorStart);
       const storyProgress = Math.min(1, Math.max(0, (trackY - indicatorStart) / storyRange));
       openingSection.classList.toggle("story-active", trackY > dotGonePoint && storyProgress < .98 && progress < releaseStart);
       if (storyIndicator) {
         storyIndicator.style.setProperty("--story-progress", storyProgress.toFixed(3));
+        storyIndicator.setAttribute("aria-valuenow", Math.round(storyProgress * 100).toString());
       }
     }
 
@@ -2444,6 +2574,54 @@
         top: openingSection.offsetTop + targetProgress,
         behavior: reducedMotion ? "auto" : "smooth"
       });
+    }
+
+    function scrollIntroToStoryProgress(progress, behavior = "auto") {
+      if (!openingSection) return;
+      syncOpeningLayout();
+      const { indicatorStart, storyRange } = getStoryMetrics();
+      const clamped = Math.min(1, Math.max(0, progress));
+      window.scrollTo({
+        top: openingSection.offsetTop + indicatorStart + (storyRange * clamped),
+        behavior
+      });
+    }
+
+    function handleStoryIndicatorPointer(event) {
+      if (!storyIndicator) return;
+      event.preventDefault();
+      storyIndicator.setPointerCapture(event.pointerId);
+      const updateFromPointer = (pointerEvent) => {
+        const rect = storyIndicator.getBoundingClientRect();
+        const progress = (pointerEvent.clientY - rect.top) / Math.max(1, rect.height);
+        scrollIntroToStoryProgress(progress);
+      };
+      const stopDragging = (pointerEvent) => {
+        storyIndicator.releasePointerCapture(pointerEvent.pointerId);
+        storyIndicator.removeEventListener("pointermove", updateFromPointer);
+        storyIndicator.removeEventListener("pointerup", stopDragging);
+        storyIndicator.removeEventListener("pointercancel", stopDragging);
+      };
+      updateFromPointer(event);
+      storyIndicator.addEventListener("pointermove", updateFromPointer);
+      storyIndicator.addEventListener("pointerup", stopDragging);
+      storyIndicator.addEventListener("pointercancel", stopDragging);
+    }
+
+    function handleStoryIndicatorKey(event) {
+      if (!storyIndicator) return;
+      const current = (parseFloat(storyIndicator.getAttribute("aria-valuenow")) || 0) / 100;
+      let next = current;
+      if (event.key === "ArrowDown") next += .08;
+      if (event.key === "ArrowUp") next -= .08;
+      if (event.key === "PageDown") next += .22;
+      if (event.key === "PageUp") next -= .22;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = 1;
+      if (next !== current) {
+        event.preventDefault();
+        scrollIntroToStoryProgress(next, reducedMotion ? "auto" : "smooth");
+      }
     }
 
     function scrollToProjects(event) {
@@ -2521,6 +2699,10 @@
     projectJumpLinks.forEach((link) => {
       link.addEventListener("click", scrollToProjects);
     });
+    if (storyIndicator) {
+      storyIndicator.addEventListener("pointerdown", handleStoryIndicatorPointer);
+      storyIndicator.addEventListener("keydown", handleStoryIndicatorKey);
+    }
     runTypingLoop();
 
     function initCaseFlows() {
@@ -2538,10 +2720,11 @@
           const heading = section.querySelector("h3");
           return heading ? heading.textContent.trim() : "";
         });
-        let activeIndex = 0;
+        let activeIndex = -1;
 
         function setActive(index) {
-          activeIndex = (index + sections.length) % sections.length;
+          activeIndex = Math.max(0, Math.min(index, sections.length - 1));
+          flow.classList.add("detail-open");
           const activeId = sections[activeIndex].dataset.caseStep;
           sections.forEach((section) => {
             section.classList.toggle("active", section.dataset.caseStep === activeId);
@@ -2551,20 +2734,33 @@
           });
           if (label) label.textContent = labels[activeIndex];
           if (counter) counter.textContent = `${activeIndex + 1} / ${sections.length}`;
+          if (prev) prev.hidden = activeIndex === 0;
+          if (next) next.hidden = activeIndex === sections.length - 1;
         }
 
         nodes.forEach((node, index) => {
           node.addEventListener("click", () => setActive(index));
         });
-        if (prev) prev.addEventListener("click", () => setActive(activeIndex - 1));
-        if (next) next.addEventListener("click", () => setActive(activeIndex + 1));
+        if (prev) prev.addEventListener("click", () => {
+          if (activeIndex > 0) setActive(activeIndex - 1);
+        });
+        if (next) next.addEventListener("click", () => {
+          if (activeIndex < sections.length - 1) setActive(activeIndex + 1);
+        });
         if (mapReturn) {
           mapReturn.addEventListener("click", () => {
-            const activeNode = nodes[activeIndex];
-            if (activeNode) activeNode.focus();
+            flow.classList.remove("detail-open");
+            nodes.forEach((node) => node.classList.remove("active"));
+            sections.forEach((section) => section.classList.remove("active"));
+            activeIndex = -1;
+            const firstNode = nodes[0];
+            if (firstNode) firstNode.focus();
           });
         }
-        setActive(0);
+        nodes.forEach((node) => node.classList.remove("active"));
+        sections.forEach((section) => section.classList.remove("active"));
+        if (prev) prev.hidden = true;
+        if (next) next.hidden = true;
       });
     }
 
