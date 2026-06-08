@@ -197,19 +197,6 @@
       text-decoration: none;
     }
 
-    .nav-label {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 1px;
-      line-height: 1.05;
-    }
-
-    .nav-label-small {
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 520;
-    }
-
     .nav-icon {
       flex: 0 0 auto;
       position: relative;
@@ -522,9 +509,6 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity .24s ease;
-      cursor: grab;
-      touch-action: none;
-      user-select: none;
     }
 
     .story-scroll-indicator::before {
@@ -542,7 +526,7 @@
       content: "";
       position: absolute;
       left: calc(50% - (var(--story-marker-size) / 2));
-      margin-left: -3px;
+      margin-left: -1px;
       top: calc(var(--story-progress) * (100% - var(--story-marker-size)));
       width: var(--story-marker-size);
       height: var(--story-marker-size);
@@ -553,7 +537,7 @@
     .story-scroll-indicator .story-glow {
       position: absolute;
       left: calc(50% - (var(--story-glow-size) / 2));
-      margin-left: -3px;
+      margin-left: -1px;
       top: calc((var(--story-progress) * (100% - var(--story-marker-size))) + (var(--story-marker-size) / 2) - (var(--story-glow-size) / 2));
       width: var(--story-glow-size);
       height: var(--story-glow-size);
@@ -564,11 +548,6 @@
 
     .opening.story-active .story-scroll-indicator {
       opacity: 1;
-      pointer-events: auto;
-    }
-
-    .story-scroll-indicator:active {
-      cursor: grabbing;
     }
 
     .eyebrow {
@@ -1779,10 +1758,7 @@
           </span>
         </a>
         <a class="nav-visual-link nav-next-link" href="#research">
-          <span class="nav-label">
-            <span class="nav-label-small">Academic</span>
-            <span>Research</span>
-          </span>
+          <span>Academic Research</span>
           <span class="nav-icon" aria-hidden="true">
             <img class="icon-off" src="assets/nav-research-notebook-off.png" alt="">
             <img class="icon-on" src="assets/nav-research-notebook-on.png" alt="">
@@ -1831,7 +1807,7 @@
                   <p>I am now looking for work where I can keep improving my skills, solve meaningful problems, and be a part of making people's lives a little better.</p>
                 </div>
               </div>
-              <div class="story-scroll-indicator" role="scrollbar" aria-label="Scroll intro text" aria-controls="intro-story" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+              <div class="story-scroll-indicator" aria-hidden="true">
                 <span class="story-glow"></span>
               </div>
             </div>
@@ -2678,8 +2654,9 @@
       const top = target === openingSection || target.id === "top"
         ? 0
         : window.scrollY + target.getBoundingClientRect().top - navHeight - 8;
+      const adjustedTop = target.id === "gophish" ? top + Math.round(1 * 37.795) : top;
       window.scrollTo({
-        top: Math.max(0, top),
+        top: Math.max(0, adjustedTop),
         behavior
       });
     }
@@ -2764,10 +2741,6 @@
     projectJumpLinks.forEach((link) => {
       link.addEventListener("click", scrollToProjects);
     });
-    if (storyIndicator) {
-      storyIndicator.addEventListener("pointerdown", handleStoryIndicatorPointer);
-      storyIndicator.addEventListener("keydown", handleStoryIndicatorKey);
-    }
     runTypingLoop();
 
     function initCaseFlows() {
