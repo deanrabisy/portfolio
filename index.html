@@ -630,11 +630,12 @@
       flex-wrap: wrap;
       justify-content: flex-end;
       gap: 14px;
-      max-width: 340px;
+      max-width: 680px;
       padding-top: clamp(10px, 1.8vw, 24px);
     }
 
-    .project-logo-link {
+    .project-logo-link,
+    .project-logo-placeholder {
       display: grid;
       place-items: center;
       width: clamp(108px, 10.5vw, 150px);
@@ -644,6 +645,11 @@
       box-shadow: 0 12px 28px rgba(23, 34, 36, .16);
       overflow: hidden;
       transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .project-logo-placeholder {
+      opacity: .22;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
     }
 
     .project-logo-link:hover,
@@ -1826,6 +1832,13 @@
         <div class="project-logo-nav" aria-label="Jump to a project">
           <a class="project-logo-link" href="#gophish" aria-label="Jump to GoPhish project">
             <img src="GoPhish/GoPhishlogo.png" alt="GoPhish">
+          </a>
+          <span class="project-logo-placeholder" aria-hidden="true"></span>
+          <a class="project-logo-link" href="#progressing" aria-label="Jump to Progressing project">
+            <img src="assets/project-logo-progressing-option-3.png" alt="Progressing">
+          </a>
+          <a class="project-logo-link" href="#recall" aria-label="Jump to Re-Call project">
+            <img src="assets/recall logo.png" alt="Re-Call">
           </a>
         </div>
       </div>
