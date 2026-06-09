@@ -627,10 +627,12 @@
 
     .project-logo-nav {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-end;
+      justify-content: flex-start;
       gap: 14px;
-      max-width: 680px;
+      max-width: clamp(108px, 10.5vw, 150px);
       padding-top: clamp(10px, 1.8vw, 24px);
     }
 
@@ -1709,6 +1711,7 @@
       }
 
       .project-logo-nav {
+        align-items: flex-start;
         justify-content: flex-start;
         max-width: none;
       }
