@@ -79,7 +79,7 @@
 
     .brand-group {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 10px;
       min-width: 0;
       flex: 0 1 auto;
@@ -627,17 +627,17 @@
 
     .project-logo-nav {
       --project-logo-size: clamp(126px, 10.8vw, 176px);
-      --project-logo-step: calc(var(--project-logo-size) * .72);
+      --project-logo-step: calc(var(--project-logo-size) * 1.04);
       display: grid;
       grid-template-columns: repeat(2, var(--project-logo-step));
-      grid-auto-rows: var(--project-logo-step);
+      grid-auto-rows: calc(var(--project-logo-size) * .65);
       align-items: start;
       justify-content: end;
       gap: 0;
       width: max-content;
       max-width: min(100%, calc(var(--project-logo-size) + var(--project-logo-step)));
       padding-top: clamp(10px, 1.8vw, 24px);
-      padding-bottom: calc(var(--project-logo-size) * .25);
+      padding-bottom: calc(var(--project-logo-size) * 1.65);
     }
 
     .project-logo-link,
@@ -656,14 +656,18 @@
       transition: transform .22s ease, box-shadow .22s ease;
     }
 
-    .project-logo-link:nth-child(even) {
-      --logo-y: calc(var(--project-logo-size) * .18);
+    .project-logo-link:nth-child(2) {
+      --logo-y: calc(var(--project-logo-size) * .65);
       --logo-x: calc(var(--project-logo-size) * -.04);
     }
 
-    .project-logo-link:nth-child(3),
+    .project-logo-link:nth-child(3) {
+      --logo-y: calc(var(--project-logo-size) * .55);
+    }
+
     .project-logo-link:nth-child(4) {
-      --logo-y: calc(var(--project-logo-size) * -.03);
+      --logo-y: calc(var(--project-logo-size) * 1.25);
+      --logo-x: calc(var(--project-logo-size) * -.04);
     }
 
     .project-logo-placeholder {
@@ -1826,7 +1830,7 @@
                 </div>
 
                 <div class="intro-body-callout" id="intro-story">
-                  <p>My background is a mix of teaching, operations, and psychological research. The projects here come from my work as an English as a second language (ESL) tutor.</p>
+                  <p>My background is a mix of teaching, operations, and psychological research. The projects here come from my work as an English as a second language (ESL) tutor, while the research documentation comes from my work as an academic researcher.</p>
                   <p>I kept running into the same problem: students needed repeated practice, but the tools I had often made that practice feel too passive or mechanical. I knew that feeling from the other side too. As a student, I disliked learning that felt like going through the motions, and as a teacher, I hated becoming the person asking students to do it.</p>
                   <p>So I started building my own tools, usually games, to help students speak more, stay engaged, and repeat language in a way that felt natural. Everything here was built independently, tested in real lessons, and shaped by what students actually did with it.</p>
                   <p>I am now looking for work where I can keep improving my skills, solve meaningful problems, and be a part of making people's lives a little better.</p>
