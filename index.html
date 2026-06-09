@@ -626,16 +626,18 @@
     }
 
     .project-logo-nav {
-      --project-logo-size: clamp(94px, 7.8vw, 124px);
+      --project-logo-size: clamp(126px, 10.8vw, 176px);
+      --project-logo-step: calc(var(--project-logo-size) * .72);
       display: grid;
-      grid-template-columns: repeat(2, var(--project-logo-size));
+      grid-template-columns: repeat(2, var(--project-logo-step));
+      grid-auto-rows: var(--project-logo-step);
       align-items: start;
       justify-content: end;
-      gap: clamp(8px, 1.2vw, 14px);
+      gap: 0;
       width: max-content;
-      max-width: min(100%, calc((var(--project-logo-size) * 2) + 14px));
+      max-width: min(100%, calc(var(--project-logo-size) + var(--project-logo-step)));
       padding-top: clamp(10px, 1.8vw, 24px);
-      padding-bottom: 18px;
+      padding-bottom: calc(var(--project-logo-size) * .25);
     }
 
     .project-logo-link,
@@ -643,18 +645,25 @@
       display: grid;
       place-items: center;
       --logo-y: 0px;
+      --logo-x: 0px;
       width: var(--project-logo-size);
       aspect-ratio: 1;
       border-radius: 50%;
       background: rgba(255, 255, 255, .9);
       box-shadow: 0 12px 28px rgba(23, 34, 36, .16);
       overflow: hidden;
-      transform: translateY(var(--logo-y));
+      transform: translate(var(--logo-x), var(--logo-y));
       transition: transform .22s ease, box-shadow .22s ease;
     }
 
     .project-logo-link:nth-child(even) {
-      --logo-y: 18px;
+      --logo-y: calc(var(--project-logo-size) * .18);
+      --logo-x: calc(var(--project-logo-size) * -.04);
+    }
+
+    .project-logo-link:nth-child(3),
+    .project-logo-link:nth-child(4) {
+      --logo-y: calc(var(--project-logo-size) * -.03);
     }
 
     .project-logo-placeholder {
@@ -664,7 +673,7 @@
 
     .project-logo-link:hover,
     .project-logo-link:focus-visible {
-      transform: translateY(calc(var(--logo-y) - 3px));
+      transform: translate(var(--logo-x), calc(var(--logo-y) - 3px));
       outline: none;
       box-shadow: 0 16px 34px rgba(23, 34, 36, .22);
     }
