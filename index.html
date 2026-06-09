@@ -1836,7 +1836,9 @@
           <a class="project-logo-link" href="#gophish" aria-label="Jump to GoPhish project">
             <img src="GoPhish/GoPhishlogo.png" alt="GoPhish">
           </a>
-          <span class="project-logo-placeholder" aria-hidden="true"></span>
+          <a class="project-logo-link" href="#ihave" aria-label="Jump to I-have project">
+            <img src="assets/project-logo-ihave-option-3a.png" alt="I-have">
+          </a>
           <a class="project-logo-link" href="#progressing" aria-label="Jump to Progressing project">
             <img src="assets/project-logo-progressing-option-3.png" alt="Progressing">
           </a>
@@ -2670,7 +2672,11 @@
       const top = target === openingSection || target.id === "top"
         ? 0
         : window.scrollY + target.getBoundingClientRect().top - navHeight - 8;
-      const adjustedTop = target.id === "gophish" ? top + Math.round(1 * 37.795) : top;
+      const sectionOffsets = {
+        gophish: Math.round(1 * 37.795),
+        progressing: 120
+      };
+      const adjustedTop = top + (sectionOffsets[target.id] || 0);
       window.scrollTo({
         top: Math.max(0, adjustedTop),
         behavior
