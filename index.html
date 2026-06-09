@@ -626,27 +626,35 @@
     }
 
     .project-logo-nav {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      align-items: flex-end;
-      justify-content: flex-start;
-      gap: 14px;
-      max-width: clamp(108px, 10.5vw, 150px);
+      --project-logo-size: clamp(94px, 7.8vw, 124px);
+      display: grid;
+      grid-template-columns: repeat(2, var(--project-logo-size));
+      align-items: start;
+      justify-content: end;
+      gap: clamp(8px, 1.2vw, 14px);
+      width: max-content;
+      max-width: min(100%, calc((var(--project-logo-size) * 2) + 14px));
       padding-top: clamp(10px, 1.8vw, 24px);
+      padding-bottom: 18px;
     }
 
     .project-logo-link,
     .project-logo-placeholder {
       display: grid;
       place-items: center;
-      width: clamp(108px, 10.5vw, 150px);
+      --logo-y: 0px;
+      width: var(--project-logo-size);
       aspect-ratio: 1;
       border-radius: 50%;
       background: rgba(255, 255, 255, .9);
       box-shadow: 0 12px 28px rgba(23, 34, 36, .16);
       overflow: hidden;
+      transform: translateY(var(--logo-y));
       transition: transform .22s ease, box-shadow .22s ease;
+    }
+
+    .project-logo-link:nth-child(even) {
+      --logo-y: 18px;
     }
 
     .project-logo-placeholder {
@@ -656,7 +664,7 @@
 
     .project-logo-link:hover,
     .project-logo-link:focus-visible {
-      transform: translateY(-3px);
+      transform: translateY(calc(var(--logo-y) - 3px));
       outline: none;
       box-shadow: 0 16px 34px rgba(23, 34, 36, .22);
     }
@@ -1711,8 +1719,7 @@
       }
 
       .project-logo-nav {
-        align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: start;
         max-width: none;
       }
 
@@ -2674,7 +2681,9 @@
         : window.scrollY + target.getBoundingClientRect().top - navHeight - 8;
       const sectionOffsets = {
         gophish: Math.round(1 * 37.795),
-        progressing: 120
+        ihave: Math.round(1 * 37.795),
+        progressing: Math.round(1 * 37.795) + 120,
+        recall: Math.round(1 * 37.795)
       };
       const adjustedTop = top + (sectionOffsets[target.id] || 0);
       window.scrollTo({
