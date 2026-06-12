@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dean Rabisy | Portfolio</title>
   <meta name="description" content="Portfolio of Dean Rabisy: design, product thinking, and hands-on learning tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
+      --font-body: Aptos, "Aptos Display", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-flow: "Nunito Sans", Aptos, "Aptos Display", ui-sans-serif, system-ui, sans-serif;
       --ink: #172224;
       --muted: #607176;
       --soft: #899aa0;
@@ -39,7 +44,7 @@
       margin: 0;
       color: var(--ink);
       background: var(--paper);
-      font: 16px/1.6 Aptos, "Aptos Display", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 16px/1.6 var(--font-body);
       text-rendering: optimizeLegibility;
     }
 
@@ -74,7 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: clamp(72px, 8vw, 132px);
+      gap: clamp(34px, 5vw, 84px);
     }
 
     .brand-group {
@@ -82,7 +87,7 @@
       align-items: baseline;
       gap: 10px;
       min-width: 0;
-      flex: 0 1 auto;
+      flex: 1 1 auto;
     }
 
     .mail-icon {
@@ -122,7 +127,9 @@
     .mail-icon:hover .mail-closed,
     .mail-icon:focus-visible .mail-closed,
     .nav-contact:hover .mail-closed,
-    .nav-contact:focus-visible .mail-closed {
+    .nav-contact:focus-visible .mail-closed,
+    .nav-contact-group:hover .mail-closed,
+    .nav-contact-group:focus-within .mail-closed {
       opacity: 0;
       transform: translateY(8px) scale(.92);
     }
@@ -130,7 +137,9 @@
     .mail-icon:hover .mail-open,
     .mail-icon:focus-visible .mail-open,
     .nav-contact:hover .mail-open,
-    .nav-contact:focus-visible .mail-open {
+    .nav-contact:focus-visible .mail-open,
+    .nav-contact-group:hover .mail-open,
+    .nav-contact-group:focus-within .mail-open {
       opacity: 1;
       transform: translateY(-6px) scale(1.06) rotate(-3deg);
     }
@@ -163,6 +172,8 @@
     .brand-subtitle {
       color: var(--muted);
       font-size: .9rem;
+      line-height: 1.15;
+      margin-left: 6px;
       white-space: nowrap;
     }
 
@@ -259,7 +270,6 @@
       align-items: center;
       gap: 6px;
       padding: 2px 0 2px 9px;
-      margin-left: 4px;
       color: var(--ink);
       text-decoration: none;
     }
@@ -267,6 +277,88 @@
     .nav-contact .mail-icon {
       width: 50px;
       height: 42px;
+    }
+
+    .nav-contact-group {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 4px;
+      padding-right: 4px;
+    }
+
+    .copy-email {
+      position: absolute;
+      right: -1px;
+      bottom: 3px;
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      color: rgba(23, 34, 36, .74);
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 6px 12px rgba(23, 34, 36, .14);
+      font: inherit;
+      cursor: pointer;
+      transition: background .2s ease, box-shadow .2s ease, transform .2s ease, filter .2s ease;
+      z-index: 3;
+    }
+
+    .copy-email img {
+      display: block;
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 3px rgba(23, 34, 36, .14));
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .copy-email-note {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: -2px;
+      z-index: 20;
+      width: max-content;
+      max-width: min(260px, 80vw);
+      padding: 8px 10px;
+      border: 1px solid rgba(36, 94, 104, .16);
+      border-radius: 12px;
+      color: #172224;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 14px 28px rgba(23, 34, 36, .16);
+      font-size: .82rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .copy-email:hover,
+    .copy-email:focus-visible {
+      outline: none;
+      transform: translateY(-1px) scale(1.08);
+      background: rgba(255, 255, 255, .88);
+      box-shadow: 0 8px 16px rgba(23, 34, 36, .18);
+      filter: drop-shadow(0 0 8px rgba(180, 231, 226, .34));
+    }
+
+    .copy-email:hover img,
+    .copy-email:focus-visible img {
+      transform: rotate(-5deg) scale(1.08);
+      filter: drop-shadow(0 3px 5px rgba(23, 34, 36, .2));
+    }
+
+    .copy-email:hover .copy-email-note,
+    .copy-email:focus-visible .copy-email-note,
+    .copy-email.copied .copy-email-note {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .opening {
@@ -589,7 +681,7 @@
     .project-start {
       position: relative;
       z-index: 6;
-      min-height: 100svh;
+      min-height: calc(100svh + 4cm);
       display: grid;
       align-items: start;
       padding: clamp(112px, 16svh, 156px) 0 clamp(86px, 13svh, 128px);
@@ -618,6 +710,16 @@
       letter-spacing: -.01em;
     }
 
+    .project-start h2 {
+      max-width: 700px;
+      font-size: clamp(2.25rem, 5.25vw, 4.85rem);
+      line-height: 1.02;
+    }
+
+    .project-title-line {
+      display: block;
+    }
+
     .project-start p {
       max-width: 690px;
       margin: calc(24px + 1cm) 0 0;
@@ -636,7 +738,7 @@
       gap: 0;
       width: max-content;
       max-width: min(100%, calc(var(--project-logo-size) + var(--project-logo-step)));
-      padding-top: clamp(10px, 1.8vw, 24px);
+      padding-top: calc(clamp(10px, 1.8vw, 24px) + 1cm);
       padding-bottom: calc(var(--project-logo-size) * 1.65);
     }
 
@@ -675,17 +777,184 @@
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28);
     }
 
+    .project-logo-link {
+      --logo-lift: -7px;
+      --logo-scale: 1.055;
+      --logo-rotate: 0deg;
+      isolation: isolate;
+    }
+
     .project-logo-link:hover,
     .project-logo-link:focus-visible {
-      transform: translate(var(--logo-x), calc(var(--logo-y) - 3px));
+      transform: translate(var(--logo-x), calc(var(--logo-y) + var(--logo-lift)));
       outline: none;
-      box-shadow: 0 16px 34px rgba(23, 34, 36, .22);
+      box-shadow: 0 18px 38px rgba(23, 34, 36, .22);
     }
 
     .project-logo-link img {
+      position: relative;
+      z-index: 2;
       width: 100%;
       height: 100%;
       object-fit: contain;
+      transform-origin: center;
+      transition: transform .34s cubic-bezier(.2, .75, .24, 1), filter .34s ease;
+    }
+
+    .project-logo-link::before,
+    .project-logo-link::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .28s ease, transform .36s ease;
+    }
+
+    .project-logo-link::before {
+      z-index: 0;
+      inset: 7%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 42% 36%, rgba(255, 255, 255, .94), rgba(255, 255, 255, .4) 28%, rgba(84, 191, 208, .2) 52%, rgba(84, 191, 208, 0) 73%),
+        radial-gradient(circle at 58% 62%, rgba(255, 201, 91, .28), rgba(255, 201, 91, 0) 48%);
+      transform: scale(.76);
+    }
+
+    .project-logo-link::after {
+      z-index: 1;
+      inset: 13%;
+      border-radius: 50%;
+      border: 1px solid rgba(84, 191, 208, .26);
+      transform: scale(.9);
+      box-shadow: inset 0 0 28px rgba(255, 255, 255, .56);
+    }
+
+    .project-logo-link:hover img,
+    .project-logo-link:focus-visible img {
+      transform: scale(var(--logo-scale)) rotate(var(--logo-rotate));
+      filter: drop-shadow(0 10px 12px rgba(23, 34, 36, .12));
+    }
+
+    .project-logo-link:hover::before,
+    .project-logo-link:focus-visible::before {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .project-logo-link:hover::after,
+    .project-logo-link:focus-visible::after {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+
+    .logo-gophish {
+      --logo-lift: -9px;
+      --logo-rotate: -2deg;
+    }
+
+    .logo-ihave {
+      --logo-scale: 1.065;
+      --logo-rotate: 1.5deg;
+    }
+
+    .logo-progressing {
+      --logo-lift: -8px;
+      --logo-rotate: -1deg;
+    }
+
+    .logo-recall {
+      --logo-scale: 1.06;
+      --logo-rotate: 2deg;
+    }
+
+    .project-start-arrow {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: clamp(46px, 4.2vw, 62px);
+      aspect-ratio: 1;
+      margin: clamp(12px, 1.8vw, 18px) 0 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .74);
+      box-shadow: 0 8px 16px rgba(23, 34, 36, .12);
+      text-decoration: none;
+      transition: transform .22s ease, filter .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .project-start-arrow img {
+      grid-area: 1 / 1;
+      display: block;
+      width: 86%;
+      height: 86%;
+      object-fit: contain;
+      transition: opacity .22s ease, transform .24s ease, filter .24s ease;
+    }
+
+    .project-start-arrow .icon-on {
+      opacity: 0;
+      transform: scale(.94);
+    }
+
+    .project-start-arrow:hover,
+    .project-start-arrow:focus-visible {
+      outline: none;
+      transform: translateY(2px);
+      background: rgba(255, 255, 255, .86);
+      box-shadow: 0 11px 20px rgba(23, 34, 36, .16);
+      filter: drop-shadow(0 0 11px rgba(180, 231, 226, .48));
+    }
+
+    .project-start-arrow:hover .icon-off,
+    .project-start-arrow:focus-visible .icon-off {
+      opacity: 0;
+      transform: scale(.96);
+    }
+
+    .project-start-arrow:hover .icon-on,
+    .project-start-arrow:focus-visible .icon-on {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+
+    .project-start-jump {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: min(100%, 520px);
+      margin: clamp(12px, 1.8vw, 18px) 0 0;
+      color: rgba(23, 34, 36, .76);
+      text-decoration: none;
+      font-size: clamp(.92rem, 1.05vw, 1rem);
+      line-height: 1.34;
+    }
+
+    .project-start-jump .project-start-arrow {
+      flex: 0 0 auto;
+      margin: 0;
+    }
+
+    .project-start-jump-text {
+      max-width: 38ch;
+    }
+
+    .project-start-jump:hover .project-start-arrow,
+    .project-start-jump:focus-visible .project-start-arrow {
+      transform: translateY(2px);
+      background: rgba(255, 255, 255, .86);
+      box-shadow: 0 11px 20px rgba(23, 34, 36, .16);
+      filter: drop-shadow(0 0 11px rgba(180, 231, 226, .48));
+    }
+
+    .project-start-jump:hover .project-start-arrow .icon-off,
+    .project-start-jump:focus-visible .project-start-arrow .icon-off {
+      opacity: 0;
+      transform: scale(.96);
+    }
+
+    .project-start-jump:hover .project-start-arrow .icon-on,
+    .project-start-jump:focus-visible .project-start-arrow .icon-on {
+      opacity: 1;
+      transform: scale(1.06);
     }
 
     .project-flow-bg {
@@ -734,6 +1003,7 @@
 
     .project-strip.reverse .project-copy {
       order: 1;
+      padding-right: clamp(12px, 2.5vw, 36px);
     }
 
     .project-media {
@@ -977,20 +1247,27 @@
 
     .pipeline-section {
       color: #172224;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: clamp(42px, 6svh, 72px) 0;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255, 255, 255, .72), rgba(255, 255, 255, 0) 30%),
+        linear-gradient(135deg, #f8fcf6, #ecf6e5 54%, #dcefd7);
     }
 
     .pipeline-inner,
     .research-inner {
       display: grid;
-      grid-template-columns: minmax(260px, .72fr) minmax(0, 1fr);
+      grid-template-columns: minmax(260px, .58fr) minmax(0, 1fr);
       gap: clamp(30px, 5vw, 76px);
-      align-items: start;
+      align-items: center;
     }
 
     .pipeline-section h2,
     .research-section h2 {
       max-width: 640px;
-      font-size: clamp(2.2rem, 5.2vw, 4.8rem);
+      font-size: clamp(2.05rem, 4.6vw, 4.2rem);
       line-height: 1.04;
       font-weight: 760;
       color: #245e68;
@@ -1006,58 +1283,353 @@
 
     .pipeline-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: clamp(16px, 2vw, 24px);
+      align-items: start;
+    }
+
+    .pipeline-grid-top {
+      grid-column: 2;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: clamp(12px, 1.6vw, 20px);
+      align-items: stretch;
+      justify-items: center;
+      align-self: center;
     }
 
     .pipeline-card {
-      min-height: 190px;
-      padding: 22px;
-      border: 1px solid rgba(79, 129, 153, .18);
+      position: relative;
+      grid-column: span 2;
+      width: min(100%, clamp(150px, 15vw, 210px));
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      padding: clamp(12px, 1.2vw, 16px);
+      border: 1px solid rgba(23, 34, 36, .14);
       border-radius: var(--radius);
-      background: rgba(255, 255, 255, .58);
-      box-shadow: 0 18px 42px rgba(23, 34, 36, .08);
+      color: inherit;
+      background: rgba(255, 255, 255, .34);
+      box-shadow: 0 8px 18px rgba(23, 34, 36, .055);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .24s ease, filter .24s ease, border-color .24s ease, background .24s ease, box-shadow .24s ease;
+      isolation: isolate;
     }
 
-    .pipeline-icon {
+    .pipeline-card:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+
+    .pipeline-card:nth-child(5) {
+      grid-column: 4 / span 2;
+    }
+
+    .pipeline-card:hover,
+    .pipeline-card:focus-visible,
+    .pipeline-card.is-open {
+      transform: translateY(-4px);
+      filter: drop-shadow(0 16px 18px rgba(23, 34, 36, .12));
+      border-color: rgba(23, 34, 36, .24);
+      background: rgba(255, 255, 255, .46);
+      box-shadow: 0 12px 24px rgba(23, 34, 36, .075);
+      outline: none;
+    }
+
+    .pipeline-art {
+      width: clamp(82px, 8vw, 118px);
+      aspect-ratio: 1;
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 18px;
-      border-radius: 50%;
-      color: #245e68;
-      background: radial-gradient(circle, rgba(191, 229, 231, .82), rgba(84, 191, 208, .2) 68%, rgba(84, 191, 208, 0));
-      font-size: .78rem;
-      font-weight: 820;
-    }
-
-    .pipeline-card h3 {
       margin: 0;
-      color: #172224;
-      font-size: 1.08rem;
-      line-height: 1.2;
+      padding: 5px;
+      overflow: visible;
+      border-radius: 0;
+      background: rgba(255, 255, 255, .52);
+      border: 1px solid rgba(0, 0, 0, .55);
+      box-shadow: none;
+      box-sizing: border-box;
     }
 
-    .pipeline-card p {
-      margin-top: 10px;
+    .pipeline-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform .3s cubic-bezier(.2, .75, .24, 1), filter .3s ease;
+    }
+
+    .pipeline-card:hover .pipeline-art img,
+    .pipeline-card:focus-visible .pipeline-art img,
+    .pipeline-card.is-open .pipeline-art img {
+      transform: scale(1.055) rotate(-1deg);
+      filter: drop-shadow(0 10px 12px rgba(23, 34, 36, .1));
+    }
+
+    .pipeline-popover {
+      position: static;
+      z-index: 1;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius);
+      background: transparent;
+      box-shadow: none;
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .pipeline-card:hover .pipeline-popover,
+    .pipeline-card:focus-visible .pipeline-popover,
+    .pipeline-card.is-open .pipeline-popover {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+
+    .pipeline-card:nth-child(3n) .pipeline-popover {
+      transform: none;
+    }
+
+    .pipeline-card:nth-child(3n):hover .pipeline-popover,
+    .pipeline-card:nth-child(3n):focus-visible .pipeline-popover,
+    .pipeline-card:nth-child(3n).is-open .pipeline-popover {
+      transform: none;
+    }
+
+    .pipeline-popover strong {
+      display: block;
+      margin: 0 0 5px;
+      color: #172224;
+      font-size: clamp(.9rem, 1vw, 1rem);
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .pipeline-popover span {
+      display: block;
+      margin-top: 0;
       color: #506166;
-      font-size: .94rem;
-      line-height: 1.5;
+      font-size: clamp(.76rem, .82vw, .86rem);
+      line-height: 1.32;
+      text-align: center;
+    }
+
+    .section-next-cue {
+      grid-column: 1 / -1;
+      opacity: 1;
+      margin: clamp(28px, 5vw, 54px) auto 0;
+    }
+
+    .section-next-cue::before,
+    .section-next-cue::after {
+      display: none;
+    }
+
+    .pipeline-intro .section-next-cue {
+      display: grid;
+      margin: clamp(18px, 3vw, 30px) auto 0;
+    }
+
+    .research-section .section-next-cue {
+      margin-top: calc(clamp(28px, 5vw, 54px) - 2cm);
     }
 
     .research-section {
-      color: #172224;
+      color: #f4fbfb;
       background:
-        radial-gradient(circle at 80% 16%, rgba(191, 229, 231, .58), rgba(191, 229, 231, 0) 34%),
-        linear-gradient(135deg, #f7fbfa, #e8f5f2 58%, #dcefe5);
+        radial-gradient(circle at 80% 16%, rgba(191, 229, 231, .28), rgba(191, 229, 231, 0) 34%),
+        linear-gradient(135deg, #245e68, #2e7e86 58%, #3fa7a4);
     }
 
-    .research-note {
-      max-width: 690px;
-      padding: 24px 26px;
-      border-left: 2px solid rgba(79, 129, 153, .42);
-      background: rgba(255, 255, 255, .46);
+    .research-inner {
+      grid-template-columns: 1fr;
+      gap: clamp(26px, 4vw, 44px);
+    }
+
+    .research-head {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .research-tagline {
+      max-width: 900px;
+      margin: 0;
+      color: rgba(244, 251, 251, .82);
+      font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+      line-height: 1.55;
+    }
+
+    .research-section .eyebrow {
+      color: rgba(244, 251, 251, .76);
+    }
+
+    .research-section h2 {
+      color: #ffffff;
+      max-width: none;
+      font-size: clamp(1.42rem, 2.45vw, 2.25rem);
+      line-height: 1.16;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(14px, 2vw, 22px);
+      overflow: visible;
+    }
+
+    .research-card {
+      position: relative;
+      min-height: 250px;
+      display: grid;
+      grid-template-rows: 98px 1fr auto auto;
+      gap: 12px;
+      padding: 22px;
+      overflow: visible;
+      border: 1px solid rgba(79, 129, 153, .18);
+      border-radius: var(--radius);
+      color: #172224;
+      text-align: left;
+      background:
+        radial-gradient(circle at 24% 18%, rgba(255, 255, 255, .86), rgba(255, 255, 255, 0) 38%),
+        rgba(255, 255, 255, .78);
+      box-shadow: 0 18px 42px rgba(23, 34, 36, .08);
+      cursor: pointer;
+      font: inherit;
+      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease, background .24s ease;
+    }
+
+    .research-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -34px -50px auto;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(84, 191, 208, .22), rgba(255, 201, 91, .13) 46%, rgba(84, 191, 208, 0) 72%);
+      opacity: .8;
+      transition: transform .28s ease, opacity .28s ease;
+    }
+
+    .research-card:hover,
+    .research-card:focus-visible {
+      outline: none;
+      z-index: 4;
+      transform: translateY(-4px);
+      border-color: rgba(84, 191, 208, .38);
+      background:
+        radial-gradient(circle at 24% 18%, rgba(255, 255, 255, .94), rgba(255, 255, 255, 0) 40%),
+        rgba(255, 255, 255, .72);
+      box-shadow: 0 22px 48px rgba(23, 34, 36, .12);
+    }
+
+    .research-card:hover::before,
+    .research-card:focus-visible::before {
+      opacity: 1;
+      transform: translate(-12px, -10px) scale(1.08);
+    }
+
+    .research-icon {
+      position: relative;
+      z-index: 1;
+      width: 96px;
+      height: 96px;
+      display: grid;
+      place-items: center;
+      overflow: visible;
+      transition: transform .26s ease, box-shadow .26s ease;
+    }
+
+    .research-icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity .22s ease, transform .28s ease, filter .28s ease;
+    }
+
+    .research-icon .icon-on {
+      opacity: 0;
+      transform: scale(.94);
+    }
+
+    .research-card:hover .research-icon .icon-off,
+    .research-card:focus-visible .research-icon .icon-off {
+      opacity: 0;
+      transform: scale(.98);
+    }
+
+    .research-card:hover .research-icon .icon-on,
+    .research-card:focus-visible .research-icon .icon-on {
+      opacity: 1;
+      transform: scale(1.02) rotate(-3deg);
+      filter: drop-shadow(0 10px 12px rgba(23, 34, 36, .12));
+    }
+
+    .research-icon::before,
+    .research-icon::after {
+      content: "";
+      display: none;
+    }
+
+    .research-card h3 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: #172224;
+      font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+      line-height: 1.16;
+      font-weight: 760;
+    }
+
+    .research-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: #506166;
+      font-size: .95rem;
+      line-height: 1.48;
+    }
+
+    .research-card span {
+      position: relative;
+      z-index: 1;
+      color: #245e68;
+      font-size: .84rem;
+      font-weight: 720;
+    }
+
+    .research-case-body {
+      display: grid;
+      gap: 24px;
+      padding: clamp(28px, 4vw, 48px);
+      background: #fff;
+    }
+
+    .research-case-body .case-section {
+      align-items: start;
+      padding: 0 0 24px;
+      border-bottom: 1px solid rgba(79, 129, 153, .14);
+    }
+
+    .research-case-body ul {
+      margin: 10px 0 0;
+      padding-left: 1.15rem;
+      color: #38423e;
+      line-height: 1.55;
+    }
+
+    .research-case-body li + li {
+      margin-top: 6px;
+    }
+
+    .research-publication {
+      margin-top: 12px;
+      color: #245e68;
+      font-weight: 720;
     }
 
     .closing {
@@ -1070,8 +1642,8 @@
       overflow: hidden;
       color: #172224;
       background:
-        radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .82), rgba(255, 255, 255, 0) 34%),
-        linear-gradient(135deg, #eff8e4, #d9efd4 55%, #cce9df);
+        radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .86), rgba(255, 255, 255, 0) 34%),
+        linear-gradient(135deg, #f1fbfb, #d9f0f0 55%, #c6e7e7);
     }
 
     .closing-inner {
@@ -1144,12 +1716,12 @@
     }
 
     .modal-top {
-      min-height: 52px;
+      min-height: 42px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-bottom: 1px solid var(--line);
       background: rgba(247, 251, 250, .96);
     }
@@ -1161,6 +1733,7 @@
     .modal-title b {
       display: block;
       line-height: 1.2;
+      font-size: .9rem;
     }
 
     .modal-title span {
@@ -1173,34 +1746,107 @@
     }
 
     .close-modal {
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--line);
+      position: relative;
+      width: 24px;
+      height: 24px;
+      border: 1.5px solid #2d7f88;
       border-radius: 50%;
-      background: var(--surface);
-      color: var(--ink);
-      font-size: 1.45rem;
-      line-height: 1;
+      background: transparent;
+      color: transparent;
+      font-size: 0;
+      line-height: 0;
       cursor: pointer;
+      overflow: visible;
+      box-shadow: 0 0 0 rgba(84, 191, 208, 0);
+      transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
     }
 
     .close-modal:hover,
     .close-modal:focus-visible {
-      background: #edece4;
+      background: #2d9aa0;
+      border-color: #2d9aa0;
+      box-shadow: 0 0 16px rgba(84, 191, 208, .48);
       outline: none;
+      transform: scale(1.04);
+    }
+
+    .close-modal::before,
+    .close-modal::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 1.6px;
+      border-radius: 999px;
+      background: #245e68;
+      transition: background .18s ease;
+    }
+
+    .close-modal::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .close-modal::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .close-modal:hover::before,
+    .close-modal:focus-visible::before,
+    .close-modal:hover::after,
+    .close-modal:focus-visible::after {
+      background: #ffffff;
+    }
+
+    .case-end-close {
+      display: grid;
+      place-items: center;
+      grid-column: auto;
+      order: initial;
+      width: 50px;
+      height: 50px;
+      margin: 40px auto 0;
+      border: 0;
+      padding: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0) 0 10px, #2d7f88 10.5px 11.8px, rgba(255, 255, 255, 0) 12.2px),
+        rgba(255, 255, 255, .22);
+      backdrop-filter: blur(2px) saturate(1.1);
+      animation: scrollDotPulse 1.5s ease-in-out infinite;
+    }
+
+    .case-end-close::before,
+    .case-end-close::after {
+      width: 12px;
+    }
+
+    .case-end-close:hover,
+    .case-end-close:focus-visible {
+      background:
+        radial-gradient(circle, #2d9aa0 0 11.8px, rgba(255, 255, 255, 0) 12.2px),
+        rgba(255, 255, 255, .36);
+    }
+
+    .learning-case-modal .case-end-close {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: end;
+      justify-self: center;
     }
 
     .modal-content {
       overflow-y: auto;
+      overflow-x: hidden;
       background: #ffffff;
     }
 
     .case-hero {
       display: grid;
       grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
-      gap: clamp(24px, 4vw, 42px);
+      gap: clamp(18px, 3vw, 34px);
       align-items: end;
-      padding: clamp(24px, 3.6vw, 42px) clamp(28px, 5vw, 58px);
+      padding: clamp(16px, 2.2vw, 28px) clamp(28px, 5vw, 58px);
       border-bottom: 0;
       color: #f4fbfb;
       background:
@@ -1213,7 +1859,8 @@
     }
 
     .case-hero h2 {
-      font-size: clamp(2.3rem, 5vw, 4.8rem);
+      margin: 0;
+      font-size: clamp(2rem, 3.8vw, 3.45rem);
       font-weight: 780;
       letter-spacing: -.01em;
     }
@@ -1221,7 +1868,7 @@
     .case-hero p {
       margin: 0;
       color: rgba(244, 251, 251, .86);
-      font-size: clamp(1rem, 1.4vw, 1.12rem);
+      font-size: clamp(.94rem, 1.18vw, 1.04rem);
     }
 
     .case-body {
@@ -1296,24 +1943,736 @@
       box-shadow: none;
     }
 
-    #gophish-modal .modal-top {
+    .learning-case-modal .modal-top {
       background: rgba(232, 247, 247, .96);
     }
 
-    #gophish-modal .modal-title b {
+    .learning-case-modal .modal-title b {
       color: #245e68;
     }
 
-    #gophish-modal .modal-title span {
+    .learning-case-modal .modal-title span {
       display: block;
     }
 
-    #gophish-modal .case-body {
-      width: min(1180px, calc(100% - 32px));
+    .learning-case-modal .case-body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
-    #gophish-modal .case-body::before {
+    .learning-case-modal .case-body::before {
       display: none;
+    }
+
+    .learning-case-modal .case-hero {
+      position: relative;
+      z-index: 5;
+      grid-template-columns: auto minmax(132px, .18fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(12px, 1.7vw, 22px);
+      min-height: clamp(118px, 15.5vh, 162px);
+      padding: clamp(8px, 1.1vw, 14px) clamp(24px, 4.4vw, 52px);
+      color: #245e68;
+      background: #ffffff;
+    }
+
+    .learning-case-modal .case-hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 22px;
+      border-bottom: 1.5px solid rgba(36, 94, 104, .18);
+      border-radius: 0 0 52% 52% / 0 0 100% 100%;
+      pointer-events: none;
+    }
+
+    .case-project-logo {
+      position: relative;
+      z-index: 2;
+      width: clamp(52px, 5.8vw, 78px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .case-project-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .learning-case-modal .modal-panel {
+      grid-template-rows: 1fr;
+    }
+
+    .learning-case-modal .modal-top {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 6;
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .learning-case-modal .modal-title {
+      display: none;
+    }
+
+    .learning-case-modal .modal-content {
+      grid-row: 1;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .learning-case-modal .case-hero .eyebrow {
+      display: block;
+      margin: 0 0 4px;
+      color: rgba(36, 94, 104, .62);
+      font-size: .66rem;
+      letter-spacing: .12em;
+    }
+
+    .case-title-divider {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: calc(100% - 24px);
+      width: clamp(182px, 22.4vw, 392px);
+      max-width: none;
+      height: auto;
+      margin-top: 0;
+      filter: drop-shadow(0 7px 10px rgba(36, 94, 104, .08));
+    }
+
+    .learning-case-modal .case-hero > div:first-child {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 10px;
+      overflow: visible;
+    }
+
+    .learning-case-modal .case-hero .case-detail-head {
+      display: none;
+    }
+
+    .learning-case-modal .case-hero .case-detail-label {
+      margin: 0;
+      font-size: clamp(1.65rem, 3.2vw, 3rem);
+      line-height: 1;
+    }
+
+    .learning-case-modal .case-hero h2 {
+      font-size: clamp(1.7rem, 2.8vw, 2.62rem);
+      color: #245e68;
+    }
+
+    .learning-case-modal .case-hero .case-map {
+      z-index: 1;
+      justify-self: end;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      min-height: clamp(96px, 10.8vw, 130px);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .learning-case-modal .case-hero .case-flow-art {
+      inset: -58% -68% -58% auto;
+      width: 214%;
+      height: 214%;
+      filter: none;
+    }
+
+    .learning-case-modal .case-hero .case-node {
+      min-width: 52px;
+      min-height: 27px;
+      padding: 5px 7px;
+      font-size: .56rem;
+      box-shadow: 0 8px 20px rgba(23, 34, 36, .1), inset 0 0 0 1px rgba(255, 255, 255, .5);
+    }
+
+    .learning-case-modal .case-hero .case-node-glow {
+      width: 38px;
+      height: 38px;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .learning-case-modal .case-detail {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(18px, 2.4vw, 34px) 0 clamp(24px, 4.4vw, 52px);
+    }
+
+    .learning-case-modal .case-flow-content .case-section {
+      display: grid;
+      grid-template-columns: clamp(184px, 18vw, 248px) minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+      column-gap: clamp(20px, 3.2vw, 42px);
+      min-height: calc(100svh - 210px);
+      padding: 14px 0 66px;
+      scroll-margin-top: 240px;
+    }
+
+    .learning-case-modal .case-flow-content .case-section h3 {
+      position: relative;
+      top: auto;
+      display: block;
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      justify-self: stretch;
+      max-width: 100%;
+      margin: 0;
+      color: #245e68;
+      font-size: clamp(1.34rem, 2.5vw, 2.25rem);
+      font-weight: 780;
+      letter-spacing: 0;
+      line-height: 1.05;
+      text-transform: none;
+      overflow-wrap: normal;
+      text-wrap: balance;
+    }
+
+    .learning-case-modal .media-grid {
+      grid-template-columns: minmax(0, 560px);
+      justify-content: end;
+      gap: 22px;
+    }
+
+    .learning-case-modal .media-grid .media-item,
+    .learning-case-modal .media-item:has(video) {
+      width: min(560px, 100%);
+    }
+
+    .learning-case-modal .case-feature-media,
+    .learning-case-modal .case-feature-media:has(video) {
+      width: min(calc(760px + 1.5cm), 100%);
+      margin: 0 0 24px;
+    }
+
+    .learning-case-modal .case-feature-media video {
+      width: 100%;
+      aspect-ratio: 43 / 20;
+      object-fit: cover;
+    }
+
+    .learning-case-modal .case-feature-media figcaption {
+      padding-block: 10px;
+    }
+
+    #gophish-modal .case-feature-media,
+    #recall-modal .case-feature-media {
+      width: min(calc(760px + 1.5cm), 100%);
+      margin: 0 0 24px;
+    }
+
+    #gophish-modal .case-feature-media video,
+    #recall-modal .case-feature-media video {
+      width: 100%;
+      aspect-ratio: 43 / 20;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    #recall-modal .case-feature-media,
+    #recall-modal .case-feature-media:has(video) {
+      width: min(calc(760px + 1.5cm), 100%);
+    }
+
+    #recall-modal .case-feature-media video {
+      display: block;
+      height: auto;
+      aspect-ratio: 43 / 20;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-copy-lines p {
+      margin-bottom: 10px;
+    }
+
+
+    .learning-case-modal .case-flow-content h4 {
+      margin: 24px 0 9px;
+      color: #245e68;
+      font-size: clamp(1.02rem, 1.45vw, 1.18rem);
+      font-weight: 780;
+      letter-spacing: 0;
+    }
+
+    .learning-case-modal .case-quote-line {
+      margin: 10px 0 16px;
+      color: #245e68;
+      font-size: clamp(1.08rem, 1.55vw, 1.24rem);
+      font-weight: 780;
+    }
+
+    .learning-case-modal .case-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, .95fr);
+      gap: clamp(18px, 3vw, 34px);
+      align-items: center;
+      margin: 22px 0 28px;
+    }
+
+    .learning-case-modal .case-split.reverse {
+      grid-template-columns: minmax(260px, .95fr) minmax(0, 1fr);
+    }
+
+    .learning-case-modal .case-split > * {
+      min-width: 0;
+    }
+
+    .learning-case-modal .case-full-media,
+    .learning-case-modal .case-logo-preview {
+      width: min(820px, 100%);
+      margin: 22px 0 28px;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-full-media img,
+    .learning-case-modal .case-logo-preview img,
+    .learning-case-modal .case-split .media-item img {
+      width: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-logo-preview {
+      width: min(430px, 100%);
+    }
+
+    .learning-case-modal .case-logo-preview img {
+      padding: 16px;
+    }
+
+    @media (max-width: 820px) {
+      .learning-case-modal .case-split,
+      .learning-case-modal .case-split.reverse {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .learning-case-modal .case-two-column-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 28px;
+      padding-left: 20px;
+    }
+
+    .learning-case-modal .case-two-column-list + .case-feature-media {
+      margin-top: clamp(44px, 8svh, 86px);
+    }
+
+    #gophish-modal .case-two-column-list + .case-feature-media,
+    #recall-modal .case-two-column-list + .case-feature-media {
+      margin-top: 0;
+    }
+
+    .learning-case-modal .case-flow-content ul li + li {
+      margin-top: .38em;
+    }
+
+    .learning-case-modal .case-flow-content .case-section[data-case-step="hard"] ul li + li,
+    .learning-case-modal .case-flow-content .case-section[data-case-step="learned"] ul li + li {
+      margin-top: .82em;
+    }
+
+    .learning-case-modal .case-two-column-list {
+      display: block;
+    }
+
+    .learning-case-modal .case-two-column-list li + li {
+      margin-top: .38em;
+    }
+
+    .learning-case-modal .case-logo-row {
+      grid-template-columns: minmax(0, .72fr) max-content;
+      align-items: center;
+      justify-content: start;
+      gap: clamp(22px, 3vw, 40px);
+    }
+
+    .learning-case-modal .case-logo-row .case-logo-preview {
+      width: max-content;
+      max-width: min(320px, 100%);
+      margin: 0;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-logo-row .case-logo-preview img {
+      display: block;
+      width: auto;
+      max-width: 300px;
+      height: auto;
+      padding: 10px;
+      aspect-ratio: auto;
+    }
+
+    .learning-case-modal .case-progressing-full {
+      width: 100%;
+      max-width: none;
+      margin: 16px 0 26px;
+      border: 0;
+      border-radius: 0;
+      background: #fff;
+      overflow: visible;
+    }
+
+    .learning-case-modal .case-progressing-full img {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      aspect-ratio: auto;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-guide-layout {
+      grid-template-columns: minmax(0, 1.11fr) minmax(280px, 420px);
+      align-items: center;
+      gap: clamp(28px, 4vw, 52px);
+    }
+
+    .learning-case-modal .case-guide-card {
+      width: min(330px, 100%);
+      margin: 0;
+      justify-self: center;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-ability-row {
+      grid-template-columns: minmax(0, 1.11fr) minmax(280px, 420px);
+      align-items: center;
+      gap: clamp(28px, 4vw, 52px);
+    }
+
+    .learning-case-modal .case-ability-row.reverse {
+      grid-template-columns: minmax(0, 1.11fr) minmax(280px, 420px);
+    }
+
+    .learning-case-modal .case-guide-layout > div,
+    .learning-case-modal .case-ability-row:not(.reverse) > div {
+      grid-column: 1;
+    }
+
+    .learning-case-modal .case-guide-layout > figure,
+    .learning-case-modal .case-ability-row:not(.reverse) > figure {
+      grid-column: 2;
+    }
+
+    .learning-case-modal .case-ability-row.reverse > figure {
+      grid-column: 1;
+    }
+
+    .learning-case-modal .case-ability-row.reverse > div {
+      grid-column: 2;
+    }
+
+    .learning-case-modal .case-double-trouble-row > figure {
+      justify-self: center;
+      align-self: center;
+    }
+
+    .learning-case-modal .case-ability-card {
+      width: min(420px, 100%);
+      margin: 0;
+      justify-self: center;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-guide-card img,
+    .learning-case-modal .case-ability-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      aspect-ratio: auto;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .media-item.contain.case-progressing-full img,
+    .learning-case-modal .media-item.contain.case-guide-card img,
+    .learning-case-modal .media-item.contain.case-ability-card img {
+      aspect-ratio: auto;
+      padding: 0;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-logo-row .media-item.contain.case-logo-preview img {
+      aspect-ratio: auto;
+      padding: 10px;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-logo-left {
+      width: max-content;
+      max-width: min(320px, 100%);
+      margin: 18px 0 0;
+      padding: 0;
+      border: 1px solid rgba(79, 129, 153, .16);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .learning-case-modal .case-logo-left img {
+      display: block;
+      width: auto;
+      max-width: 300px;
+      height: auto;
+      aspect-ratio: auto;
+      padding: 0;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .learning-case-modal .case-logo-left figcaption {
+      background: #fff;
+      padding: 8px 10px;
+    }
+
+    .learning-case-modal .after-list-break {
+      margin-top: 16px;
+    }
+
+    .learning-case-modal .case-ability-row {
+      grid-template-columns: minmax(0, 1.11fr) minmax(280px, 420px);
+      align-items: center;
+      justify-content: stretch;
+      column-gap: clamp(28px, 4vw, 52px);
+    }
+
+    .learning-case-modal .case-ability-row.reverse {
+      grid-template-columns: minmax(0, 1.11fr) minmax(280px, 420px);
+    }
+
+    .learning-case-modal .case-ability-card {
+      width: min(260px, 100%);
+      padding: 14px;
+      justify-self: center;
+    }
+
+    .learning-case-modal .case-double-trouble-row > figure {
+      justify-self: center;
+      align-self: center;
+    }
+
+    .learning-case-modal .case-ability-card img {
+      max-height: 260px;
+      object-fit: contain;
+    }
+
+    .research-flow-modal .case-hero {
+      grid-template-columns: minmax(510px, .76fr) minmax(0, 1.24fr);
+      min-height: clamp(130px, 18vh, 178px);
+    }
+
+    .research-flow-modal .case-hero > div:first-child {
+      min-width: 0;
+      padding-bottom: 10px;
+    }
+
+    .research-flow-modal .case-hero h2 {
+      max-width: 680px;
+      font-size: clamp(1.25rem, 2.05vw, 2.12rem);
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+
+    .research-flow-modal .case-hero .case-map {
+      justify-self: end;
+      width: 18.2cm;
+      max-width: none;
+      height: 5.98cm;
+      min-height: 0;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    .research-flow-modal .case-hero .case-flow-art {
+      left: 0;
+      top: 50%;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: translateY(-50%);
+      opacity: .96;
+    }
+
+    .research-flow-modal .learning-case-flow.detail-open .case-hero .case-flow-art {
+      left: 0;
+      top: 50%;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: translateY(-50%);
+    }
+
+    .research-flow-modal .case-hero .case-node {
+      min-width: 52px;
+      min-height: 28px;
+      padding: 6px 9px;
+      font-size: .62rem;
+      box-shadow: 0 8px 20px rgba(23, 34, 36, .1), inset 0 0 0 1px rgba(255, 255, 255, .58);
+      transform: translate(-50%, calc(-100% - 28px));
+    }
+
+    .research-flow-modal .case-hero .case-node:hover,
+    .research-flow-modal .case-hero .case-node:focus-visible,
+    .research-flow-modal .case-hero .case-node.active,
+    .research-flow-modal .case-hero .case-node.hovered {
+      transform: translate(-50%, calc(-100% - 28px)) scale(1.05);
+    }
+
+    .research-flow-modal .case-hero .case-node.is-below {
+      transform: translate(-50%, 28px);
+    }
+
+    .research-flow-modal .case-hero .case-node.is-below:hover,
+    .research-flow-modal .case-hero .case-node.is-below:focus-visible,
+    .research-flow-modal .case-hero .case-node.is-below.active,
+    .research-flow-modal .case-hero .case-node.is-below.hovered {
+      transform: translate(-50%, 28px) scale(1.05);
+    }
+
+    .research-flow-modal .case-hero .case-node::after {
+      height: 24px;
+      top: calc(100% + 3px);
+    }
+
+    .research-flow-modal .case-hero .case-node.is-below::after {
+      bottom: calc(100% + 3px);
+    }
+
+    .research-flow-modal .case-hero .case-node-glow {
+      width: 64px;
+      height: 64px;
+      background: radial-gradient(circle, rgba(231, 251, 250, .94), rgba(76, 172, 181, .72) 34%, rgba(25, 119, 139, 0) 74%);
+      filter: blur(.14px) drop-shadow(0 0 20px rgba(28, 128, 148, .56));
+    }
+
+    .research-flow-modal .case-flow-content .case-section {
+      grid-template-columns: clamp(184px, 18vw, 248px) minmax(0, 1fr);
+    }
+
+
+    @media (max-width: 820px) {
+      .learning-case-modal .case-logo-row,
+      .learning-case-modal .case-guide-layout,
+      .learning-case-modal .case-ability-row,
+      .learning-case-modal .case-ability-row.reverse {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .learning-case-modal .case-flow-content .case-section h3::before,
+    .learning-case-modal .case-flow-content .case-section h3::after {
+      content: none;
+    }
+
+    .learning-case-modal .case-flow-content .case-section > div {
+      grid-column: 2;
+      grid-row: 1;
+      align-self: start;
+      padding-top: clamp(32px, 5.5vw, 74px);
+    }
+
+    .learning-case-modal .case-flow-content .case-section.case-text-only > div {
+      align-self: center;
+      padding-top: 0;
+    }
+
+    .learning-case-modal .case-flow-content .case-section + .case-section {
+      border-top: 0;
+    }
+
+    .case-next-section {
+      display: inline-flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin: 36px auto 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .case-next-section::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 12px rgba(84, 191, 208, .58)) drop-shadow(0 8px 13px rgba(23, 34, 36, .14));
+      transform: rotate(180deg);
+      animation: caseArrowPulse 2.8s ease-in-out infinite;
+    }
+
+    .case-next-section::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(229, 247, 247, .82), rgba(84, 191, 208, .42) 42%, rgba(84, 191, 208, 0) 76%);
+      animation: caseGlowPulse 2.8s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .case-next-section:hover::before,
+    .case-next-section:focus-visible::before {
+      transform: rotate(180deg) scale(1.14);
+      filter: drop-shadow(0 0 16px rgba(84, 191, 208, .78)) drop-shadow(0 8px 13px rgba(23, 34, 36, .14));
+    }
+
+    .learning-case-modal .case-flow-controls {
+      display: none !important;
+    }
+
+    .case-section-next {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: end;
+      justify-self: center;
+      order: initial;
+      margin-top: 40px;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .learning-case-modal .case-map-return {
+      display: none;
+    }
+
+    .learning-case-modal .learning-case-flow.detail-open .case-flow-controls {
+      display: flex;
     }
 
     .case-flow {
@@ -1321,33 +2680,61 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 24px;
-      min-height: 640px;
-      padding: 22px 0 60px;
+      min-height: 0;
+      padding: 14px 0 42px;
     }
 
     .case-map {
       position: relative;
-      min-height: 430px;
+      min-height: clamp(320px, 38vw, 430px);
       border-radius: var(--radius);
       background:
         radial-gradient(circle at 22% 36%, rgba(191, 229, 231, .68), rgba(191, 229, 231, 0) 30%),
         radial-gradient(circle at 78% 64%, rgba(215, 232, 184, .38), rgba(215, 232, 184, 0) 28%),
-        linear-gradient(145deg, rgba(247, 251, 250, .92), rgba(232, 247, 247, .58));
+        linear-gradient(145deg, rgba(255, 255, 255, .94), rgba(247, 251, 250, .7));
       overflow: hidden;
       box-shadow: inset 0 0 0 1px rgba(79, 129, 153, .1);
       transition: min-height .36s ease, border-radius .36s ease, background .36s ease;
     }
 
-    .case-map::before {
-      content: "Vector flow";
+    .case-flow-art {
       position: absolute;
-      left: 24px;
-      top: 20px;
-      color: rgba(36, 94, 104, .66);
-      font-size: .78rem;
-      font-weight: 760;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+      inset: 6% 3%;
+      width: 94%;
+      height: 88%;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 18px 26px rgba(36, 94, 104, .08));
+    }
+
+    .case-node-glow {
+      --node-x: 50%;
+      --node-y: 50%;
+      --glow-offset-x: 0px;
+      --glow-offset-y: 0px;
+      position: absolute;
+      left: var(--node-x);
+      top: var(--node-y);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, .9), rgba(153, 221, 220, .55) 34%, rgba(84, 191, 208, 0) 72%);
+      filter: blur(.2px) drop-shadow(0 0 18px rgba(84, 191, 208, .42));
+      opacity: 0;
+      transform: translate(calc(-50% + var(--glow-offset-x)), calc(-50% + var(--glow-offset-y))) scale(.78);
+      transition: opacity .22s ease, transform .22s ease;
+      pointer-events: none;
+    }
+
+    .case-node-glow.active {
+      opacity: 1;
+      transform: translate(calc(-50% + var(--glow-offset-x)), calc(-50% + var(--glow-offset-y))) scale(1);
+    }
+
+    .case-node-glow.hovered {
+      opacity: 1;
+      transform: translate(calc(-50% + var(--glow-offset-x)), calc(-50% + var(--glow-offset-y))) scale(1.1);
     }
 
     .case-map svg {
@@ -1367,11 +2754,11 @@
     }
 
     .case-node {
-      --x: 50%;
-      --y: 50%;
+      --node-x: 50%;
+      --node-y: 50%;
       position: absolute;
-      left: var(--x);
-      top: var(--y);
+      left: var(--node-x);
+      top: var(--node-y);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1381,25 +2768,98 @@
       border: 1px solid rgba(79, 129, 153, .24);
       border-radius: 999px;
       color: #245e68;
-      background: rgba(255, 255, 255, .82);
-      box-shadow: 0 12px 28px rgba(23, 34, 36, .1);
-      font: inherit;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: 0 12px 28px rgba(23, 34, 36, .1), inset 0 0 0 1px rgba(255, 255, 255, .5);
+      font-family: var(--font-flow);
       font-size: .78rem;
       font-weight: 780;
       letter-spacing: .04em;
       text-transform: uppercase;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, calc(-100% - 18px));
       cursor: pointer;
       transition: transform .22s ease, background .22s ease, box-shadow .22s ease;
     }
 
     .case-node:hover,
     .case-node:focus-visible,
-    .case-node.active {
+    .case-node.active,
+    .case-node.hovered {
       outline: none;
       background: rgba(232, 247, 247, .96);
       box-shadow: 0 16px 36px rgba(36, 94, 104, .16);
-      transform: translate(-50%, -50%) scale(1.06);
+      transform: translate(-50%, calc(-100% - 18px)) scale(1.06);
+    }
+
+    .case-node.is-below {
+      transform: translate(-50%, 18px);
+    }
+
+    .case-node.is-below:hover,
+    .case-node.is-below:focus-visible,
+    .case-node.is-below.active,
+    .case-node.is-below.hovered {
+      transform: translate(-50%, 18px) scale(1.06);
+    }
+
+    .case-node.is-left {
+      transform: translate(calc(-100% - 12px), -50%);
+    }
+
+    .case-node.is-left:hover,
+    .case-node.is-left:focus-visible,
+    .case-node.is-left.active,
+    .case-node.is-left.hovered {
+      transform: translate(calc(-100% - 12px), -50%) scale(1.06);
+    }
+
+    .case-node.is-right {
+      transform: translate(12px, -50%);
+    }
+
+    .case-node.is-right:hover,
+    .case-node.is-right:focus-visible,
+    .case-node.is-right.active,
+    .case-node.is-right.hovered {
+      transform: translate(12px, -50%) scale(1.06);
+    }
+
+    .case-node::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 4px);
+      width: 1px;
+      height: 16px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, rgba(36, 94, 104, .4), rgba(36, 94, 104, 0));
+      transform: translateX(-50%);
+      opacity: .46;
+      pointer-events: none;
+    }
+
+    .case-node.is-below::after {
+      top: auto;
+      bottom: calc(100% + 4px);
+      background: linear-gradient(to top, rgba(36, 94, 104, .4), rgba(36, 94, 104, 0));
+    }
+
+    .case-node.is-left::after {
+      left: calc(100% + 4px);
+      top: 50%;
+      width: 16px;
+      height: 1px;
+      background: linear-gradient(to right, rgba(36, 94, 104, .4), rgba(36, 94, 104, 0));
+      transform: translateY(-50%);
+    }
+
+    .case-node.is-right::after {
+      left: auto;
+      right: calc(100% + 4px);
+      top: 50%;
+      width: 16px;
+      height: 1px;
+      background: linear-gradient(to left, rgba(36, 94, 104, .4), rgba(36, 94, 104, 0));
+      transform: translateY(-50%);
     }
 
     .case-detail {
@@ -1414,16 +2874,17 @@
       position: sticky;
       top: 0;
       z-index: 3;
-      min-height: 132px;
+      min-height: 154px;
       border-radius: 0 0 var(--radius) var(--radius);
       background:
         radial-gradient(circle at 18% 20%, rgba(191, 229, 231, .48), rgba(191, 229, 231, 0) 30%),
         linear-gradient(145deg, rgba(247, 251, 250, .96), rgba(232, 247, 247, .72));
     }
 
-    .case-flow.detail-open .case-map::before {
-      top: 14px;
-      font-size: .68rem;
+    .case-flow.detail-open .case-flow-art {
+      inset: 0 2%;
+      width: 96%;
+      height: 100%;
     }
 
     .case-flow.detail-open .case-map path {
@@ -1489,13 +2950,62 @@
 
     .case-flow-arrow {
       position: fixed;
-      top: 50%;
+      top: calc(50% + 2cm);
       z-index: 85;
-      width: 48px;
-      height: 48px;
-      font-size: 1.3rem;
-      box-shadow: 0 14px 30px rgba(23, 34, 36, .12);
+      width: 62px;
+      height: 62px;
+      border: 0;
+      color: transparent;
+      background: transparent;
+      font-size: 0;
+      box-shadow: none;
       transform: translateY(-50%);
+    }
+
+    .case-flow-arrow::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      background: url("assets/flow-triangle-marker.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 12px rgba(84, 191, 208, .58)) drop-shadow(0 8px 13px rgba(23, 34, 36, .14));
+      animation: caseArrowPulse 2.8s ease-in-out infinite;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .case-flow-arrow::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(229, 247, 247, .82), rgba(84, 191, 208, .42) 42%, rgba(84, 191, 208, 0) 76%);
+      opacity: .95;
+      z-index: -1;
+      transition: opacity .2s ease, transform .2s ease;
+      animation: caseGlowPulse 2.8s ease-in-out infinite;
+    }
+
+    .case-flow-arrow[data-case-prev]::before {
+      transform: rotate(90deg);
+    }
+
+    .case-flow-arrow[data-case-next]::before {
+      transform: rotate(-90deg);
+    }
+
+    .case-flow-arrow.case-flow-close::before {
+      inset: 20px;
+      border: 0;
+      border-radius: 0;
+      background: url("assets/flow-close-x-thin.png") center / contain no-repeat;
+      filter: drop-shadow(0 0 13px rgba(84, 191, 208, .48)) drop-shadow(0 8px 13px rgba(23, 34, 36, .12));
+      transform: none;
+    }
+
+    .case-flow-arrow.case-flow-close:hover::before,
+    .case-flow-arrow.case-flow-close:focus-visible::before {
+      background: url("assets/flow-close-x-thin.png") center / contain no-repeat;
+      transform: scale(1.12);
+      filter: drop-shadow(0 0 16px rgba(84, 191, 208, .74));
     }
 
     .case-flow-arrow[data-case-prev] {
@@ -1522,7 +3032,54 @@
 
     .case-flow-arrow:hover,
     .case-flow-arrow:focus-visible {
-      transform: translateY(-50%) scale(1.04);
+      background: transparent;
+      box-shadow: none;
+      transform: translateY(-50%);
+    }
+
+    .case-flow-arrow[data-case-prev]:hover::before,
+    .case-flow-arrow[data-case-prev]:focus-visible::before {
+      transform: rotate(90deg) scale(1.14);
+      filter: drop-shadow(0 0 16px rgba(84, 191, 208, .78)) drop-shadow(0 8px 13px rgba(23, 34, 36, .14));
+    }
+
+    .case-flow-arrow[data-case-next]:hover::before,
+    .case-flow-arrow[data-case-next]:focus-visible::before {
+      transform: rotate(-90deg) scale(1.14);
+      filter: drop-shadow(0 0 16px rgba(84, 191, 208, .78)) drop-shadow(0 8px 13px rgba(23, 34, 36, .14));
+    }
+
+    .case-flow-arrow:hover::after,
+    .case-flow-arrow:focus-visible::after {
+      opacity: 1;
+      transform: scale(1.16);
+    }
+
+    .case-flow-arrow.case-flow-close:hover::before,
+    .case-flow-arrow.case-flow-close:focus-visible::before {
+      background: url("assets/flow-close-x-thin.png") center / contain no-repeat;
+      transform: scale(1.12);
+      filter: drop-shadow(0 0 16px rgba(84, 191, 208, .74));
+    }
+
+    @keyframes caseArrowPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 9px rgba(84, 191, 208, .42)) drop-shadow(0 8px 13px rgba(23, 34, 36, .12));
+      }
+      50% {
+        filter: drop-shadow(0 0 19px rgba(84, 191, 208, .82)) drop-shadow(0 8px 13px rgba(23, 34, 36, .16));
+      }
+    }
+
+    @keyframes caseGlowPulse {
+      0%, 100% {
+        opacity: .72;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.28);
+      }
     }
 
     .case-flow-content .case-section {
@@ -1556,6 +3113,7 @@
     }
 
     .case-flow-counter {
+      display: none;
       color: var(--muted);
       font-size: .9rem;
     }
@@ -1563,7 +3121,8 @@
     .case-section p,
     .case-section li {
       color: #37413d;
-      font-size: 1.02rem;
+      font-family: var(--font-body);
+      font-size: 1.08rem;
     }
 
     .case-section p {
@@ -1621,13 +3180,29 @@
       background: #f8fcfc;
     }
 
+    .media-item.card-set-landscape {
+      width: 100%;
+      margin: 22px 0;
+      background: #ffffff;
+    }
+
+    .media-item.card-set-landscape img {
+      aspect-ratio: 2048 / 551;
+      object-fit: contain;
+      padding: 0;
+      background: #ffffff;
+    }
+
     .media-item figcaption {
       position: relative;
       z-index: 1;
       margin: 0;
       padding: 12px 14px;
       color: var(--muted);
+      font-family: var(--font-body);
       font-size: .9rem;
+      font-weight: 500;
+      line-height: 1.45;
       border-top: 1px solid var(--line);
     }
 
@@ -1651,6 +3226,7 @@
       .case-flow,
       .pipeline-inner,
       .research-inner,
+      .research-head,
       .closing-grid {
         grid-template-columns: 1fr;
       }
@@ -1677,8 +3253,15 @@
         right: 18px;
       }
 
-      .pipeline-grid {
+      .pipeline-grid,
+      .pipeline-grid-top,
+      .research-grid {
         grid-template-columns: 1fr;
+      }
+
+      .pipeline-grid-top,
+      .section-next-cue {
+        grid-column: 1;
       }
 
       .project-strip.reverse .project-media,
@@ -1736,6 +3319,11 @@
         max-width: none;
       }
 
+      .research-icon {
+        width: 86px;
+        height: 86px;
+      }
+
       .project-strip {
         padding: 54px 0;
       }
@@ -1776,7 +3364,7 @@
         <a class="brand-name" href="#top" aria-label="Back to top">
           <strong>Dean Rabisy</strong>
         </a>
-        <span class="brand-subtitle">Learning Design / Product Thinking / Optimization</span>
+        <span class="brand-subtitle">Learning Design / Product Thinking / Research &amp; Optimization</span>
       </div>
       <div class="nav-links">
         <a class="nav-visual-link nav-projects-link" href="#projects" data-projects-jump>
@@ -1800,13 +3388,19 @@
             <img class="icon-on" src="assets/nav-brain-network-on.png" alt="">
           </span>
         </a>
-        <a class="nav-contact" href="mailto:adaptive.dean@gmail.com" aria-label="Email Dean">
-          <span>Contact</span>
-          <span class="mail-icon" aria-hidden="true">
-            <img class="mail-closed" src="assets/email-envelope-closed.png" alt="">
-            <img class="mail-open" src="assets/email-letter.png" alt="">
-          </span>
-        </a>
+        <span class="nav-contact-group">
+          <a class="nav-contact" href="mailto:adaptive.dean@gmail.com" aria-label="Email Dean at adaptive.dean@gmail.com">
+            <span>Contact</span>
+            <span class="mail-icon" aria-hidden="true">
+              <img class="mail-closed" src="assets/email-envelope-closed.png" alt="">
+              <img class="mail-open" src="assets/email-letter.png" alt="">
+            </span>
+          </a>
+          <button class="copy-email" type="button" data-email="adaptive.dean@gmail.com" aria-label="Copy email address adaptive.dean@gmail.com">
+            <img src="assets/copy-email-icon.png" alt="">
+            <span class="copy-email-note" aria-hidden="true">Copy adaptive.dean@gmail.com</span>
+          </button>
+        </span>
       </div>
     </nav>
   </header>
@@ -1849,20 +3443,31 @@
       <div class="wrap project-start-layout">
         <div class="project-start-copy">
           <p class="eyebrow">Projects</p>
-          <h2 id="projects-title">Products built to make learning engaging.</h2>
+          <h2 id="projects-title">
+            <span class="project-title-line">Products Built</span>
+            <span class="project-title-line">to make learning</span>
+            <span class="project-title-line">engaging.</span>
+          </h2>
           <p>Across these projects, I designed, built, tested, and improved learning tools through real student use, identifying usability problems, edge cases, synchronization issues, and unclear interaction states. Open a project to read the full case study.</p>
+          <a class="project-start-jump" href="#pipeline" aria-label="Jump to Stay Tuned section">
+            <span class="project-start-arrow" aria-hidden="true">
+              <img class="icon-off" src="assets/project-stay-arrow-off.png" alt="">
+              <img class="icon-on" src="assets/project-stay-arrow-on.png" alt="">
+            </span>
+            <span class="project-start-jump-text">Click to have a look at the Stay Tuned section and see work that is still in progress.</span>
+          </a>
         </div>
         <div class="project-logo-nav" aria-label="Jump to a project">
-          <a class="project-logo-link" href="#gophish" aria-label="Jump to GoPhish project">
+          <a class="project-logo-link logo-gophish" href="#gophish" aria-label="Jump to GoPhish project">
             <img src="GoPhish/GoPhishlogo.png" alt="GoPhish">
           </a>
-          <a class="project-logo-link" href="#ihave" aria-label="Jump to I-have project">
-            <img src="assets/project-logo-ihave-option-3a.png" alt="I-have">
+          <a class="project-logo-link logo-ihave" href="#ihave" aria-label="Jump to iHave project">
+            <img src="assets/project-logo-ihave-option-3a.png" alt="iHave">
           </a>
-          <a class="project-logo-link" href="#progressing" aria-label="Jump to Progressing project">
+          <a class="project-logo-link logo-progressing" href="#progressing" aria-label="Jump to Progressing project">
             <img src="assets/project-logo-progressing-option-3.png" alt="Progressing">
           </a>
-          <a class="project-logo-link" href="#recall" aria-label="Jump to Re-Call project">
+          <a class="project-logo-link logo-recall" href="#recall" aria-label="Jump to Re-Call project">
             <img src="assets/recall logo.png" alt="Re-Call">
           </a>
         </div>
@@ -1884,22 +3489,22 @@
               <button class="button case-study-button case-button-1" type="button" data-modal="gophish-modal" aria-label="Open GoPhish case study">Open case study</button>
             </div>
           </div>
-          <a class="project-next" href="#ihave" aria-label="Jump to I-have project"></a>
+          <a class="project-next" href="#ihave" aria-label="Jump to iHave project"></a>
         </div>
       </section>
 
       <section class="project-strip reverse" id="ihave" aria-labelledby="ihave-title">
         <div class="wrap project-grid">
-          <div class="project-media" role="group" aria-label="Open I-have case study">
+          <div class="project-media" role="group" aria-label="Open iHave case study">
             <video src="I-have/Ihave - Hero - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
             <p class="media-caption">Players compete to empty their hand first by linking cards correctly into a shared chain.</p>
-            <button class="open-hit" type="button" data-modal="ihave-modal" aria-label="Open I-have case study"></button>
+            <button class="open-hit" type="button" data-modal="ihave-modal" aria-label="Open iHave case study"></button>
           </div>
           <div class="project-copy">
-            <h2 id="ihave-title">I-have</h2>
+            <h2 id="ihave-title">iHave</h2>
             <p class="tagline">An online game that gets students speaking quickly.</p>
             <div class="project-actions">
-              <button class="button case-study-button case-button-2" type="button" data-modal="ihave-modal" aria-label="Open I-have case study">Open case study</button>
+              <button class="button case-study-button case-button-2" type="button" data-modal="ihave-modal" aria-label="Open iHave case study">Open case study</button>
             </div>
           </div>
           <a class="project-next" href="#progressing" aria-label="Jump to Progressing project"></a>
@@ -1944,27 +3549,60 @@
 
       <section class="pipeline-section" id="pipeline" aria-labelledby="pipeline-title">
         <div class="wrap pipeline-inner">
-          <div>
+          <div class="pipeline-intro">
             <p class="eyebrow">Stay tuned for</p>
             <h2 id="pipeline-title">A few things still taking shape.</h2>
             <p>Some work is still in progress, some is being tested, and some needs a clearer story before it belongs here properly.</p>
+            <a class="scroll-cue section-next-cue visible" href="#research" aria-label="Jump to academic research section">
+              <span aria-hidden="true"></span>
+            </a>
           </div>
-          <div class="pipeline-grid" aria-label="Portfolio pipeline">
-            <article class="pipeline-card">
-              <span class="pipeline-icon" aria-hidden="true">01</span>
-              <h3>Research notes</h3>
-              <p>Shorter write-ups on learning, motivation, repetition, and how students actually respond to different tools.</p>
-            </article>
-            <article class="pipeline-card">
-              <span class="pipeline-icon" aria-hidden="true">02</span>
-              <h3>New prototypes</h3>
-              <p>Early experiments that are not ready for a full case study yet, but are already shaping the next round of work.</p>
-            </article>
-            <article class="pipeline-card">
-              <span class="pipeline-icon" aria-hidden="true">03</span>
-              <h3>More evidence</h3>
-              <p>Updates from testing, clearer before-and-after decisions, and more detail on what changed after real use.</p>
-            </article>
+          <div class="pipeline-grid pipeline-grid-top" aria-label="Portfolio pipeline">
+            <button class="pipeline-card" type="button" aria-label="Read about Word Crush Duel">
+              <span class="pipeline-art" aria-hidden="true">
+                <img src="Stay Tuned/logo-word-crush-duel-duel-only.png" alt="">
+              </span>
+              <span class="pipeline-popover">
+                <strong>Word Crush Duel</strong>
+                <span>A two-player word-search race with a shifting board, built for fast vocabulary recognition.</span>
+              </span>
+            </button>
+            <button class="pipeline-card" type="button" aria-label="Read about NetWords">
+              <span class="pipeline-art" aria-hidden="true">
+                <img src="Stay Tuned/networds-generated-option-a.png" alt="">
+              </span>
+              <span class="pipeline-popover">
+                <strong>NetWords</strong>
+                <span>A hex-board word strategy game about building connected paths through meaning and association.</span>
+              </span>
+            </button>
+            <button class="pipeline-card" type="button" aria-label="Read about Reading Test Simulator">
+              <span class="pipeline-art" aria-hidden="true">
+                <img src="Stay Tuned/reading-simulator-generated.png" alt="">
+              </span>
+              <span class="pipeline-popover">
+                <strong>Reading Test Simulator</strong>
+                <span>A tool for turning reading files into structured practice, question by question.</span>
+              </span>
+            </button>
+            <button class="pipeline-card" type="button" aria-label="Read about Sound Twins">
+              <span class="pipeline-art" aria-hidden="true">
+                <img src="Stay Tuned/sound twins.png" alt="">
+              </span>
+              <span class="pipeline-popover">
+                <strong>Sound Twins</strong>
+                <span>A phonics matching game where students pair different words that share the same sound.</span>
+              </span>
+            </button>
+            <button class="pipeline-card" type="button" aria-label="Read about Phonics Suite">
+              <span class="pipeline-art" aria-hidden="true">
+                <img src="Stay Tuned/phonics-suite-generated.png" alt="">
+              </span>
+              <span class="pipeline-popover">
+                <strong>Phonics Suite</strong>
+                <span>A growing set of phonics lessons connecting rules, sorting, matching, puzzles, and stories.</span>
+              </span>
+            </button>
           </div>
         </div>
       </section>
@@ -1972,14 +3610,44 @@
 
     <section class="research-section" id="research" aria-labelledby="research-title">
       <div class="wrap research-inner">
-        <div>
-          <p class="eyebrow">Research</p>
-          <h2 id="research-title">The thinking behind the tools.</h2>
+        <div class="research-head">
+          <div>
+            <p class="eyebrow">Academic Research</p>
+            <h2 id="research-title">Intervention-focused papers on designing and evaluating tailored psychological interventions to achieve measurable outcomes.</h2>
+          </div>
         </div>
-        <div class="research-note">
-          <p>This section will hold research notes, observations from lessons, and the reasoning behind design decisions.</p>
-          <p>For now, it gives the portfolio a place for the psychological and teaching side of the work, not only the finished products.</p>
+        <div class="research-grid" aria-label="Academic research articles">
+          <button class="research-card" type="button" data-modal="research-mindfulness-modal">
+            <span class="research-icon" aria-hidden="true">
+              <img class="icon-off" src="assets/research-mindfulness-off.png" alt="">
+              <img class="icon-on" src="assets/research-mindfulness-on.png" alt="">
+            </span>
+            <h3>Brief Mindfulness Intervention and Access to Internal States</h3>
+            <p>A brief intervention study testing whether mindfulness improves access to internal bodily states.</p>
+            <span>Open research summary</span>
+          </button>
+          <button class="research-card" type="button" data-modal="research-inner-speech-modal">
+            <span class="research-icon" aria-hidden="true">
+              <img class="icon-off" src="assets/research-inner-speech-off.png" alt="">
+              <img class="icon-on" src="assets/research-inner-speech-on.png" alt="">
+            </span>
+            <h3>Positive Inner Speech Training and Performance Anxiety</h3>
+            <p>A three-day training study testing whether positive inner speech can reduce exam-related anxiety.</p>
+            <span>Open research summary</span>
+          </button>
+          <button class="research-card" type="button" data-modal="research-visq-modal">
+            <span class="research-icon" aria-hidden="true">
+              <img class="icon-off" src="assets/research-validation-off.png" alt="">
+              <img class="icon-on" src="assets/research-validation-on.png" alt="">
+            </span>
+            <h3>The Hebrew VISQ-R: Measuring Inner Speech in Hebrew Speakers</h3>
+            <p>A validation study adapting an inner-speech questionnaire for Hebrew-speaking participants.</p>
+            <span>Open research summary</span>
+          </button>
         </div>
+        <a class="scroll-cue section-next-cue visible" href="#next" aria-label="Jump to what I am looking for next">
+          <span aria-hidden="true"></span>
+        </a>
       </div>
     </section>
 
@@ -2002,7 +3670,7 @@
     </section>
   </main>
 
-  <div class="modal" id="gophish-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="gophish-modal-title">
+  <div class="modal learning-case-modal" id="gophish-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="gophish-modal-title">
     <div class="modal-panel">
       <div class="modal-top">
         <div class="modal-title">
@@ -2010,125 +3678,146 @@
         </div>
         <button class="close-modal" type="button" aria-label="Close case study">x</button>
       </div>
-      <div class="modal-content">
+      <div class="modal-content learning-case-flow" data-case-flow data-start-step="0">
         <section class="case-hero">
+          <div class="case-project-logo" aria-hidden="true">
+            <img src="GoPhish/GoPhishlogo.png" alt="">
+          </div>
           <div>
             <p class="eyebrow">Case Study</p>
             <h2>GoPhish</h2>
-          </div>
-          <p>A familiar card game adapted into a real-time phonics tool, designed to make repeated sound practice feel natural and engadging.</p>
-        </section>
-        <div class="case-body case-flow" data-case-flow>
-          <div class="case-map" aria-label="GoPhish case study vector flow">
-            <svg viewBox="0 0 960 300" aria-hidden="true" focusable="false">
-              <path d="M82 168 C164 78 246 78 306 146 C364 212 436 214 500 150 C568 82 650 90 704 158 C762 230 824 220 884 126" />
-            </svg>
-            <button class="case-node" style="--x:9%; --y:56%" type="button" data-case-node="problem">Problem</button>
-            <button class="case-node" style="--x:21%; --y:31%" type="button" data-case-node="idea">Idea</button>
-            <button class="case-node" style="--x:33%; --y:49%" type="button" data-case-node="built">Built</button>
-            <button class="case-node" style="--x:45%; --y:68%" type="button" data-case-node="practice">Practice</button>
-            <button class="case-node" style="--x:56%; --y:46%" type="button" data-case-node="worked">Worked</button>
-            <button class="case-node" style="--x:67%; --y:28%" type="button" data-case-node="hard">Hard</button>
-            <button class="case-node" style="--x:77%; --y:53%" type="button" data-case-node="not-yet">Not Yet</button>
-            <button class="case-node" style="--x:86%; --y:70%" type="button" data-case-node="learned">Learned</button>
-            <button class="case-node" style="--x:93%; --y:42%" type="button" data-case-node="outcome">Outcome</button>
-          </div>
-          <div class="case-detail">
+            <img class="case-title-divider" src="assets/gophish-title-divider-clean.png" alt="">
             <div class="case-detail-head">
-              <h3 class="case-detail-label" data-case-label>Problem</h3>
-              <button class="case-map-return" type="button" data-case-map-return>Vector flow</button>
+              <h3 class="case-detail-label" data-case-label>The Problem</h3>
             </div>
+          </div>
+          <div class="case-map" aria-label="GoPhish case study vector flow">
+            <img class="case-flow-art" src="assets/gophish-project-flow-horizontal-v3.png" alt="">
+            <span class="case-node-glow" data-flow-x="5.8" data-flow-y="41.7" data-case-glow="problem"></span>
+            <span class="case-node-glow" data-flow-x="18.7" data-flow-y="45.1" data-case-glow="idea"></span>
+            <span class="case-node-glow" data-flow-x="30.1" data-flow-y="49.0" data-case-glow="built"></span>
+            <span class="case-node-glow" data-flow-x="42.1" data-flow-y="48.5" data-case-glow="practice"></span>
+            <span class="case-node-glow" data-flow-x="52.2" data-flow-y="54.8" data-case-glow="worked"></span>
+            <span class="case-node-glow" data-flow-x="61.5" data-flow-y="54.3" data-case-glow="hard"></span>
+            <span class="case-node-glow" data-flow-x="70.9" data-flow-y="54.7" data-case-glow="not-yet"></span>
+            <span class="case-node-glow" data-flow-x="81.6" data-flow-y="56.6" data-case-glow="learned"></span>
+            <span class="case-node-glow" data-flow-x="92.3" data-flow-y="60.2" data-case-glow="outcome"></span>
+            <button class="case-node is-left" type="button" data-flow-x="5.8" data-flow-y="41.7" data-case-node="problem">Problem</button>
+            <button class="case-node is-below" type="button" data-flow-x="18.7" data-flow-y="45.1" data-case-node="idea">Idea</button>
+            <button class="case-node" type="button" data-flow-x="30.1" data-flow-y="49.0" data-case-node="built">Built</button>
+            <button class="case-node is-below" type="button" data-flow-x="42.1" data-flow-y="48.5" data-case-node="practice">Looks Like</button>
+            <button class="case-node" type="button" data-flow-x="52.2" data-flow-y="54.8" data-case-node="worked">What Works</button>
+            <button class="case-node is-below" type="button" data-flow-x="61.5" data-flow-y="54.3" data-case-node="hard">Challenges</button>
+            <button class="case-node" type="button" data-flow-x="70.9" data-flow-y="54.7" data-case-node="not-yet">In the Works</button>
+            <button class="case-node is-below" type="button" data-flow-x="81.6" data-flow-y="56.6" data-case-node="learned">Takeaways</button>
+            <button class="case-node is-right" type="button" data-flow-x="92.3" data-flow-y="60.2" data-case-node="outcome">Outcomes</button>
+          </div>
+        </section>
+        <div class="case-body">
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Vector flow</button>
             <div class="case-flow-content">
-          <section class="case-section active" data-case-step="problem">
-            <h3>Problem</h3>
+          <section class="case-section case-text-only active" data-case-step="problem">
+            <h3>The Problem</h3>
             <div>
-              <p>A lot of online teaching ends up feeling passive by using worksheets, slides, and a lot of "teacher explains / student listens". <br> Students lose focus quickly, while teachers do not always have flexible tools that make practice feel interactive and keep everyone engaged.</br></p>
+              <p>A lot of online teaching ends up feeling passive by using worksheets, slides, and a lot of "teacher explains / student listens".</p>
+              <p>Students lose focus quickly.</p>
+              <p>Teachers do not always have flexible tools that make practice feel interactive and keep everyone engaged.</p>
             </div>
           </section>
-          <section class="case-section" data-case-step="idea">
-            <h3>Idea</h3>
+          <section class="case-section case-text-only" data-case-step="idea">
+            <h3>The Idea</h3>
             <div>
-              <p>Take a game students already know, Go Fish for example, and turn it into a learning tool. The goal was to make repetition feel natural, fun, and engaging.<br><br> Instead of solving worksheets, students would: </p>
+              <p>Take a game students already know, Go Fish for example, and turn it into a learning tool.</p>
+              <p>The goal was to make repetition feel natural, fun, and engaging.</p>
+              <p>Instead of solving worksheets, students would:</p>
               <ul>
-                <li>Play and compete</li>
-                <li>Repeat patterns without it feeling like an exercise</li>
+                <li>Play and compete.</li>
+                <li>Repeat patterns without it feeling like an exercise.</li>
               </ul>
             </div>
           </section>
           <section class="case-section" data-case-step="built">
-            <h3>Built</h3>
+            <h3>How I Built It</h3>
             <div>
-              <p>I broke phonics into smaller groups, such as short vowels and digraphs, and turned each group into a card set. Each card includes four words, visuals, and one clear spelling pattern, so repetition happens naturally during gameplay but can still be used as a focused tool for teaching.</p>
-              <p>From there, I built a multiplayer web app where players can hold cards, organize their hand, pass cards, and complete sets. All actions sync in real time through Firebase.</p>
-              <figure class="media-item contain">
-                <img src="GoPhish/GoPhish Sets for PORT (Medium Banner (US) (Landscape)) (28 x 55 in).png" alt="GoPhish phonics card sets">
+              <p>I broke phonics into smaller groups, such as short vowels and digraphs, and turned each group into a card set.</p>
+              <p>Each card includes four words, visuals, and one clear spelling pattern.</p>
+              <p>That way, repetition happens naturally during gameplay but can still be used as a focused tool for teaching.</p>
+              <figure class="media-item contain card-set-landscape">
+                <img src="GoPhish/GoPhish Sets for PORT.png" alt="GoPhish phonics card sets">
                 <figcaption>GoPhish card sets organized by phonics pattern, helping students repeat target sounds through gameplay.</figcaption>
               </figure>
+              <p>From there, I built a multiplayer web app where players can hold cards, organize their hand, pass cards, and complete sets.</p>
+              <p>All actions sync in real time through Firebase.</p>
             </div>
           </section>
           <section class="case-section" data-case-step="practice">
-            <h3>Practice</h3>
-            <div>
-              <p>The goal is to complete the most phonics sets out of all other players. Players ask each other for cards, pass cards back and forth, and complete matching phonics sets. Repeated requests create repetition without making practice feel repetitive.</p>
-              <div class="media-grid">
-                <figure class="media-item">
-                  <video src="GoPhish/GoPhish - Hand Arrangement - Final.mp4" controls preload="metadata"></video>
-                  <figcaption>Manual card arrangement helps students manage larger hands while visually grouping related sound patterns.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="GoPhish/Go Phish Set Completion Final1.mp4" controls preload="metadata"></video>
-                  <figcaption>A larger card display helps players manage more cards, identify matching patterns, and complete sets clearly.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="GoPhish/GoPhish Passing Final.mp4" controls preload="metadata"></video>
-                  <figcaption>Players pass requested cards in real time, keeping the phonics pattern practice connected to live interaction.</figcaption>
-                </figure>
-              </div>
+            <h3>What It Looks Like</h3>
+            <div class="case-copy-lines">
+              <figure class="media-item case-feature-media">
+                <video src="GoPhish/GoPhish Passing Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>Players pass requested cards in real time, keeping the phonics pattern practice connected to live interaction.</figcaption>
+              </figure>
+              <p>The goal is to complete the most phonics sets out of all other players.</p>
+              <p>Players ask each other for cards, pass cards back and forth, and complete matching phonics sets.</p>
+              <p>Repeated requests create repetition without making practice feel repetitive.</p>
             </div>
           </section>
           <section class="case-section" data-case-step="worked">
-            <h3>Worked</h3>
+            <h3>What Works</h3>
             <div>
-              <ul>
-                <li>Students stayed focused for full sessions</li>
-                <li>Repetition happened naturally</li>
-                <li>Vocabulary and spelling patterns stuck more reliably over time</li>
-                <li>The system scaled easily by swapping card sets in and out</li>
-              </ul>
+              <ul class="case-two-column-list">
+                <li>Students stay focused for full sessions.</li>
+                <li>Repetition happens naturally.</li>
+                <li>Vocabulary and spelling patterns stick more reliably over time.</li>
+                <li>The system scales easily by swapping card sets in and out.</li>
+              </ul><br>
+              <figure class="media-item case-feature-media">
+                <video src="GoPhish/GoPhish - Hand Arrangement - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>Manual card arrangement helps students manage larger hands while visually grouping related sound patterns.</figcaption>
+              </figure>
             </div>
           </section>
           <section class="case-section" data-case-step="hard">
-            <h3>Hard</h3>
+            <h3>Challenges and Refinements</h3>
             <div>
               <ul>
-                <li><strong>Large hands and screen space:</strong> testing showed that as players collected more cards, it became harder to find, select, and manage specific cards without slowing the game down.</li>
-                <li><strong>Usability for younger students:</strong> some actions needed stronger visual feedback, clearer selection states, and larger previews so students could understand what was happening without extra explanation.</li>
-                <li><strong>Translating physical play online:</strong> physical card games rely on touch, visibility, and table layout, so the digital version needed extra feedback systems to replace those cues.</li>
-              </ul>
+                <li><strong>Large hands and screen space:</strong> testing showed that as players collected more cards, it became harder to find, select, and manage specific cards without slowing the game down. I added a larger card display to make these actions easier.</li>
+                <li><strong>Usability for younger students:</strong> some actions needed stronger visual feedback, clearer selection states, and larger previews. Students needed to understand what was happening without extra explanation. An example of this is the large and prominent pause button.</li>
+                <li><strong>Translating physical play online:</strong> physical card games rely on touch, visibility, and table layout. The digital version needed extra feedback systems to replace those cues. That is where animations became helpful.</li>
+              </ul> <br>
+              <figure class="media-item case-feature-media">
+                <video src="GoPhish/Go Phish Set Completion Final1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>A larger card display helps players manage more cards, identify matching patterns, and complete sets clearly.</figcaption>
+              </figure>
             </div>
           </section>
           <section class="case-section" data-case-step="not-yet">
-            <h3>Not Yet</h3>
+            <h3>What's In the Works</h3>
             <div>
-              <p>I explored replacing individual cards with shared boards and tokens. This would reduce visual clutter, but it would also completely change the feel of the game. I decided to validate the existing system first.</p>
+              <p>I am currently exploring replacing individual cards with shared boards and tokens.</p>
+              <p>This could reduce visual clutter, but it would also change the feel and design of the game.</p>
+              <p>It would require a different visual design, new code, and a redesign of most card elements, so I am treating it as a larger iteration rather than a small adjustment.</p>
             </div>
           </section>
           <section class="case-section" data-case-step="learned">
-            <h3>Learned</h3>
+            <h3>My Takeaways</h3>
             <div>
               <ul>
-                <li>Test core assumptions before building around them</li>
-                <li>Translating a physical game online means redesigning the interaction, not copying it</li>
-                <li>Digital feedback has to replace the satisfaction of physical play</li>
-                <li>Screen space is not just a UI constraint; it shapes the learning system</li>
+                <li>Test core assumptions before building around them.</li>
+                <li>Translating a physical game online means redesigning the interaction, not copying it.</li>
+                <li>Digital feedback has to replace the satisfaction of physical play.</li>
+                <li>Screen space is not just a UI constraint; it shapes the learning system.</li>
               </ul>
             </div>
           </section>
           <section class="case-section" data-case-step="outcome">
-            <h3>Outcome</h3>
+            <h3>The Outcomes</h3>
             <div>
-              <p>This became a reliable tool for phonics practice: higher participation, smoother repetition, and more consistent exposure to spelling patterns.</p>
+              <p>This became a reliable tool for phonics practice.</p>
+              <p>It led to higher participation, smoother repetition, and more consistent exposure to spelling patterns.</p>
             </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close case study">x</button>
           </section>
             </div>
             <div class="case-flow-controls">
@@ -2142,7 +3831,7 @@
     </div>
   </div>
 
-  <div class="modal" id="ihave-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="ihave-modal-title">
+  <div class="modal learning-case-modal" id="ihave-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="ihave-modal-title">
     <div class="modal-panel">
       <div class="modal-top">
         <div class="modal-title">
@@ -2150,72 +3839,142 @@
         </div>
         <button class="close-modal" type="button" aria-label="Close case study">x</button>
       </div>
-      <div class="modal-content">
+      <div class="modal-content learning-case-flow" data-case-flow data-start-step="0">
         <section class="case-hero">
+          <div class="case-project-logo" aria-hidden="true">
+            <img src="assets/project-logo-ihave-option-3a.png" alt="">
+          </div>
           <div>
             <p class="eyebrow">Case Study</p>
-            <h2>I-have</h2>
+            <h2>iHave</h2>
           </div>
-          <p>A fast reaction game that gives the start of an online lesson momentum by turning simple speaking prompts into a shared card chain.</p>
+          <div class="case-map" aria-label="iHave case study vector flow">
+            <img class="case-flow-art" src="assets/case-flow-ihave.png" alt="">
+            <span class="case-node-glow" data-flow-x="8.9" data-flow-y="54.4" data-case-glow="problem"></span>
+            <span class="case-node-glow" data-flow-x="19.5" data-flow-y="53.1" data-case-glow="idea"></span>
+            <span class="case-node-glow" data-flow-x="29.4" data-flow-y="51.1" data-case-glow="built"></span>
+            <span class="case-node-glow" data-flow-x="39.1" data-flow-y="50.5" data-case-glow="practice"></span>
+            <span class="case-node-glow" data-flow-x="47.3" data-flow-y="48.4" data-case-glow="worked"></span>
+            <span class="case-node-glow" data-flow-x="57.7" data-flow-y="45.2" data-case-glow="hard"></span>
+            <span class="case-node-glow" data-flow-x="66.2" data-flow-y="43.3" data-case-glow="not-yet"></span>
+            <span class="case-node-glow" data-flow-x="76.5" data-flow-y="42.7" data-case-glow="learned"></span>
+            <span class="case-node-glow" data-flow-x="86.2" data-flow-y="42.5" data-case-glow="outcome"></span>
+            <button class="case-node is-left" type="button" data-flow-x="8.9" data-flow-y="54.4" data-case-node="problem">Problem</button>
+            <button class="case-node" type="button" data-flow-x="19.5" data-flow-y="53.1" data-case-node="idea">Idea</button>
+            <button class="case-node is-below" type="button" data-flow-x="29.4" data-flow-y="51.1" data-case-node="built">Built</button>
+            <button class="case-node" type="button" data-flow-x="39.1" data-flow-y="50.5" data-case-node="practice">Looks Like</button>
+            <button class="case-node is-below" type="button" data-flow-x="47.3" data-flow-y="48.4" data-case-node="worked">What Works</button>
+            <button class="case-node" type="button" data-flow-x="57.7" data-flow-y="45.2" data-case-node="hard">Challenges</button>
+            <button class="case-node is-below" type="button" data-flow-x="67.2" data-flow-y="43.3" data-case-node="not-yet">In the Works</button>
+            <button class="case-node" type="button" data-flow-x="76.5" data-flow-y="42.7" data-case-node="learned">Takeaways</button>
+            <button class="case-node is-right" type="button" data-flow-x="86.2" data-flow-y="42.5" data-case-node="outcome">Outcomes</button>
+          </div>
         </section>
         <div class="case-body">
-          <section class="case-section">
-            <h3>Problem</h3>
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Vector flow</button>
+            <div class="case-flow-content">
+          <section class="case-section case-text-only active" data-case-step="problem">
+            <h3>The Problem</h3>
             <div>
-              <p>Online lessons can feel awkward, especially with younger or quieter students. Without early momentum, students hesitate to speak, energy stays low, and the rest of the lesson becomes harder to build.</p>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Idea</h3>
-            <div>
-              <p>Create something fast, simple, and competitive. The focus was to create an intuitive and compelling game for all levels that gets students speaking immediately. This helps break the ice and gives students a positive experience.</p>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Built</h3>
-            <div>
-              <p>I created a closed loop system of 24 cards: 8 different items, each repeated 3 times. Each card contains "I have [X]" and "Who has [Y]". Every card connects to another card, so the game can begin anywhere.</p>
-              <p>To bring this online, I built a shared real-time interface where both players can see all cards, cards snap into a central chain, and actions sync in real time.</p>
-              <p>Testing led me to add a tie-break mechanic for near-simultaneous plays, a chain-break state to prevent deadlocks, manual card arrangement, and clearer animations.</p>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Practice</h3>
-            <div>
-              <p>One player begins: "I have a lion." They reveal: "Who has a horse?" Players race to find the matching card. The first player to react discards their card and continues the chain.</p>
-              <p>Because the game rewards speed, students stay focused, speaking happens naturally, and mistakes do not interrupt the flow. Rounds usually last 2 to 3 minutes and can be repeated multiple times.</p>
-              <div class="media-grid">
-                <figure class="media-item">
-                  <video src="I-have/Ihave - Hero - Final.mp4" controls preload="metadata"></video>
-                  <figcaption>Players compete to empty their hand first by linking cards correctly into a shared chain.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="I-have/Ihave - Battle - Final.mp4" controls preload="metadata"></video>
-                  <figcaption>Near-simultaneous plays trigger a quick battle UI to decide who gets to continue the chain.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="I-have/Ihave - Arranging - Final.mp4" controls preload="metadata"></video>
-                  <figcaption>Players arrange their cards before the round begins, making it easier to scan their hand and react quickly during play.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="I-have/Ihave - Endgame - Final.mp4" controls preload="metadata"></video>
-                  <figcaption>End of a round showing the winning player with an empty hand and the opponent's final loss state.</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Worked</h3>
-            <div>
+              <p>Online lessons can feel awkward, especially with younger or quieter students.</p>
+              <p>Without early momentum:</p>
               <ul>
-                <li>Students spoke almost immediately</li>
-                <li>Competition increased energy and removed awkwardness</li>
-                <li>Students often wanted to replay it</li>
+                <li>Students hesitate to speak.</li>
+                <li>Energy stays low.</li>
+                <li>Lessons become harder to build.</li>
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Hard</h3>
+          <section class="case-section case-text-only" data-case-step="idea">
+            <h3>The Idea</h3>
+            <div>
+              <p>Create something fast, simple, and competitive.</p>
+              <p>The focus is to create an intuitive and compelling game for all levels that gets students speaking immediately.</p>
+              <p>This helps break the ice and gives students a positive experience.</p>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="built">
+            <h3>How I Built It</h3>
+            <div>
+              <p>I created a closed loop system of cards:</p>
+              <ul>
+                <li>24 total cards.</li>
+                <li>8 different items.</li>
+                <li>Each repeated 3 times.</li>
+              </ul><br>
+<p>Each card contains:</p>
+              <ul>
+                <li>"I have [X]".</li>
+                <li>"Who has [Y]".</li>
+              </ul><br>
+<p>The goal of the game is to be the first player to empty their hand.</p>
+              <p>Every card connects to another card, so the game can begin anywhere.</p>
+              <p>To bring this online, I built a shared real-time interface where:</p>
+              <ul>
+                <li>Both players can see all cards.</li>
+                <li>Cards snap into a central chain.</li>
+                <li>Actions sync in real time.</li>
+              </ul> <br>
+<p>I also added systems based on testing:</p>
+              <h4>Tie-break mechanic</h4>
+              <p>If two players act at the same time, a quick click battle determines who gets to play the card.</p>
+              <figure class="media-item case-feature-media">
+                <video src="I-have/Ihave - Battle - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>Near-simultaneous plays trigger a quick battle UI to decide who gets to continue the chain.</figcaption>
+              </figure>
+              <h4>Chain break handling</h4>
+              <p>Testing revealed situations where the game could stall because the required card had already been played.</p>
+              <p>To prevent deadlocks, I added a visual state that clearly communicated when any card could be played.</p>
+              <h4>UI improvements</h4>
+              <ul>
+                <li>Manual card arrangement.</li>
+                <li>Animations.</li>
+              </ul><br>
+<figure class="media-item case-feature-media">
+                <video src="I-have/Ihave - Arranging - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>Players arrange their cards before the round begins, making it easier to scan their hand and react quickly during play.</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="practice">
+            <h3>What It Looks Like</h3>
+            <div>
+              <figure class="media-item case-feature-media">
+                <video src="I-have/Ihave - Hero - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>Players compete to empty their hand first by linking cards correctly into a shared chain.</figcaption>
+              </figure>
+              <p>One player begins:</p>
+              <p class="case-quote-line">"I have a lion."</p>
+              <p>They reveal:</p>
+              <p class="case-quote-line">"Who has a horse?"</p>
+              <p>Players race to find the matching card.</p>
+              <p>The first player to react discards their card and continues the chain.</p>
+              <p>Because the game rewards speed:</p>
+              <ul>
+                <li>Students stay focused.</li>
+                <li>Speaking happens naturally.</li>
+                <li>Mistakes do not interrupt flow.</li>
+              </ul><br>
+<p>Rounds usually last 2-3 minutes and can be repeated multiple times.</p><br>
+<figure class="media-item case-feature-media">
+                <video src="I-have/Ihave - Endgame - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>End of a round showing the winning player with an empty hand and the opponent's final loss state.</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="worked">
+            <h3>What Works</h3>
+            <div>
+              <ul class="case-two-column-list">
+                <li>Students speak almost immediately.</li>
+                <li>Competition increases energy and removes awkwardness.</li>
+                <li>Students often want to replay it.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="hard">
+            <h3>Challenges and Refinements</h3>
             <div>
               <ul>
                 <li><strong>Real-time syncing:</strong> simultaneous player actions exposed timing and fairness issues, especially when two players tried to play a card at nearly the same moment.</li>
@@ -2225,39 +3984,53 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Not Yet</h3>
+          <section class="case-section" data-case-step="not-yet">
+            <h3>What's In the Works</h3>
+            <div>
+              <p>I am currently rebranding the game as Links.</p>
+              <p>This is a full style and mechanical rebrand that will significantly expand the content and grammar principles covered by the game.</p>
+              <figure class="media-item contain case-logo-preview case-logo-left">
+                <img src="I-have/links logo.png" alt="Links logo">
+                <figcaption>Links rebrand logo.</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="learned">
+            <h3>My Takeaways</h3>
             <div>
               <ul>
-                <li>Expand content significantly</li>
-                <li>Entire rebranding, including name and visual design</li>
+                <li>Reaction-based games need feedback that feels immediate and decisive.</li>
+                <li>Animation is not decoration; it helps players understand timing, conflict, and reward.</li>
+                <li>Digital products need sensory cues to create a feeling of impact.</li>
+                <li>Branding should be considered before too much interface work becomes fixed.</li>
               </ul>
-              <p>These are currently in the works.</p>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Learned</h3>
+          <section class="case-section" data-case-step="outcome">
+            <h3>The Outcomes</h3>
             <div>
+              <p>This became a reliable tool for breaking the ice and teaching simple grammar principles:</p>
               <ul>
-                <li>Reaction-based games need feedback that feels immediate and decisive</li>
-                <li>Animation is not decoration; it helps players understand timing, conflict, and reward</li>
-                <li>Digital products need sensory cues to create a feeling of impact</li>
-                <li>Branding should be considered before too much interface work becomes fixed</li>
+                <li>Faster engagement.</li>
+                <li>More speaking early on.</li>
+                <li>Smoother lesson transitions.</li>
+                <li>Very memorable and easy to refer back to.</li>
               </ul>
             </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close case study">x</button>
           </section>
-          <section class="case-section">
-            <h3>Outcome</h3>
-            <div>
-              <p>This became a reliable tool for lesson warmups: faster engagement, more speaking early on, and smoother lesson transitions.</p>
             </div>
-          </section>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 9</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="modal" id="progressing-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="progressing-modal-title">
+  <div class="modal learning-case-modal" id="progressing-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="progressing-modal-title">
     <div class="modal-panel">
       <div class="modal-top">
         <div class="modal-title">
@@ -2265,84 +4038,173 @@
         </div>
         <button class="close-modal" type="button" aria-label="Close case study">x</button>
       </div>
-      <div class="modal-content">
+      <div class="modal-content learning-case-flow" data-case-flow data-start-step="0">
         <section class="case-hero">
+          <div class="case-project-logo" aria-hidden="true">
+            <img src="assets/project-logo-progressing-option-3.png" alt="">
+          </div>
           <div>
             <p class="eyebrow">Case Study</p>
             <h2>Progressing</h2>
           </div>
-          <p>A sentence-building card game where students use visual structure, repetition, and gameplay to practice present progressive grammar.</p>
+          <div class="case-map" aria-label="Progressing case study vector flow">
+            <img class="case-flow-art" src="assets/case-flow-progressing.png" alt="">
+            <span class="case-node-glow" data-flow-x="7.7" data-flow-y="52.4" data-case-glow="problem"></span>
+            <span class="case-node-glow" data-flow-x="16.9" data-flow-y="52.2" data-case-glow="idea"></span>
+            <span class="case-node-glow" data-flow-x="29.1" data-flow-y="52.2" data-case-glow="built"></span>
+            <span class="case-node-glow" data-flow-x="41.4" data-flow-y="52.3" data-case-glow="practice"></span>
+            <span class="case-node-glow" data-flow-x="52.8" data-flow-y="52.8" data-case-glow="worked"></span>
+            <span class="case-node-glow" data-flow-x="65.5" data-flow-y="52.4" data-case-glow="hard"></span>
+            <span class="case-node-glow" data-flow-x="75.7" data-flow-y="53.1" data-case-glow="not-yet"></span>
+            <span class="case-node-glow" data-flow-x="85.4" data-flow-y="54.4" data-case-glow="learned"></span>
+            <span class="case-node-glow" data-flow-x="94.9" data-flow-y="52.8" data-case-glow="outcome"></span>
+            <button class="case-node is-left" type="button" data-flow-x="7.7" data-flow-y="52.4" data-case-node="problem">Problem</button>
+            <button class="case-node" type="button" data-flow-x="16.9" data-flow-y="52.2" data-case-node="idea">Idea</button>
+            <button class="case-node is-below" type="button" data-flow-x="29.1" data-flow-y="52.2" data-case-node="built">Built</button>
+            <button class="case-node" type="button" data-flow-x="41.4" data-flow-y="52.3" data-case-node="practice">Looks Like</button>
+            <button class="case-node is-below" type="button" data-flow-x="52.8" data-flow-y="52.8" data-case-node="worked">What Works</button>
+            <button class="case-node" type="button" data-flow-x="65.5" data-flow-y="52.4" data-case-node="hard">Challenges</button>
+            <button class="case-node is-below" type="button" data-flow-x="75.9" data-flow-y="53.1" data-case-node="not-yet">In the Works</button>
+            <button class="case-node" type="button" data-flow-x="85.4" data-flow-y="54.4" data-case-node="learned">Takeaways</button>
+            <button class="case-node is-right" type="button" data-flow-x="94.9" data-flow-y="52.8" data-case-node="outcome">Outcomes</button>
+          </div>
         </section>
         <div class="case-body">
-          <section class="case-section">
-            <h3>Problem</h3>
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Vector flow</button>
+            <div class="case-flow-content">
+          <section class="case-section case-text-only active" data-case-step="problem">
+            <h3>The Problem</h3>
             <div>
-              <p>Grammar is often taught through drills and explanations. For many students, that feels unnatural and is difficult to retain.</p>
+              <p>Grammar is often taught through drills and explanations.</p>
+              <p>For many students, that feels unnatural and is difficult to retain.</p>
+              <p>This results in:</p>
               <ul>
-                <li>Students do not get enough meaningful repetition</li>
-                <li>When they do, it often feels disengaging</li>
-                <li>Students struggle to use English grammar correctly in real-life conversation</li>
+                <li>Students do not get enough meaningful repetition.</li>
+                <li>When they do, it often feels disengaging.</li>
+                <li>Students struggle to use English grammar correctly in real life.</li>
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Idea</h3>
+          <section class="case-section case-text-only" data-case-step="idea">
+            <h3>The Idea</h3>
             <div>
-              <p>Instead of explaining grammar, I wanted students to use it naturally. I focused on present progressive because it is common, confusing for ESL students, and structured enough to turn into a repeatable system.</p>
+              <p>Instead of explaining grammar, I wanted students to use it naturally.</p>
+              <p>I focused on present progressive (<em>"I am learning"</em>) because it is common, confusing for ESL students, and structured enough to turn into a repeatable system.</p>
+              <p>The goal was to create a game where:</p>
+              <ul>
+                <li>Repetition happens naturally.</li>
+                <li>Sentence structure is visible.</li>
+                <li>Students learn through use instead of memorization.</li>
+              </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Built</h3>
+          <section class="case-section" data-case-step="built">
+            <h3>How I Built It</h3>
             <div>
-              <p>I started with a simple sentence structure: subject, "to be", verb, "-ing" form, and time expression. Then I created roughly 20 sentences and broke them into modular cards.</p>
-              <p>Cards are color-coded by role, each card includes a visual, and guide cards show correct sentence structure. This allowed students to build correctly before fully understanding grammar rules.</p>
-              <div class="media-grid">
-                <figure class="media-item contain">
-                  <img src="Progressing/Progressing Sentence Guide Card.png" alt="Progressing positive sentence guide card">
+              <p>I started with a simple sentence structure:</p>
+              <ul>
+                <li>Subject</li>
+                <li>"To be" (am/is/are)</li>
+                <li>Verb</li>
+                <li>"-ing" form</li>
+                <li>Time expression</li>
+              </ul>
+              <p class="after-list-break">Then I created roughly 20 sentences and broke them into modular cards.</p>
+              <figure class="media-item contain card-set-landscape">
+                <img src="Progressing/Progressing Sentence Example.png" alt="Progressing complete sentence card sequence">
+                <figcaption>A completed sentence sequence built from color-coded cards, making grammar roles visible during play.</figcaption>
+              </figure>
+              <div class="case-split case-guide-layout">
+                <div>
+                  <p>To make the system easier to use:</p>
+                  <ul>
+                    <li>Cards are color-coded by role.</li>
+                    <li>Each card includes a visual.</li>
+                    <li>Guide cards show correct sentence structure.</li>
+                  </ul>
+                  <p class="after-list-break">This allowed students to build correctly before fully understanding grammar rules.</p>
+                </div>
+                <figure class="media-item contain case-guide-card">
+                  <img src="Progressing/Progressing Sentence Guide Card.png" alt="Progressing sentence guide card">
                   <figcaption>Guide card showing the structure players use to build positive sentences independently.</figcaption>
                 </figure>
-                <figure class="media-item contain">
-                  <img src="Progressing/Progressing Sentence Example.png" alt="Progressing sentence example">
-                  <figcaption>A completed sentence sequence built from color-coded cards, making grammar roles visible during play.</figcaption>
+              </div>
+              <div class="case-split reverse case-ability-row case-double-trouble-row">
+                <figure class="media-item contain case-ability-card">
+                  <img src="Progressing/13.png" alt="Double Trouble ability card">
+                  <figcaption>Ability card that rewards completed sentences with an extra point, adding strategy to grammar practice.</figcaption>
                 </figure>
+                <div>
+                  <p>To make gameplay engaging, I added:</p>
+                  <ul>
+                    <li>Turn-based gameplay.</li>
+                    <li>Multiple action types.</li>
+                    <li>Ability cards that let players disrupt each other or gain advantages.</li>
+                  </ul>
+                  <p class="after-list-break">I also added a spelling layer where correctly modifying verbs earned bonus actions.</p>
+                  <p>Most of this was refined through repeated testing.</p>
+                </div>
               </div>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Practice</h3>
+          <section class="case-section" data-case-step="practice">
+            <h3>What It Looks Like</h3>
             <div>
-              <p>The goal is to be the first player to score 5 points. Players earn points by completing sentences correctly while slowing their opponent down. Over multiple turns, players build sentences step by step.</p>
-              <p>To make gameplay engaging, I added turn-based gameplay, multiple action types, ability cards that let players disrupt each other or gain advantages, and a spelling layer where correctly modifying verbs earned bonus actions.</p>
-              <p>Players can steal cards, pull from discard piles, and earn double points. This creates a balance between building correctly, managing your hand, and reacting to your opponent.</p>
-              <div class="media-grid">
-                <figure class="media-item contain">
-                  <img src="Progressing/13.png" alt="Progressing extra point ability card">
-                  <figcaption>Ability card that rewards a completed sentence with an extra point, adding strategy to grammar practice.</figcaption>
-                </figure>
-                <figure class="media-item contain">
-                  <img src="Progressing/15.png" alt="Progressing recover from discard pile ability card">
+              <div class="case-split case-ability-row">
+                <div>
+                  <p>The goal is to be the first player to score 5 points.</p>
+                  <p>Players earn points by completing sentences correctly while slowing their opponent down.</p>
+                  <p>Over multiple turns, players build sentences step by step:</p>
+                  <ul>
+                    <li>"She"</li>
+                    <li>"is"</li>
+                    <li>"walk"</li>
+                    <li>"ing"</li>
+                    <li>"now"</li>
+                  </ul>
+                </div>
+                <figure class="media-item contain case-ability-card">
+                  <img src="Progressing/15.png" alt="Dumpster Dive ability card">
                   <figcaption>Ability card that lets players recover a used card, giving them more options while building sentences.</figcaption>
                 </figure>
-                <figure class="media-item contain">
-                  <img src="Progressing/14.png" alt="Progressing steal card ability card">
+              </div>
+              <div class="case-split reverse case-ability-row">
+                <figure class="media-item contain case-ability-card">
+                  <img src="Progressing/14.png" alt="Red-Handed ability card">
                   <figcaption>Ability card that lets a player steal from an opponent, adding interaction and tension.</figcaption>
                 </figure>
+                <div>
+                  <p>Players can also:</p>
+                  <ul>
+                    <li>Steal cards.</li>
+                    <li>Pull from discard piles.</li>
+                    <li>Earn double points.</li>
+                  </ul><br>
+                  <p>This creates a balance between:</p>
+                  <ul>
+                    <li>Building correctly.</li>
+                    <li>Managing your hand.</li>
+                    <li>Reacting to your opponent.</li>
+                  </ul>
+                </div>
               </div>
+              <p>Over time, students begin to internalize the correct grammatical structure without relying on explanations.</p>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Worked</h3>
+          <section class="case-section" data-case-step="worked">
+            <h3>What Works</h3>
             <div>
-              <ul>
-                <li>Students formed correct sentences more independently</li>
-                <li>Repetition felt natural</li>
-                <li>Participation increased</li>
-                <li>Students began self-correcting</li>
+              <ul class="case-two-column-list">
+                <li>Students form correct sentences more independently.</li>
+                <li>Repetition feels natural.</li>
+                <li>Participation increases.</li>
+                <li>Students begin self-correcting.</li>
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Hard</h3>
+          <section class="case-section" data-case-step="hard">
+            <h3>Challenges and Refinements</h3>
             <div>
               <ul>
                 <li><strong>Complexity vs usability:</strong> every new mechanic made the game more interesting and gave players more freedom, but also increased complexity and drifted away from the original goal. Finding the right balance required repeated testing and simplification.</li>
@@ -2352,39 +4214,48 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Not Yet</h3>
+          <section class="case-section" data-case-step="not-yet">
+            <h3>What's In the Works</h3>
+            <div>
+              <p>I plan to build a fully digital version of this game.</p>
+              <p>I will also test expansions into more complex sentence structures and a fuller tense system, including simpler grammar systems such as "to be" and "to have".</p>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="learned">
+            <h3>My Takeaways</h3>
             <div>
               <ul>
-                <li>Expand into more complex sentence structures</li>
-                <li>Build a full tense system</li>
-                <li>Create a digital version</li>
+                <li>Simplicity is usually stronger than feature richness.</li>
+                <li>Motivation changes how repetition feels.</li>
+                <li>Interaction is just as important as content.</li>
+                <li>Systems need natural endpoints.</li>
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Learned</h3>
+          <section class="case-section" data-case-step="outcome">
+            <h3>The Outcomes</h3>
             <div>
+              <p>This became a reliable tool for grammar practice:</p>
               <ul>
-                <li>Simplicity is usually stronger than feature richness</li>
-                <li>Motivation changes how repetition feels</li>
-                <li>Interaction is just as important as content</li>
-                <li>Systems need natural endpoints</li>
+                <li>Stronger sentence accuracy and better retention.</li>
+                <li>More confidence using grammar in conversation.</li>
+                <li>Higher engagement than traditional grammar exercises.</li>
               </ul>
             </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close case study">x</button>
           </section>
-          <section class="case-section">
-            <h3>Outcome</h3>
-            <div>
-              <p>This became a reliable tool for grammar practice: stronger sentence accuracy and better retention, more confidence using grammar in conversation, and higher engagement than traditional grammar exercises.</p>
             </div>
-          </section>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 9</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="modal" id="recall-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="recall-modal-title">
+  <div class="modal learning-case-modal" id="recall-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="recall-modal-title">
     <div class="modal-panel">
       <div class="modal-top">
         <div class="modal-title">
@@ -2392,74 +4263,131 @@
         </div>
         <button class="close-modal" type="button" aria-label="Close case study">x</button>
       </div>
-      <div class="modal-content">
+      <div class="modal-content learning-case-flow" data-case-flow data-start-step="0">
         <section class="case-hero">
+          <div class="case-project-logo" aria-hidden="true">
+            <img src="assets/recall logo.png" alt="">
+          </div>
           <div>
             <p class="eyebrow">Case Study</p>
             <h2>Re-Call</h2>
           </div>
-          <p>A vocabulary game where players build a growing spoken sequence, moving from recognition toward active recall.</p>
+          <div class="case-map" aria-label="Re-Call case study vector flow">
+            <img class="case-flow-art" src="assets/case-flow-recall.png" alt="">
+            <span class="case-node-glow" data-flow-x="8.4" data-flow-y="41.2" data-case-glow="problem"></span>
+            <span class="case-node-glow" data-flow-x="19.2" data-flow-y="44.2" data-case-glow="idea"></span>
+            <span class="case-node-glow" data-flow-x="30.0" data-flow-y="48.0" data-case-glow="built"></span>
+            <span class="case-node-glow" data-flow-x="40.7" data-flow-y="50.0" data-case-glow="practice"></span>
+            <span class="case-node-glow" data-flow-x="51.3" data-flow-y="51.0" data-case-glow="worked"></span>
+            <span class="case-node-glow" data-flow-x="61.7" data-flow-y="52.8" data-case-glow="hard"></span>
+            <span class="case-node-glow" data-flow-x="72.9" data-flow-y="55.6" data-case-glow="not-yet" style="--glow-offset-x: -1mm;"></span>
+            <span class="case-node-glow" data-flow-x="82.6" data-flow-y="56.6" data-case-glow="learned"></span>
+            <span class="case-node-glow" data-flow-x="91.6" data-flow-y="59.8" data-case-glow="outcome"></span>
+            <button class="case-node is-left" type="button" data-flow-x="8.4" data-flow-y="41.2" data-case-node="problem">Problem</button>
+            <button class="case-node" type="button" data-flow-x="19.2" data-flow-y="44.2" data-case-node="idea">Idea</button>
+            <button class="case-node is-below" type="button" data-flow-x="30.0" data-flow-y="48.0" data-case-node="built">Built</button>
+            <button class="case-node" type="button" data-flow-x="41.5" data-flow-y="50.9" data-case-node="practice">Looks Like</button>
+            <button class="case-node is-below" type="button" data-flow-x="51.3" data-flow-y="51.0" data-case-node="worked">What Works</button>
+            <button class="case-node" type="button" data-flow-x="61.7" data-flow-y="52.8" data-case-node="hard">Challenges</button>
+            <button class="case-node is-below" type="button" data-flow-x="74.2" data-flow-y="57.0" data-case-node="not-yet">In the Works</button>
+            <button class="case-node" type="button" data-flow-x="82.6" data-flow-y="56.6" data-case-node="learned">Takeaways</button>
+            <button class="case-node is-right" type="button" data-flow-x="91.6" data-flow-y="59.8" data-case-node="outcome">Outcomes</button>
+          </div>
         </section>
         <div class="case-body">
-          <section class="case-section">
-            <h3>Problem</h3>
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Vector flow</button>
+            <div class="case-flow-content">
+          <section class="case-section case-text-only active" data-case-step="problem">
+            <h3>The Problem</h3>
             <div>
-              <p>Most vocabulary practice focuses on recognition: matching words to images, translation, or multiple-choice exercises. This helps in the short term, but students often struggle to quickly recall vocabulary during real conversations.</p>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Idea</h3>
-            <div>
-              <p>Turn vocabulary practice into a competitive memory game. Instead of matching pairs, players build a growing chain they need to remember and repeat. Everything stays within one category, which helps students build stronger connections between words.</p>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Built</h3>
-            <div>
-              <p>The system includes vocabulary cards with visuals, a growing sequence, and turn-based gameplay. I also added second chance cards and a visual legend.</p>
-              <p>The platform handles visual interactions, while speaking happens through live conversation.</p>
-              <div class="media-grid">
-                <figure class="media-item">
-                  <video src="Re-call/Re-call - Second Chance - Final .mp4" controls preload="metadata"></video>
-                  <figcaption>A player receives a second chance card and later uses it to recover from a mistake, keeping the round forgiving without removing consequences.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="Re-call/Re-call Legend Final.mp4" controls preload="metadata"></video>
-                  <figcaption>The visual legend opens on demand, giving players a quick reference for the vocabulary items in the round.</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Practice</h3>
-            <div>
-              <p>The goal is to be the last player remaining. One player starts: "I would like some water." The next player continues: "I would like some water and sauce." The sequence continues growing until someone makes a mistake.</p>
-              <p>A single word might be repeated more than ten times in one round. Games usually last around 10 to 15 minutes.</p>
-              <div class="media-grid">
-                <figure class="media-item">
-                  <video src="Re-call/Re-call hero final.mp4" controls preload="metadata"></video>
-                  <figcaption>Players take turns verbally recalling and expanding a growing vocabulary sequence.</figcaption>
-                </figure>
-                <figure class="media-item">
-                  <video src="Re-call/Re-call - WinLose - Final.mp4" controls preload="metadata"></video>
-                  <figcaption>Mistake challenge flow showing how the game validates an incorrect sequence and resolves the round.</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-          <section class="case-section">
-            <h3>Worked</h3>
-            <div>
+              <p>Most vocabulary practice focuses on recognition:</p>
               <ul>
-                <li>High repetition without repetitive feeling</li>
-                <li>Better recall than simple matching games</li>
-                <li>Students stayed engaged</li>
-                <li>The visual legend helped weaker learners participate</li>
+                <li>Matching words to images.</li>
+                <li>Translation.</li>
+                <li>Multiple-choice exercises.</li>
+              </ul><br>
+<p>This helps in the short term, but students often struggle to quickly recall vocabulary during real conversations.</p>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="idea">
+            <h3>The Idea</h3>
+            <div>
+              <p>Turn vocabulary practice into a competitive memory game.</p>
+              <p>Instead of matching pairs, players build a growing chain they need to remember and repeat.</p>
+              <p>Everything stays within one category, for example food, which helps students build stronger connections between words.</p>
+              <p>The goal is simple:</p>
+              <ul>
+                <li>Remember all items in the sequence in the correct order.</li>
+                <li>Add something new.</li>
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Hard</h3>
+          <section class="case-section" data-case-step="built">
+            <h3>How I Built It</h3>
+            <div>
+              <p>The system includes:</p>
+              <ul>
+                <li>Vocabulary cards with visuals.</li>
+                <li>A growing sequence.</li>
+                <li>Turn-based gameplay.</li>
+              </ul><br>
+<p>I also added:</p>
+              <h4>Second chance cards</h4>
+              <p>These are shuffled into the deck and allow players to recover from a mistake when used.</p>
+              <figure class="media-item case-feature-media">
+                <video src="Re-call/Re-call - Second Chance - Final .mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>A player receives a second chance card and later uses it to recover from a mistake, keeping the game forgiving without removing consequences.</figcaption>
+              </figure>
+              <h4>Visual legend</h4>
+              <p>This shows all possible vocabulary items and helps students learn new words.</p>
+              <figure class="media-item case-feature-media">
+                <video src="Re-call/Re-call Legend Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>The visual legend opens on demand, giving players a quick reference for the vocabulary items in the round.</figcaption>
+              </figure>
+              <p>The platform handles visual interactions, while speaking happens through live conversation.</p>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="practice">
+            <h3>What It Looks Like</h3>
+            <div>
+              <figure class="media-item case-feature-media">
+                <video src="Re-call/Re-call hero final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>Players take turns verbally recalling and expanding a growing vocabulary sequence.</figcaption>
+              </figure>
+              <p>The goal is to be the last player remaining.</p>
+              <p>One player starts:</p>
+              <p class="case-quote-line">"I would like some water."</p>
+              <p>The next player continues:</p>
+              <p class="case-quote-line">"I would like some water and sauce."</p>
+              <p>The sequence continues growing until someone makes a mistake.</p>
+              <p>This creates:</p>
+              <ul>
+                <li>Repeated vocabulary exposure.</li>
+                <li>Active recall.</li>
+                <li>Constant verbal participation.</li>
+              </ul><br>
+<p>A single word might be repeated 10+ times in one round.</p>
+              <p>Games usually last around 10-15 minutes.</p>
+              <figure class="media-item case-feature-media">
+                <video src="Re-call/Re-call - WinLose - Final.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                <figcaption>End-of-round mistake check showing how players can challenge an incorrect sequence and end the round.</figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="worked">
+            <h3>What Works</h3>
+            <div>
+              <ul class="case-two-column-list">
+                <li>High repetition without a repetitive feeling.</li>
+                <li>Better recall than simple matching games.</li>
+                <li>Students stay engaged.</li>
+                <li>The visual legend helps weaker learners participate.</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section" data-case-step="hard">
+            <h3>Challenges and Refinements</h3>
             <div>
               <ul>
                 <li><strong>Sequence accuracy:</strong> because the game relies on a growing sequence, even small inconsistencies in card order could disrupt gameplay. Maintaining an accurate game state required careful tracking of revealed cards and turn progression.</li>
@@ -2468,33 +4396,294 @@
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Not Yet</h3>
+          <section class="case-section" data-case-step="not-yet">
+            <h3>What's In the Works</h3>
             <div>
-              <ul>
-                <li>Expand with more semantic categories</li>
-                <li>Create a fully synchronized online multiplayer version</li>
-              </ul>
-              <p>The current system is designed for players to interact through a shared interface and handle validation naturally, so extra systems are not necessary yet.</p>
+              <p>I am going to build a fully synchronized online multiplayer version.</p>
+              <p>I will also expand the game with more semantic categories, such as common restaurant dishes, household nouns, and everyday items.</p>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Learned</h3>
+          <section class="case-section" data-case-step="learned">
+            <h3>My Takeaways</h3>
             <div>
               <ul>
-                <li>Interface layout becomes easier when the game state is clearly defined</li>
-                <li>Turn changes, timing, and feedback need to be mapped as part of the design</li>
-                <li>Some physical learning activities become stronger when supported digitally</li>
-                <li>Animation works best when it clarifies what just happened and what happens next</li>
+                <li>Interface layout becomes easier when the game state is clearly defined.</li>
+                <li>Turn changes, timing, and feedback need to be mapped as part of the design.</li>
+                <li>Some physical learning activities become stronger when supported digitally.</li>
+                <li>Animation works best when it clarifies what just happened and what happens next.</li>
               </ul>
             </div>
           </section>
-          <section class="case-section">
-            <h3>Outcome</h3>
+          <section class="case-section" data-case-step="outcome">
+            <h3>The Outcomes</h3>
             <div>
-              <p>This became a reliable tool for learning and practicing vocabulary, speaking English in a structured way, and creating active participation and engagement.</p>
+              <p>This became a reliable, fun, and effective way to:</p>
+              <ul>
+                <li>Learn and practice vocabulary.</li>
+                <li>Speak English in a structured way.</li>
+                <li>Create active participation and engagement.</li>
+              </ul>
+            </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close case study">x</button>
+          </section>
+            </div>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 9</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal learning-case-modal research-flow-modal" id="research-mindfulness-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="research-mindfulness-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="research-mindfulness-title">Brief Mindfulness Intervention and Access to Internal States</b>
+          <span>Academic research</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close research summary">x</button>
+      </div>
+      <div class="modal-content learning-case-flow research-case-flow" data-case-flow data-start-step="0">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Research Summary</p>
+            <h2>Brief Mindfulness Intervention and Access to Internal States</h2>
+            <div class="case-detail-head">
+              <h3 class="case-detail-label" data-case-label>Research Question</h3>
+            </div>
+          </div>
+          <div class="case-map research-map" aria-label="Academic research summary flow">
+            <img class="case-flow-art" src="assets/research-flow-frameless-1.png" alt="">
+            <span class="case-node-glow" data-flow-x="16.5" data-flow-y="49.0" data-case-glow="question"></span>
+            <span class="case-node-glow" data-flow-x="39.4" data-flow-y="51.1" data-case-glow="role"></span>
+            <span class="case-node-glow" data-flow-x="60.9" data-flow-y="50.6" data-case-glow="method"></span>
+            <span class="case-node-glow" data-flow-x="82.5" data-flow-y="50.7" data-case-glow="findings"></span>
+            <button class="case-node" type="button" data-flow-x="16.5" data-flow-y="49.0" data-case-node="question">Question</button>
+            <button class="case-node is-below" type="button" data-flow-x="39.4" data-flow-y="51.1" data-case-node="role">Role</button>
+            <button class="case-node" type="button" data-flow-x="60.9" data-flow-y="50.6" data-case-node="method">Method</button>
+            <button class="case-node is-below" type="button" data-flow-x="82.5" data-flow-y="51.7" data-case-node="findings">Findings</button>
+          </div>
+        </section>
+        <div class="case-body">
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Research flow</button>
+            <div class="case-flow-content">
+          <section class="case-section case-text-only active" data-case-step="question">
+            <h3>Research Question</h3>
+            <div>
+              <p>Difficulties accessing and interpreting internal states are thought to contribute to obsessive-compulsive symptoms and related difficulties in self-regulation. This study investigated whether a brief mindfulness-based intervention could temporarily improve access to internal bodily states in individuals with elevated obsessive-compulsive tendencies.</p>
             </div>
           </section>
+          <section class="case-section case-text-only" data-case-step="role">
+            <h3>My Role</h3>
+            <div>
+              <ul>
+                <li>Lead researcher</li>
+                <li>Study design and implementation</li>
+                <li>Participant recruitment and coordination</li>
+                <li>Statistical analysis</li>
+                <li>Lead author</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="method">
+            <h3>Method</h3>
+            <div>
+              <p>63 students with elevated obsessive-compulsive symptoms were randomly assigned to either a brief mindfulness meditation condition or a neutral audio condition.</p>
+              <p>Participants then completed a muscle-tension reproduction task designed to measure access to internal bodily states.</p>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="findings">
+            <h3>Findings &amp; Conclusions</h3>
+            <div>
+              <ul>
+                <li>Participants who completed the mindfulness intervention demonstrated more accurate muscle-tension reproduction</li>
+                <li>The intervention improved access to internal bodily states compared to the control condition</li>
+                <li>Even a brief mindfulness exercise produced measurable cognitive effects</li>
+              </ul>
+              <p>The findings suggest that access to internal states can be temporarily improved through mindfulness-based interventions and support theories linking mindfulness to improved self-awareness and self-regulation.</p>
+              <p class="research-publication">Publication: In press</p>
+            </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close research summary">x</button>
+          </section>
+            </div>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 4</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal learning-case-modal research-flow-modal" id="research-inner-speech-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="research-inner-speech-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="research-inner-speech-title">Positive Inner Speech Training and Performance Anxiety</b>
+          <span>Academic research</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close research summary">x</button>
+      </div>
+      <div class="modal-content learning-case-flow research-case-flow" data-case-flow data-start-step="0">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Research Summary</p>
+            <h2>Positive Inner Speech Training and Performance Anxiety</h2>
+            <div class="case-detail-head">
+              <h3 class="case-detail-label" data-case-label>Research Question</h3>
+            </div>
+          </div>
+          <div class="case-map research-map" aria-label="Academic research summary flow">
+            <img class="case-flow-art" src="assets/research-flow-frameless-2.png" alt="">
+            <span class="case-node-glow" data-flow-x="19.1" data-flow-y="38.7" data-case-glow="question"></span>
+            <span class="case-node-glow" data-flow-x="42.5" data-flow-y="52.8" data-case-glow="role"></span>
+            <span class="case-node-glow" data-flow-x="64.2" data-flow-y="66.5" data-case-glow="method"></span>
+            <span class="case-node-glow" data-flow-x="82.6" data-flow-y="59.6" data-case-glow="findings"></span>
+            <button class="case-node" type="button" data-flow-x="19.1" data-flow-y="38.7" data-case-node="question">Question</button>
+            <button class="case-node is-below" type="button" data-flow-x="42.5" data-flow-y="52.8" data-case-node="role">Role</button>
+            <button class="case-node" type="button" data-flow-x="64.2" data-flow-y="66.5" data-case-node="method">Method</button>
+            <button class="case-node is-below" type="button" data-flow-x="82.6" data-flow-y="59.6" data-case-node="findings">Findings</button>
+          </div>
+        </section>
+        <div class="case-body">
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Research flow</button>
+            <div class="case-flow-content">
+          <section class="case-section case-text-only active" data-case-step="question">
+            <h3>Research Question</h3>
+            <div>
+              <p>Many students experience anxiety before academic exams, which can negatively affect performance. While spontaneous inner speech has been linked to emotional regulation, it was unclear whether deliberately training positive inner speech could reduce exam-related performance anxiety.</p>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="role">
+            <h3>My Role</h3>
+            <div>
+              <ul>
+                <li>Lead researcher</li>
+                <li>Study design and implementation</li>
+                <li>Participant recruitment and coordination</li>
+                <li>Statistical analysis</li>
+                <li>Lead author</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="method">
+            <h3>Method</h3>
+            <div>
+              <p>101 students completed measures of performance anxiety and inner speech before being randomly assigned to either a positive inner speech training condition or a neutral control condition.</p>
+              <p>Participants completed three consecutive days of training before repeating the anxiety assessment the evening before major exams.</p>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="findings">
+            <h3>Findings &amp; Conclusions</h3>
+            <div>
+              <ul>
+                <li>Positive inner speech training reduced cognitive anxiety</li>
+                <li>Positive inner speech training increased self-confidence</li>
+                <li>Neutral inner speech training produced substantially smaller changes</li>
+                <li>Training effectiveness was predicted by participants' existing inner speech habits</li>
+              </ul>
+              <p>The findings suggest that positive inner speech training may be an effective intervention for reducing academic performance anxiety and that individual differences in spontaneous inner speech influence intervention outcomes.</p>
+              <p class="research-publication">Publication: In press</p>
+            </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close research summary">x</button>
+          </section>
+            </div>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 4</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal learning-case-modal research-flow-modal" id="research-visq-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="research-visq-title">
+    <div class="modal-panel">
+      <div class="modal-top">
+        <div class="modal-title">
+          <b id="research-visq-title">The Hebrew VISQ-R: Measuring Inner Speech in Hebrew Speakers</b>
+          <span>Academic research</span>
+        </div>
+        <button class="close-modal" type="button" aria-label="Close research summary">x</button>
+      </div>
+      <div class="modal-content learning-case-flow research-case-flow" data-case-flow data-start-step="0">
+        <section class="case-hero">
+          <div>
+            <p class="eyebrow">Research Summary</p>
+            <h2>The Hebrew VISQ-R: Measuring Inner Speech in Hebrew Speakers</h2>
+            <div class="case-detail-head">
+              <h3 class="case-detail-label" data-case-label>Research Question</h3>
+            </div>
+          </div>
+          <div class="case-map research-map" aria-label="Academic research summary flow">
+            <img class="case-flow-art" src="assets/research-flow-frameless-3.png" alt="">
+            <span class="case-node-glow" data-flow-x="16.4" data-flow-y="67.6" data-case-glow="question"></span>
+            <span class="case-node-glow" data-flow-x="39.8" data-flow-y="58.2" data-case-glow="role"></span>
+            <span class="case-node-glow" data-flow-x="62.2" data-flow-y="48.0" data-case-glow="method"></span>
+            <span class="case-node-glow" data-flow-x="83.0" data-flow-y="35.9" data-case-glow="findings"></span>
+            <button class="case-node" type="button" data-flow-x="15.6" data-flow-y="66.8" data-case-node="question">Question</button>
+            <button class="case-node is-below" type="button" data-flow-x="39.8" data-flow-y="59.9" data-case-node="role">Role</button>
+            <button class="case-node" type="button" data-flow-x="62.2" data-flow-y="48.0" data-case-node="method">Method</button>
+            <button class="case-node is-below" type="button" data-flow-x="83.5" data-flow-y="38.6" data-case-node="findings">Findings</button>
+          </div>
+        </section>
+        <div class="case-body">
+          <div class="case-detail">
+            <button class="case-map-return" type="button" data-case-map-return>Research flow</button>
+            <div class="case-flow-content">
+          <section class="case-section case-text-only active" data-case-step="question">
+            <h3>Research Question</h3>
+            <div>
+              <p>Inner speech plays an important role in self-regulation, planning, and reflection, yet most tools used to measure it were developed for English-speaking populations. Without a validated Hebrew version of the Varieties of Inner Speech Questionnaire-Revised, researchers lacked a reliable way to investigate inner speech among Hebrew speakers and compare findings across cultures.</p>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="role">
+            <h3>My Role</h3>
+            <div>
+              <ul>
+                <li>Assisted with questionnaire translation</li>
+                <li>Assisted with participant recruitment and data collection</li>
+                <li>Conducted statistical analyses</li>
+              </ul>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="method">
+            <h3>Method</h3>
+            <div>
+              <p>The project focused on adapting and validating a Hebrew version of the VISQ-R. Data were collected from 406 participants, with a subset completing additional executive-function measures.</p>
+              <p>The study evaluated factor structure using Confirmatory Factor Analysis, internal reliability across all subscales, and relationships between inner speech and executive functioning.</p>
+            </div>
+          </section>
+          <section class="case-section case-text-only" data-case-step="findings">
+            <h3>Findings &amp; Conclusions</h3>
+            <div>
+              <ul>
+                <li>The Hebrew VISQ-R successfully replicated the original five-factor structure</li>
+                <li>All subscales demonstrated acceptable reliability</li>
+                <li>Several forms of inner speech were associated with executive-function measures</li>
+                <li>The questionnaire demonstrated good convergent and divergent validity</li>
+              </ul>
+              <p>The findings support the Hebrew VISQ-R as a reliable research instrument and provide further evidence linking specific varieties of inner speech to executive functioning.</p>
+              <p class="research-publication">Publication: Frontiers in Psychology (2022), "The Psychometric Properties of the Varieties of Inner Speech Questionnaire-Revised in Hebrew"</p>
+            </div>
+            <button class="close-modal case-end-close" type="button" aria-label="Close research summary">x</button>
+          </section>
+            </div>
+            <div class="case-flow-controls">
+              <button class="case-flow-arrow" type="button" data-case-prev aria-label="Previous section">&lt;</button>
+              <span class="case-flow-counter" data-case-counter>1 / 4</span>
+              <button class="case-flow-arrow" type="button" data-case-next aria-label="Next section">&gt;</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2515,7 +4704,10 @@
     const introStoryLinks = document.querySelectorAll("[data-intro-story]");
     const projectJumpLinks = document.querySelectorAll("[data-projects-jump]");
     const internalSectionLinks = document.querySelectorAll('a[href^="#"]');
+    const copyEmailButton = document.querySelector(".copy-email");
+    const pipelineCards = document.querySelectorAll(".pipeline-card");
     const storyIndicator = document.querySelector(".story-scroll-indicator");
+    let copyEmailResetTimer;
     const greetingLines = [
       "Hi,",
       "Welcome to my portfolio."
@@ -2688,6 +4880,13 @@
 
     function scrollToInternalTarget(target, behavior = reducedMotion ? "auto" : "smooth") {
       if (!target) return;
+      if (target.id === "next") {
+        window.scrollTo({
+          top: Math.max(0, document.documentElement.scrollHeight - window.innerHeight),
+          behavior
+        });
+        return;
+      }
       const navHeight = siteNav ? siteNav.getBoundingClientRect().height : 0;
       const top = target === openingSection || target.id === "top"
         ? 0
@@ -2695,8 +4894,10 @@
       const sectionOffsets = {
         gophish: Math.round(1 * 37.795),
         ihave: Math.round(1 * 37.795),
-        progressing: Math.round(1 * 37.795) + 120,
-        recall: Math.round(1 * 37.795)
+        progressing: Math.round(1.5 * 37.795),
+        recall: Math.round(1 * 37.795),
+        pipeline: Math.round(1 * 37.795),
+        research: Math.round(1.5 * 37.795)
       };
       const adjustedTop = top + (sectionOffsets[target.id] || 0);
       window.scrollTo({
@@ -2713,6 +4914,60 @@
       event.preventDefault();
       if (event.currentTarget.matches("[data-intro-story], [data-projects-jump]")) return;
       scrollToInternalTarget(target);
+    }
+
+    function copyTextFallback(text) {
+      const field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.left = "-9999px";
+      field.style.top = "0";
+      document.body.appendChild(field);
+      field.select();
+      let copied = false;
+      try {
+        copied = document.execCommand("copy");
+      } catch (error) {
+        copied = false;
+      }
+      field.remove();
+      return copied;
+    }
+
+    function resetCopyEmailNote() {
+      if (!copyEmailButton) return;
+      const note = copyEmailButton.querySelector(".copy-email-note");
+      if (note) note.textContent = "Copy adaptive.dean@gmail.com";
+      copyEmailButton.classList.remove("copied");
+    }
+
+    async function handleCopyEmail(event) {
+      if (!copyEmailButton) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const email = copyEmailButton.dataset.email || "";
+      if (!email) return;
+      let copied = false;
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(email);
+          copied = true;
+        } catch (error) {
+          copied = false;
+        }
+      }
+      if (!copied) {
+        copied = copyTextFallback(email);
+      }
+      const note = copyEmailButton.querySelector(".copy-email-note");
+      if (note) note.textContent = copied ? "Email address copied" : "Could not copy email";
+      window.clearTimeout(copyEmailResetTimer);
+      copyEmailButton.classList.add("copied");
+      copyEmailResetTimer = window.setTimeout(() => {
+        resetCopyEmailNote();
+        copyEmailButton.blur();
+      }, 1800);
     }
 
     async function runTypingLoop() {
@@ -2785,11 +5040,44 @@
     projectJumpLinks.forEach((link) => {
       link.addEventListener("click", scrollToProjects);
     });
+    if (copyEmailButton) {
+      copyEmailButton.addEventListener("click", handleCopyEmail);
+    }
+    pipelineCards.forEach((card) => {
+      card.setAttribute("aria-expanded", "false");
+      card.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = card.classList.contains("is-open");
+        pipelineCards.forEach((otherCard) => {
+          otherCard.classList.remove("is-open");
+          otherCard.setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen) {
+          card.classList.add("is-open");
+          card.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+    document.addEventListener("click", (event) => {
+      if (copyEmailButton && !event.target.closest(".copy-email")) {
+        window.clearTimeout(copyEmailResetTimer);
+        resetCopyEmailNote();
+      }
+      if (event.target.closest(".pipeline-card")) return;
+      pipelineCards.forEach((card) => {
+        card.classList.remove("is-open");
+        card.setAttribute("aria-expanded", "false");
+      });
+    });
     runTypingLoop();
 
     function initCaseFlows() {
       document.querySelectorAll("[data-case-flow]").forEach((flow) => {
         const nodes = Array.from(flow.querySelectorAll("[data-case-node]"));
+        const glows = Array.from(flow.querySelectorAll("[data-case-glow]"));
+        const flowArt = flow.querySelector(".case-flow-art");
+        const map = flow.querySelector(".case-map");
+        const pinnedItems = Array.from(flow.querySelectorAll("[data-flow-x][data-flow-y]"));
         const sections = Array.from(flow.querySelectorAll("[data-case-step]"));
         const label = flow.querySelector("[data-case-label]");
         const counter = flow.querySelector("[data-case-counter]");
@@ -2797,16 +5085,70 @@
         const next = flow.querySelector("[data-case-next]");
         const mapReturn = flow.querySelector("[data-case-map-return]");
         if (!nodes.length || !sections.length) return;
+        const isScrollCase = flow.classList.contains("learning-case-flow");
+        const scrollContainer = isScrollCase ? flow.querySelector(".case-body") : null;
 
         const labels = sections.map((section) => {
           const heading = section.querySelector("h3");
           return heading ? heading.textContent.trim() : "";
         });
         let activeIndex = -1;
+        let programmaticScroll = false;
 
-        function setActive(index) {
+        function positionFlowItems() {
+          if (!flowArt || !map || !flowArt.naturalWidth || !flowArt.naturalHeight) return;
+          const mapRect = map.getBoundingClientRect();
+          const imageRect = flowArt.getBoundingClientRect();
+          const imageRatio = flowArt.naturalWidth / flowArt.naturalHeight;
+          const boxRatio = imageRect.width / imageRect.height;
+          let renderedWidth = imageRect.width;
+          let renderedHeight = imageRect.height;
+          let renderedLeft = imageRect.left;
+          let renderedTop = imageRect.top;
+
+          if (boxRatio > imageRatio) {
+            renderedWidth = imageRect.height * imageRatio;
+            renderedLeft = imageRect.left + (imageRect.width - renderedWidth) / 2;
+          } else {
+            renderedHeight = imageRect.width / imageRatio;
+            renderedTop = imageRect.top + (imageRect.height - renderedHeight) / 2;
+          }
+
+          pinnedItems.forEach((item) => {
+            const x = parseFloat(item.dataset.flowX) / 100;
+            const y = parseFloat(item.dataset.flowY) / 100;
+            item.style.setProperty("--node-x", `${renderedLeft - mapRect.left + renderedWidth * x}px`);
+            item.style.setProperty("--node-y", `${renderedTop - mapRect.top + renderedHeight * y}px`);
+          });
+        }
+
+        function scrollToCaseSection(index) {
+          if (!isScrollCase || !scrollContainer || !sections[index]) return;
+          const sectionTop = sections[index].offsetTop;
+          programmaticScroll = true;
+          scrollContainer.scrollTo({
+            top: Math.max(0, sectionTop),
+            behavior: "smooth"
+          });
+          window.setTimeout(() => {
+            programmaticScroll = false;
+            updateActiveFromScroll();
+          }, 420);
+        }
+
+        function setHoverState(id, active) {
+          nodes.forEach((node) => {
+            node.classList.toggle("hovered", active && node.dataset.caseNode === id);
+          });
+          glows.forEach((glow) => {
+            glow.classList.toggle("hovered", active && glow.dataset.caseGlow === id);
+          });
+        }
+
+        function setActive(index, options = {}) {
           activeIndex = Math.max(0, Math.min(index, sections.length - 1));
           flow.classList.add("detail-open");
+          requestAnimationFrame(positionFlowItems);
           const activeId = sections[activeIndex].dataset.caseStep;
           sections.forEach((section) => {
             section.classList.toggle("active", section.dataset.caseStep === activeId);
@@ -2814,35 +5156,128 @@
           nodes.forEach((node) => {
             node.classList.toggle("active", node.dataset.caseNode === activeId);
           });
+          glows.forEach((glow) => {
+            glow.classList.toggle("active", glow.dataset.caseGlow === activeId);
+          });
           if (label) label.textContent = labels[activeIndex];
           if (counter) counter.textContent = `${activeIndex + 1} / ${sections.length}`;
           if (prev) prev.hidden = activeIndex === 0;
-          if (next) next.hidden = activeIndex === sections.length - 1;
+          if (next) {
+            const useClose = flow.classList.contains("learning-case-flow") && activeIndex === sections.length - 1;
+            next.hidden = activeIndex === sections.length - 1 && !useClose;
+            next.classList.toggle("case-flow-close", useClose);
+            next.setAttribute("aria-label", useClose ? "Close case study" : "Next section");
+          }
+          if (options.scroll) scrollToCaseSection(activeIndex);
         }
 
+        flow.setCaseStep = (index = 0, options = {}) => {
+          setActive(index, options);
+        };
+
         nodes.forEach((node, index) => {
-          node.addEventListener("click", () => setActive(index));
+          node.addEventListener("click", () => setActive(index, { scroll: isScrollCase }));
+          node.addEventListener("mouseenter", () => {
+            setHoverState(node.dataset.caseNode, true);
+          });
+          node.addEventListener("mouseleave", () => {
+            setHoverState(node.dataset.caseNode, false);
+          });
+          node.addEventListener("focus", () => {
+            setHoverState(node.dataset.caseNode, true);
+          });
+          node.addEventListener("blur", () => {
+            setHoverState(node.dataset.caseNode, false);
+          });
+        });
+        glows.forEach((glow) => {
+          const index = sections.findIndex((section) => section.dataset.caseStep === glow.dataset.caseGlow);
+          if (index < 0) return;
+          glow.setAttribute("role", "button");
+          glow.setAttribute("tabindex", "0");
+          glow.setAttribute("aria-label", `Jump to ${labels[index]}`);
+          glow.addEventListener("click", () => setActive(index, { scroll: isScrollCase }));
+          glow.addEventListener("mouseenter", () => setHoverState(glow.dataset.caseGlow, true));
+          glow.addEventListener("mouseleave", () => setHoverState(glow.dataset.caseGlow, false));
+          glow.addEventListener("focus", () => setHoverState(glow.dataset.caseGlow, true));
+          glow.addEventListener("blur", () => setHoverState(glow.dataset.caseGlow, false));
+          glow.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setActive(index, { scroll: isScrollCase });
+            }
+          });
         });
         if (prev) prev.addEventListener("click", () => {
-          if (activeIndex > 0) setActive(activeIndex - 1);
+          if (activeIndex > 0) setActive(activeIndex - 1, { scroll: isScrollCase });
         });
         if (next) next.addEventListener("click", () => {
-          if (activeIndex < sections.length - 1) setActive(activeIndex + 1);
+          if (next.classList.contains("case-flow-close")) {
+            const modal = flow.closest(".modal");
+            if (modal) closeModal(modal);
+            return;
+          }
+          if (activeIndex < sections.length - 1) setActive(activeIndex + 1, { scroll: isScrollCase });
         });
         if (mapReturn) {
           mapReturn.addEventListener("click", () => {
             flow.classList.remove("detail-open");
+            requestAnimationFrame(positionFlowItems);
             nodes.forEach((node) => node.classList.remove("active"));
+            glows.forEach((glow) => glow.classList.remove("active"));
             sections.forEach((section) => section.classList.remove("active"));
             activeIndex = -1;
             const firstNode = nodes[0];
             if (firstNode) firstNode.focus();
           });
         }
-        nodes.forEach((node) => node.classList.remove("active"));
-        sections.forEach((section) => section.classList.remove("active"));
-        if (prev) prev.hidden = true;
-        if (next) next.hidden = true;
+        if (flow.dataset.startStep) {
+          if (scrollContainer) scrollContainer.scrollTop = 0;
+          setActive(parseInt(flow.dataset.startStep, 10) || 0);
+        } else {
+          nodes.forEach((node) => node.classList.remove("active"));
+          glows.forEach((glow) => glow.classList.remove("active"));
+          sections.forEach((section) => section.classList.remove("active"));
+          if (prev) prev.hidden = true;
+          if (next) next.hidden = true;
+        }
+        if (flowArt) {
+          if (flowArt.complete) positionFlowItems();
+          flowArt.addEventListener("load", positionFlowItems, { once: true });
+        }
+        if (map) map.addEventListener("transitionend", positionFlowItems);
+        window.addEventListener("resize", positionFlowItems);
+        if (isScrollCase && scrollContainer) {
+          sections.forEach((section, index) => {
+            if (index >= sections.length - 1 || section.querySelector(".case-section-next")) return;
+            const button = document.createElement("button");
+            button.className = "project-next case-section-next";
+            button.type = "button";
+            button.setAttribute("aria-label", `Continue to ${labels[index + 1]}`);
+            button.addEventListener("click", () => setActive(index + 1, { scroll: true }));
+            section.appendChild(button);
+          });
+
+          let scrollTicking = false;
+          function updateActiveFromScroll() {
+            scrollTicking = false;
+            if (programmaticScroll) return;
+            const targetY = scrollContainer.getBoundingClientRect().top + 86;
+            let bestIndex = 0;
+            sections.forEach((section, index) => {
+              const rect = section.getBoundingClientRect();
+              if (rect.top <= targetY) bestIndex = index;
+            });
+            if (bestIndex !== activeIndex) setActive(bestIndex);
+          }
+
+          scrollContainer.addEventListener("scroll", () => {
+            if (scrollTicking) return;
+            scrollTicking = true;
+            requestAnimationFrame(updateActiveFromScroll);
+          });
+          requestAnimationFrame(updateActiveFromScroll);
+        }
       });
     }
 
@@ -2859,6 +5294,25 @@
       modal.classList.add("active");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
+      const scrollableContent = modal.querySelector(".case-body") || modal.querySelector(".modal-content");
+      if (scrollableContent) scrollableContent.scrollTop = 0;
+      const flow = modal.querySelector("[data-case-flow]");
+      if (flow && flow.dataset.startStep) {
+        const startStep = parseInt(flow.dataset.startStep, 10) || 0;
+        if (typeof flow.setCaseStep === "function") {
+          flow.setCaseStep(startStep, { scroll: false });
+        }
+        if (scrollableContent) {
+          scrollableContent.scrollTop = 0;
+          requestAnimationFrame(() => {
+            scrollableContent.scrollTop = 0;
+          });
+        }
+      }
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new Event("resize"));
+        requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+      });
       const closeButton = modal.querySelector(".close-modal");
       if (closeButton) closeButton.focus();
     }
@@ -2876,7 +5330,9 @@
     });
 
     modals.forEach((modal) => {
-      modal.querySelector(".close-modal").addEventListener("click", () => closeModal(modal));
+      modal.querySelectorAll(".close-modal").forEach((button) => {
+        button.addEventListener("click", () => closeModal(modal));
+      });
       modal.addEventListener("click", (event) => {
         if (event.target === modal) closeModal(modal);
       });
