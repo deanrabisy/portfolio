@@ -307,14 +307,14 @@
       z-index: 3;
     }
 
-    .copy-email img {
+    .copy-email svg {
       display: block;
-      width: 25px;
-      height: 25px;
-      object-fit: contain;
+      width: 14px;
+      height: 14px;
       pointer-events: none;
-      filter: drop-shadow(0 2px 3px rgba(23, 34, 36, .14));
-      transition: transform .2s ease, filter .2s ease;
+      stroke: #172224;
+      stroke-width: 2.1;
+      transition: transform .2s ease, stroke .2s ease;
     }
 
     .copy-email-note {
@@ -348,10 +348,10 @@
       filter: drop-shadow(0 0 8px rgba(180, 231, 226, .34));
     }
 
-    .copy-email:hover img,
-    .copy-email:focus-visible img {
+    .copy-email:hover svg,
+    .copy-email:focus-visible svg {
       transform: rotate(-5deg) scale(1.08);
-      filter: drop-shadow(0 3px 5px rgba(23, 34, 36, .2));
+      stroke: #245e68;
     }
 
     .copy-email:hover .copy-email-note,
@@ -3397,7 +3397,10 @@
             </span>
           </a>
           <button class="copy-email" type="button" data-email="adaptive.dean@gmail.com" aria-label="Copy email address adaptive.dean@gmail.com">
-            <img src="assets/copy-email-icon.png" alt="">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
             <span class="copy-email-note" aria-hidden="true">Copy adaptive.dean@gmail.com</span>
           </button>
         </span>
