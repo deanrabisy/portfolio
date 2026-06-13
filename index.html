@@ -2596,16 +2596,6 @@
       grid-template-columns: clamp(184px, 18vw, 248px) minmax(0, 1fr);
     }
 
-    .research-flow-modal .case-section-next,
-    .research-flow-modal .case-end-close {
-      transform: translateY(-1.5cm);
-    }
-
-    .research-flow-modal .case-flow-arrow {
-      top: calc(50% + .5cm);
-    }
-
-
     @media (max-width: 820px) {
       .learning-case-modal .case-logo-row,
       .learning-case-modal .case-guide-layout,
@@ -2689,6 +2679,11 @@
       border: 0;
       padding: 0;
       cursor: pointer;
+    }
+
+    .research-flow-modal .case-section-next,
+    .research-flow-modal .case-end-close {
+      margin-bottom: 1.5cm;
     }
 
     .learning-case-modal .case-map-return {
@@ -3038,6 +3033,10 @@
 
     .case-flow-arrow[data-case-next] {
       right: 40px;
+    }
+
+    .research-flow-modal .case-flow-arrow {
+      top: calc(50% + .5cm);
     }
 
     .case-flow-arrow[hidden] {
