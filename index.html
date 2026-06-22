@@ -4299,9 +4299,9 @@
           <div>
             <p class="eyebrow">What I am looking for next</p>
             <h2 id="next-title">Practical problems, thoughtful products, and work that helps people move forward.</h2>
-            <p>I am looking for work where I can combine design, product thinking, research, and optimization to solve practical problems.</p>
-            <p>I am especially interested in tools that help people learn, communicate, or make a positive influence in their lives.</p>
-            <p>I would be happy to discuss roles where this mix of thinking, testing, and building would be useful.</p>
+            <p>I am looking for work where I can combine product thinking, research, communication, and continuous improvement to solve real-world problems.</p>
+            <p>I am particularly interested in products and services that help people learn, communicate, make better decisions, or achieve meaningful goals. I enjoy understanding how people use systems, identifying opportunities for improvement, and helping create solutions that are clear, useful, and effective.</p>
+            <p>I would be happy to discuss opportunities in product, customer-facing, research, operations, or learning-focused roles where this mix of analysis, testing, communication, and building would be valuable.</p>
             <div class="signoff">Thanks for taking a look,<br>Dean</div>
           </div>
         </div>
@@ -5775,6 +5775,7 @@
         const prev = flow.querySelector("[data-case-prev]");
         const next = flow.querySelector("[data-case-next]");
         const mapReturn = flow.querySelector("[data-case-map-return]");
+        const flowVideos = Array.from(flow.querySelectorAll("video"));
         if (!nodes.length || !sections.length) return;
         const isScrollCase = flow.classList.contains("learning-case-flow");
         const scrollContainer = isScrollCase ? flow.querySelector(".case-body") : null;
@@ -5785,6 +5786,33 @@
         });
         let activeIndex = -1;
         let programmaticScroll = false;
+
+        function syncFlowVideos(activeSection = null) {
+          const modal = flow.closest(".modal");
+          const modalIsOpen = !modal || modal.classList.contains("active");
+          flowVideos.forEach((video) => {
+            const shouldPlay = modalIsOpen && activeSection && activeSection.contains(video);
+            if (!shouldPlay) {
+              video.pause();
+              return;
+            }
+            video.muted = true;
+            video.playsInline = true;
+            if (video.readyState === 0) video.load();
+            requestAnimationFrame(() => {
+              if (!activeSection.classList.contains("active")) return;
+              const playAttempt = video.play();
+              if (playAttempt && typeof playAttempt.catch === "function") {
+                playAttempt.catch(() => {
+                  const retry = () => {
+                    if (activeSection.classList.contains("active")) video.play().catch(() => {});
+                  };
+                  video.addEventListener("canplay", retry, { once: true });
+                });
+              }
+            });
+          });
+        }
 
         function positionFlowItems() {
           if (!flowArt || !map || !flowArt.naturalWidth || !flowArt.naturalHeight) return;
@@ -5859,6 +5887,7 @@
             next.classList.toggle("case-flow-close", useClose);
             next.setAttribute("aria-label", useClose ? "Close case study" : "Next section");
           }
+          syncFlowVideos(sections[activeIndex]);
           if (options.scroll) scrollToCaseSection(activeIndex);
         }
 
@@ -5917,6 +5946,7 @@
             nodes.forEach((node) => node.classList.remove("active"));
             glows.forEach((glow) => glow.classList.remove("active"));
             sections.forEach((section) => section.classList.remove("active"));
+            syncFlowVideos();
             activeIndex = -1;
             const firstNode = nodes[0];
             if (firstNode) firstNode.focus();
@@ -6010,6 +6040,7 @@
 
     function closeModal(modal) {
       if (!modal) return;
+      modal.querySelectorAll("video").forEach((video) => video.pause());
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("modal-open");
