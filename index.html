@@ -1648,7 +1648,7 @@
     }
 
     .closing {
-      min-height: calc(58svh - .5cm);
+      min-height: calc(100svh - var(--nav-height, 64px));
       position: relative;
       z-index: 4;
       display: grid;
@@ -5571,9 +5571,9 @@
       const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
       const viewportScale = viewportWidth <= 720 ? .45 : viewportWidth <= 940 ? .7 : 1;
       if (target.id === "next") {
-        const bottomTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const sectionTop = window.scrollY + target.getBoundingClientRect().top - navHeight;
         window.scrollTo({
-          top: bottomTop,
+          top: Math.max(0, sectionTop),
           behavior
         });
         return;
