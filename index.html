@@ -427,6 +427,8 @@
     }
 
     .banner img {
+      display: block;
+      width: 100%;
       height: var(--banner-height);
       object-fit: cover;
       object-position: center;
@@ -4409,6 +4411,52 @@
     }
 
     @media (max-width: 1100px) {
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .opening,
+      main,
+      .project-background-band,
+      .research-paper-landing,
+      .research-paper-story,
+      .pipeline {
+        max-width: 100%;
+        overflow-x: clip;
+      }
+
+      .banner {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .opening.pinned .banner,
+      .opening.releasing .banner {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .banner img {
+        width: 100%;
+        min-width: 100%;
+        max-width: none;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      .project-background-band::before,
+      .research-paper-landing::before,
+      .pipeline::before {
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        background-position: center center;
+        background-size: cover;
+      }
+
       .nav-inner {
         width: calc(100% - 22px);
         min-height: 0;
