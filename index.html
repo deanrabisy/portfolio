@@ -4421,6 +4421,20 @@
         --nav-height: 58px;
         --banner-height: clamp(74px, 15svh, 118px);
         --intro-top-gap: clamp(18px, 6vw, 30px);
+        --intro-stage-lift: .8cm;
+        --callout-width: calc(100vw - 24px);
+      }
+
+      body {
+        padding-top: 58px;
+      }
+
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 60;
       }
 
       .opening,
@@ -4436,6 +4450,7 @@
       .banner {
         width: 100%;
         max-width: 100%;
+        top: var(--nav-height);
       }
 
       .opening.pinned .banner,
@@ -4465,7 +4480,7 @@
 
       .nav-inner {
         width: calc(100% - 16px);
-        min-height: var(--nav-height);
+        min-height: 58px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -4476,15 +4491,27 @@
       .brand-group {
         flex: 1 1 auto;
         justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
         min-width: 0;
       }
 
       .brand-subtitle {
-        display: none;
+        display: block;
+        max-width: 34vw;
+        margin-left: 0;
+        overflow: hidden;
+        color: rgba(80, 97, 102, .78);
+        font-size: clamp(.46rem, 1.7vw, .62rem);
+        line-height: 1.05;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .brand-name strong {
         font-size: clamp(.95rem, 4.2vw, 1.18rem);
+        line-height: 1.02;
       }
 
       .brand-name strong::after {
@@ -4508,28 +4535,34 @@
       .nav-visual-link,
       .nav-contact {
         width: 38px;
-        min-height: 44px;
-        flex-direction: row;
+        min-height: 50px;
+        flex-direction: column;
         justify-content: center;
-        gap: 0;
+        gap: 1px;
         padding: 0;
         text-align: center;
       }
 
       .nav-visual-link > span:first-child,
       .nav-contact > span:first-child {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
+        order: 2;
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        clip: auto;
+        color: #245e68;
+        font-size: .48rem;
+        font-weight: 760;
+        line-height: 1;
         white-space: nowrap;
       }
 
       .nav-icon,
       .nav-contact .mail-icon {
+        order: 1;
         width: 36px;
-        height: 32px;
+        height: 30px;
       }
 
       .nav-contact-group {
@@ -4540,9 +4573,45 @@
 
       .copy-email {
         right: -1px;
-        bottom: 5px;
+        bottom: 14px;
         width: 15px;
         height: 15px;
+      }
+
+      .intro-copy,
+      .intro-callout {
+        width: calc(100% - 24px);
+      }
+
+      .opening.pinned .tagline-callout,
+      .opening.releasing .tagline-callout {
+        width: calc(100% - 24px);
+      }
+
+      .callout-track,
+      .intro-body-callout {
+        left: 0;
+        width: 100%;
+      }
+
+      .tagline-stage,
+      .intro-body-callout {
+        transform: translateY(-.7cm);
+      }
+
+      .typing-text {
+        font-size: clamp(1.06rem, 5vw, 1.32rem);
+        line-height: 1.5;
+      }
+
+      .intro .intro-body-callout p {
+        max-width: 100%;
+        font-size: clamp(1rem, 4.2vw, 1.18rem);
+        line-height: 1.58;
+      }
+
+      .intro-flow-cue {
+        bottom: clamp(96px, 17svh, 136px);
       }
 
       .copy-email svg {
@@ -4575,16 +4644,26 @@
         font-size: clamp(.88rem, 4vw, 1rem);
       }
 
+      .brand-subtitle {
+        max-width: 29vw;
+        font-size: .44rem;
+      }
+
       .nav-visual-link,
       .nav-contact {
         width: 34px;
-        min-height: 40px;
+        min-height: 46px;
+      }
+
+      .nav-visual-link > span:first-child,
+      .nav-contact > span:first-child {
+        font-size: .43rem;
       }
 
       .nav-icon,
       .nav-contact .mail-icon {
         width: 32px;
-        height: 29px;
+        height: 27px;
       }
     }
 
@@ -4635,14 +4714,14 @@
           </span>
         </a>
         <a class="nav-visual-link nav-next-link" href="#research">
-          <span>Academic Research</span>
+          <span>Research</span>
           <span class="nav-icon" aria-hidden="true">
             <img class="icon-off" src="assets/nav-research-notebook-off.png" alt="">
             <img class="icon-on" src="assets/nav-research-notebook-on.png" alt="">
           </span>
         </a>
         <a class="nav-visual-link nav-whats-next-link" href="#next">
-          <span>What's Next</span>
+          <span>Next</span>
           <span class="nav-icon" aria-hidden="true">
             <img class="icon-off" src="assets/nav-brain-network-off.png" alt="">
             <img class="icon-on" src="assets/nav-brain-network-on.png" alt="">
