@@ -4622,6 +4622,66 @@
         transform: none;
       }
 
+      .project-start {
+        min-height: 100svh;
+        align-items: center;
+        padding: calc(48px + 1.1cm) 0 clamp(36px, 8svh, 58px);
+        clip-path: url("#project-mobile-arc-clip");
+        margin-top: -1px;
+      }
+
+      .project-start .wrap {
+        width: calc(100% - 1cm);
+      }
+
+      .project-start-layout {
+        min-height: calc(100svh - 96px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: clamp(18px, 4.8svh, 32px);
+      }
+
+      .project-start-copy {
+        display: contents;
+      }
+
+      .project-start .eyebrow {
+        order: 1;
+        margin-bottom: 0;
+      }
+
+      .project-start h2 {
+        order: 2;
+        max-width: none;
+        font-size: clamp(2.35rem, 13vw, 4.05rem);
+      }
+
+      .project-start p {
+        order: 3;
+        max-width: none;
+        margin: 0;
+        font-size: clamp(1rem, 4.2vw, 1.12rem);
+        line-height: 1.5;
+      }
+
+      .project-start-jump {
+        order: 4;
+        width: 100%;
+        margin: 0;
+        font-size: clamp(.86rem, 3.7vw, .98rem);
+      }
+
+      .project-logo-nav {
+        order: 5;
+        --project-logo-size: clamp(82px, 22vw, 106px);
+        --project-logo-step: calc(var(--project-logo-size) * .96);
+        align-self: center;
+        justify-content: center;
+        padding-top: 0;
+        padding-bottom: calc(var(--project-logo-size) * 1.18);
+      }
+
       .copy-email svg {
         width: 10px;
         height: 10px;
@@ -4698,6 +4758,9 @@
       </clipPath>
       <clipPath id="project-arc-clip" clipPathUnits="objectBoundingBox">
         <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
+      </clipPath>
+      <clipPath id="project-mobile-arc-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.04 C0.28,0 0.72,0 1,0.04 V1 H0 Z" />
       </clipPath>
       <clipPath id="banner-top-arc-clip" clipPathUnits="objectBoundingBox">
         <path d="M0,0.14 C0.28,0 0.72,0 1,0.14 V1 H0 Z" />
