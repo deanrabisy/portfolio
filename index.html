@@ -7528,6 +7528,9 @@
       if (!target) return 0;
       const navHeight = siteNav ? siteNav.getBoundingClientRect().height : 0;
       if (target.id === "projects") {
+        if ((window.innerWidth || document.documentElement.clientWidth) <= 1100) {
+          return target.offsetTop + Math.round(.35 * 37.795);
+        }
         const curveClearance = Math.round(1 * 37.795) + 42;
         return target.offsetTop + curveClearance;
       }
