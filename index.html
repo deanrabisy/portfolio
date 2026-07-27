@@ -4490,10 +4490,11 @@
 
       .brand-group {
         flex: 1 1 auto;
-        justify-content: flex-start;
+        min-height: 50px;
+        justify-content: center;
         flex-direction: column;
         align-items: flex-start;
-        gap: 3px;
+        gap: 5px;
         min-width: 0;
       }
 
@@ -4503,14 +4504,15 @@
         margin-left: 0;
         overflow: hidden;
         color: rgba(80, 97, 102, .78);
-        font-size: clamp(.38rem, 1.55vw, .54rem);
-        line-height: 1.05;
+        font-size: .48rem;
+        font-weight: 760;
+        line-height: 1;
         text-overflow: clip;
         white-space: nowrap;
       }
 
       .brand-name strong {
-        font-size: clamp(1.02rem, 4.45vw, 1.28rem);
+        font-size: clamp(1.14rem, 4.95vw, 1.42rem);
         line-height: 1.02;
       }
 
@@ -4647,12 +4649,12 @@
       }
 
       .brand-name strong {
-        font-size: clamp(.94rem, 4.18vw, 1.08rem);
+        font-size: clamp(1.02rem, 4.55vw, 1.16rem);
       }
 
       .brand-subtitle {
         max-width: 100%;
-        font-size: .4rem;
+        font-size: .43rem;
       }
 
       .nav-visual-link,
