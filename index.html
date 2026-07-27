@@ -7241,6 +7241,7 @@
     const copyEmailButton = document.querySelector(".copy-email");
     const pipelineCards = document.querySelectorAll(".pipeline-card");
     let copyEmailResetTimer;
+    let completeOpeningIntroForJump = () => {};
     const greetingLines = [
       "Hi,",
       "Welcome to my portfolio."
@@ -7431,6 +7432,7 @@
       event.preventDefault();
       const projects = document.querySelector("#projects");
       if (!projects) return;
+      completeOpeningIntroForJump();
       beginProgrammaticScroll();
       window.scrollTo({
         top: getTargetScrollTop(projects),
@@ -7440,6 +7442,7 @@
 
     function scrollToInternalTarget(target, behavior = reducedMotion ? "auto" : "smooth") {
       if (!target) return;
+      completeOpeningIntroForJump();
       beginProgrammaticScroll();
       window.scrollTo({
         top: getTargetScrollTop(target),
@@ -7621,6 +7624,8 @@
       if (!typingTarget) return;
       if (reducedMotion) {
         typingTarget.textContent = taglineLines.join("\n");
+        openingSection?.dataset && (openingSection.dataset.openingHookComplete = "true");
+        openingSection?.style.setProperty("--intro-story-marker-opacity", "1");
         return;
       }
 
@@ -7631,6 +7636,7 @@
       let openingTextComplete = false;
       let releaseScrollsRemaining = 0;
       let releaseOpeningLock;
+      let introForcedComplete = false;
 
       cursor.className = "typing-cursor";
 
@@ -7687,6 +7693,10 @@
           let previous = performance.now();
 
           function tick(now) {
+            if (introForcedComplete) {
+              resolve();
+              return;
+            }
             const delta = now - previous;
             previous = now;
             const speed = 1 + scrollBoost * .32;
@@ -7726,6 +7736,24 @@
         });
       }
 
+      function completeOpeningIntroEndState() {
+        if (openingTextComplete && introForcedComplete) return;
+        introForcedComplete = true;
+        openingTextComplete = true;
+        releaseScrollsRemaining = 0;
+        typingTarget.classList.remove("is-fading");
+        typingTarget.style.opacity = "";
+        cursor.remove();
+        typingTarget.textContent = taglineLines.join("\n");
+        openingSection?.dataset && (openingSection.dataset.openingHookComplete = "true");
+        openingSection?.style.setProperty("--intro-story-marker-opacity", "1");
+        removeGreetingLock();
+        if (releaseOpeningLock) releaseOpeningLock();
+        updateOpeningState();
+      }
+
+      completeOpeningIntroForJump = completeOpeningIntroEndState;
+
       window.addEventListener("wheel", holdGreetingScroll, { passive: false });
       window.addEventListener("touchstart", rememberTouchStart, { passive: false });
       window.addEventListener("touchmove", holdGreetingTouch, { passive: false });
@@ -7734,14 +7762,17 @@
 
       const typeLines = async (lines) => {
         for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+          if (introForcedComplete) return;
           const line = lines[lineIndex];
           for (let index = 0; index <= line.length; index += 1) {
+            if (introForcedComplete) return;
             const previousLines = lines.slice(0, lineIndex).join("\n");
             const prefix = previousLines ? `${previousLines}\n` : "";
             typingTarget.textContent = prefix + line.slice(0, index);
             typingTarget.appendChild(cursor);
             await waitWithScrollBoost(line.length < 8 ? 90 : 38);
           }
+          if (introForcedComplete) return;
           await waitWithScrollBoost(linePause);
           if (lineIndex < lines.length - 1) {
             typingTarget.textContent = lines.slice(0, lineIndex + 1).join("\n") + "\n";
@@ -7755,14 +7786,19 @@
       typingTarget.textContent = "";
 
       await typeLines(greetingLines);
+      if (introForcedComplete) return;
       typingTarget.textContent = greetingLines.join("\n");
       await waitWithScrollBoost(780);
+      if (introForcedComplete) return;
       typingTarget.classList.add("is-fading");
       await waitWithScrollBoost(520);
+      if (introForcedComplete) return;
       typingTarget.classList.remove("is-fading");
       typingTarget.textContent = "";
       await waitWithScrollBoost(160);
+      if (introForcedComplete) return;
       await typeLines(taglineLines);
+      if (introForcedComplete) return;
       typingTarget.textContent = taglineLines.join("\n");
       openingSection?.dataset && (openingSection.dataset.openingHookComplete = "true");
       openingSection?.style.setProperty("--intro-story-marker-opacity", "1");
