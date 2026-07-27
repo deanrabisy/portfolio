@@ -4694,6 +4694,152 @@
         --logo-y: 0px;
       }
 
+      .project-background-band::before {
+        background-size: auto max(100%, 100svh);
+        background-position: center top;
+      }
+
+      .project-strip {
+        min-height: auto;
+        padding: clamp(76px, 11svh, 98px) 0 clamp(34px, 7svh, 56px);
+      }
+
+      .project-strip > .wrap {
+        width: calc(100% - 1cm);
+      }
+
+      .project-grid,
+      .project-strip.reverse .project-grid {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(14px, 3.8svh, 24px);
+      }
+
+      .project-visual-column,
+      .project-copy {
+        display: contents;
+      }
+
+      .project-copy h2 {
+        order: 1;
+        font-size: clamp(2.55rem, 15vw, 4.35rem);
+        line-height: .96;
+      }
+
+      .project-media,
+      .project-strip.reverse .project-media,
+      .project-media:has(video) {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        justify-self: auto;
+        border-radius: 8px;
+      }
+
+      .project-media video,
+      .project-media img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .project-media img {
+        object-fit: contain;
+      }
+
+      .media-caption {
+        padding: 10px 12px;
+        font-size: .8rem;
+        line-height: 1.35;
+      }
+
+      .project-copy .tagline {
+        order: 3;
+        margin: 0;
+        font-size: clamp(1rem, 4.8vw, 1.24rem);
+        line-height: 1.32;
+      }
+
+      .project-facts {
+        order: 4;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        background: rgba(255, 255, 255, .36);
+      }
+
+      .project-fact {
+        padding: 12px 10px;
+        border-right: 1px solid rgba(36, 94, 104, .14);
+        border-bottom: 1px solid rgba(36, 94, 104, .14);
+      }
+
+      .project-fact:nth-child(even),
+      .project-fact:last-child {
+        border-right: 0;
+      }
+
+      .project-fact:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .project-fact dt {
+        font-size: .66rem;
+      }
+
+      .project-fact dd {
+        font-size: .78rem;
+        line-height: 1.28;
+      }
+
+      .project-actions {
+        order: 5;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        width: 100%;
+        margin: 0;
+      }
+
+      .project-actions .case-study-button {
+        width: 100%;
+      }
+
+      .inline-case-outcomes {
+        padding: 0 0 clamp(48px, 8svh, 72px);
+      }
+
+      .inline-case-outcomes > .wrap {
+        width: calc(100% - 1cm);
+      }
+
+      .inline-outcome-heading {
+        margin-bottom: 18px;
+      }
+
+      .inline-outcome-heading h3 {
+        font-size: clamp(1.45rem, 8vw, 2.35rem);
+      }
+
+      .inline-outcome-grid,
+      .inline-outcome-grid-five {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .inline-outcome,
+      .inline-outcome:nth-child(1),
+      .inline-outcome:nth-child(2),
+      .inline-outcome:nth-child(3),
+      .inline-outcome:nth-child(4),
+      .inline-outcome-grid-five .inline-outcome:nth-child(5) {
+        min-height: 0;
+        padding: 16px 14px;
+        transform: none;
+      }
+
       .copy-email svg {
         width: 10px;
         height: 10px;
