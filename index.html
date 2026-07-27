@@ -5098,7 +5098,7 @@
         inset: auto;
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 20px;
       }
 
       .inline-stage-link {
@@ -5178,8 +5178,41 @@
       }
 
       .mobile-inline-panel .inline-case-media {
+        width: calc(100% + 28px);
+        max-width: calc(100% + 28px);
+        margin-left: -14px;
+        margin-right: -14px;
         border-radius: 8px;
         overflow: hidden;
+      }
+
+      .mobile-inline-panel .inline-case-media.case-study-video video {
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+      }
+
+      .mobile-inline-panel .inline-case-media.contain,
+      .mobile-inline-panel .inline-case-media.case-process-image,
+      .mobile-inline-panel .progressing-guide-card,
+      .mobile-inline-panel .progressing-float-media {
+        display: grid;
+        align-items: center;
+        background: #fff;
+      }
+
+      .mobile-inline-panel .inline-case-media.contain img,
+      .mobile-inline-panel .inline-case-media.case-process-image img,
+      .mobile-inline-panel .progressing-guide-card img,
+      .mobile-inline-panel .progressing-float-media img {
+        width: 100%;
+        height: clamp(220px, 68vw, 320px);
+        object-fit: contain;
+        padding: 10px;
+        background: #fff;
+      }
+
+      .mobile-inline-panel .progressing-float-media img {
+        height: clamp(230px, 72vw, 340px);
       }
 
       .mobile-inline-panel .case-end-ornament,
@@ -8763,7 +8796,7 @@
           if (panel?.classList.contains("is-open")) {
             beginProgrammaticScroll?.(650);
             window.scrollTo({
-              top: Math.max(0, window.scrollY + link.getBoundingClientRect().top - 112),
+              top: Math.max(0, window.scrollY + link.getBoundingClientRect().top - 64),
               behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
             });
           }
