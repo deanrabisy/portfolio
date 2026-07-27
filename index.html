@@ -4666,20 +4666,32 @@
       }
 
       .project-start-jump {
-        order: 4;
+        order: 5;
         width: 100%;
         margin: 0;
         font-size: clamp(.86rem, 3.7vw, .98rem);
       }
 
       .project-logo-nav {
-        order: 5;
-        --project-logo-size: clamp(82px, 22vw, 106px);
-        --project-logo-step: calc(var(--project-logo-size) * .96);
+        order: 4;
+        --project-logo-size: clamp(112px, 32vw, 136px);
+        --project-logo-step: var(--project-logo-size);
+        grid-template-columns: repeat(2, var(--project-logo-size));
+        grid-auto-rows: var(--project-logo-size);
+        gap: 12px;
         align-self: center;
         justify-content: center;
+        width: max-content;
+        max-width: 100%;
         padding-top: 0;
-        padding-bottom: calc(var(--project-logo-size) * 1.18);
+        padding-bottom: 0;
+      }
+
+      .project-logo-link:nth-child(2),
+      .project-logo-link:nth-child(3),
+      .project-logo-link:nth-child(4) {
+        --logo-x: 0px;
+        --logo-y: 0px;
       }
 
       .copy-email svg {
@@ -7338,7 +7350,7 @@
       const progress = Math.max(0, -rect.top);
       const trackDistance = parseFloat(getComputedStyle(openingSection).getPropertyValue("--track-distance")) || window.innerHeight;
       const gapToProjects = parseFloat(getComputedStyle(openingSection).getPropertyValue("--intro-project-gap")) || Math.round(1.25 * 37.795);
-      const releaseDistance = 1;
+      const releaseDistance = window.innerWidth <= 1100 && banner ? Math.max(1, banner.getBoundingClientRect().height) : 1;
       const releaseStart = parseFloat(getComputedStyle(openingSection).getPropertyValue("--intro-release-start")) || (trackDistance + gapToProjects);
       const total = releaseStart + releaseDistance;
       const releaseOffset = Math.max(0, progress - releaseStart);
