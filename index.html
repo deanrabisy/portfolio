@@ -7302,14 +7302,14 @@
         const clamped = Math.max(0, Math.min(1, value));
         return clamped * clamped * (3 - 2 * clamped);
       };
-      const cueCompleteAt = Math.max(1, (storyParagraphs.length - 1) * beatDistance + exitStart);
-      const cueExitPhase = easeInOut((storyProgress - cueCompleteAt) / exitDistance);
+      const cueStoryCompleteAt = Math.max(1, (storyParagraphs.length - 1) * beatDistance + exitStart);
+      const cueTimelineCompleteAt = Math.max(1, storyStart + cueStoryCompleteAt);
+      const cueExitPhase = easeInOut((storyProgress - cueStoryCompleteAt) / exitDistance);
       const cueLead = Math.max(80, beatDistance * .16);
-      const cueProgressLead = Math.max(90, beatDistance * .12);
-      const cueProgress = Math.max(0, Math.min(1, (storyProgress + cueProgressLead) / (cueCompleteAt + cueProgressLead)));
-      const cueIntro = Math.max(0, Math.min(1, (storyProgress + cueLead) / cueLead));
+      const cueProgress = Math.max(0, Math.min(1, trackY / cueTimelineCompleteAt));
+      const cueIntro = Math.max(0, Math.min(1, trackY / cueLead));
       const cueExitFade = 1 - Math.max(0, Math.min(1, (cueExitPhase - .12) / .88));
-      const cueOpacity = storyProgress < cueCompleteAt + exitDistance ? cueIntro * cueExitFade : 0;
+      const cueOpacity = storyProgress < cueStoryCompleteAt + exitDistance ? cueIntro * cueExitFade : 0;
       const markerOpacity = openingSection.dataset.openingHookComplete ? cueExitFade : 0;
 
       openingSection.style.setProperty("--intro-story-progress", cueProgress.toFixed(3));
