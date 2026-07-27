@@ -3933,6 +3933,10 @@
       inset: 0;
     }
 
+    .mobile-inline-panel {
+      display: none;
+    }
+
     .inline-stage-link {
       position: absolute;
       left: var(--node-x);
@@ -5004,6 +5008,179 @@
       .research-paper-outcomes .inline-outcome:nth-child(3),
       .research-paper-outcomes .inline-outcome:nth-child(4) {
         padding: 16px 14px;
+      }
+
+      .inline-story {
+        background: #fff;
+      }
+
+      .inline-flow-nav {
+        top: 58px;
+        padding: 6px 0 10px;
+        z-index: 55;
+      }
+
+      .inline-flow-banner,
+      .research-paper-story .inline-flow-banner {
+        width: calc(100% - 1cm);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        min-height: 0;
+      }
+
+      .inline-flow-identity,
+      .research-paper-story .inline-flow-identity {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .inline-flow-identity img,
+      .research-paper-story .inline-flow-identity img,
+      .research-summary-logo-loop {
+        width: 48px;
+        height: 48px;
+      }
+
+      .inline-flow-identity span {
+        font-size: .56rem;
+      }
+
+      .inline-flow-identity strong,
+      .research-paper-story .inline-flow-identity strong {
+        font-size: clamp(1.05rem, 5.2vw, 1.38rem);
+        line-height: 1.04;
+      }
+
+      .inline-flow-map,
+      .progressing-flow-map,
+      .research-paper-story .inline-flow-map {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        min-height: 0;
+        margin: 0;
+        padding: 16px 0 4px;
+        justify-self: auto;
+        overflow: visible;
+      }
+
+      .inline-flow-map::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 8px;
+        bottom: 8px;
+        width: 2px;
+        border-radius: 999px;
+        background: linear-gradient(to bottom, rgba(84, 191, 208, .08), rgba(36, 94, 104, .28), rgba(84, 191, 208, .08));
+        transform: translateX(-50%);
+      }
+
+      .inline-flow-art {
+        left: 50%;
+        top: 50%;
+        width: min(112svh, 720px);
+        max-width: none;
+        opacity: .2;
+        transform: translate(-50%, -50%) rotate(90deg);
+        transform-origin: center;
+      }
+
+      .inline-flow-art.edge-fade {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+      }
+
+      .inline-flow-links {
+        position: relative;
+        inset: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .inline-stage-link {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: min(190px, 62%);
+        min-height: 42px;
+        aspect-ratio: auto;
+        place-self: center;
+        display: grid;
+        transform: none;
+      }
+
+      .inline-stage-link:hover,
+      .inline-stage-link:focus-visible,
+      .inline-stage-link.active {
+        transform: none;
+      }
+
+      .mobile-inline-panel {
+        display: none;
+        width: 100%;
+        margin: -2px 0 10px;
+        padding: 16px 14px;
+        border: 1px solid rgba(36, 94, 104, .16);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .94);
+        box-shadow: 0 8px 18px rgba(36, 94, 104, .06);
+      }
+
+      .mobile-inline-panel.is-open {
+        display: block;
+      }
+
+      .mobile-inline-panel .inline-case-section-title {
+        display: none;
+      }
+
+      .mobile-inline-panel .inline-case-body,
+      .mobile-inline-panel .inline-case-media,
+      .mobile-inline-panel .inline-case-media.case-study-video,
+      .mobile-inline-panel .progressing-split-row,
+      .mobile-inline-panel .progressing-stagger-row,
+      .mobile-inline-panel .progressing-wrap-row {
+        grid-column: auto;
+        grid-row: auto;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+      }
+
+      .mobile-inline-panel .progressing-float-media,
+      .mobile-inline-panel .progressing-float-media.float-left,
+      .mobile-inline-panel .progressing-float-media.float-right {
+        float: none;
+      }
+
+      .mobile-inline-panel .inline-case-body + .inline-case-media,
+      .mobile-inline-panel .inline-case-media + .inline-case-body,
+      .mobile-inline-panel .inline-case-media + .inline-case-media {
+        margin-top: 16px;
+      }
+
+      .mobile-inline-panel .inline-case-body p,
+      .mobile-inline-panel .inline-case-body li {
+        font-size: .96rem;
+        line-height: 1.52;
+      }
+
+      .mobile-inline-panel .inline-case-media {
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .mobile-inline-panel .case-end-ornament,
+      .mobile-inline-panel .research-summary-end-art {
+        display: none;
+      }
+
+      .inline-story > .wrap > .inline-case-section {
+        display: none;
       }
 
       .copy-email svg {
@@ -8512,6 +8689,36 @@
     let inlineFlowScrollTarget = "";
     let inlineFlowSettleFrame = 0;
 
+    function isMobileInlineFlow() {
+      return (window.innerWidth || document.documentElement.clientWidth) <= 1100;
+    }
+
+    function stripDuplicateIds(node) {
+      if (node.nodeType !== 1) return;
+      node.removeAttribute("id");
+      node.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+    }
+
+    function buildMobileInlinePanels() {
+      inlineFlowLinks.forEach((link) => {
+        if (link.nextElementSibling?.classList.contains("mobile-inline-panel")) return;
+        const target = document.getElementById(link.dataset.inlineFlow);
+        if (!target) return;
+        const panel = document.createElement("div");
+        panel.className = "mobile-inline-panel";
+        panel.setAttribute("aria-hidden", "true");
+        Array.from(target.children).forEach((child) => {
+          const clone = child.cloneNode(true);
+          stripDuplicateIds(clone);
+          panel.appendChild(clone);
+        });
+        link.setAttribute("aria-expanded", "false");
+        link.insertAdjacentElement("afterend", panel);
+      });
+    }
+
+    buildMobileInlinePanels();
+
     function setActiveInlineFlow(id) {
       if (!id || activeInlineFlowId === id) return;
       activeInlineFlowId = id;
@@ -8530,6 +8737,30 @@
         if (!target) return;
 
         event.preventDefault();
+        if (isMobileInlineFlow()) {
+          const panel = link.nextElementSibling?.classList.contains("mobile-inline-panel") ? link.nextElementSibling : null;
+          const flowLinks = Array.from(link.closest(".inline-flow-links")?.querySelectorAll("[data-inline-flow]") || []);
+          flowLinks.forEach((otherLink) => {
+            const otherPanel = otherLink.nextElementSibling?.classList.contains("mobile-inline-panel") ? otherLink.nextElementSibling : null;
+            const shouldOpen = otherLink === link && !otherPanel?.classList.contains("is-open");
+            otherLink.classList.toggle("active", shouldOpen);
+            otherLink.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+            if (shouldOpen) otherLink.setAttribute("aria-current", "step");
+            else otherLink.removeAttribute("aria-current");
+            if (otherPanel) {
+              otherPanel.classList.toggle("is-open", shouldOpen);
+              otherPanel.setAttribute("aria-hidden", shouldOpen ? "false" : "true");
+            }
+          });
+          if (panel?.classList.contains("is-open")) {
+            beginProgrammaticScroll?.(650);
+            window.scrollTo({
+              top: Math.max(0, window.scrollY + link.getBoundingClientRect().top - 112),
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+            });
+          }
+          return;
+        }
         inlineFlowScrollTarget = targetId;
         setActiveInlineFlow(targetId);
 
@@ -8564,6 +8795,7 @@
 
     function syncActiveInlineFlow() {
       inlineFlowFrame = 0;
+      if (isMobileInlineFlow()) return;
       if (!trackedInlineSections.length) return;
       if (inlineFlowScrollTarget) return;
 
