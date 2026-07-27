@@ -4420,7 +4420,7 @@
       .opening {
         --nav-height: 58px;
         --banner-height: calc(clamp(74px, 15svh, 118px) + 1cm);
-        --intro-top-gap: clamp(18px, 6vw, 30px);
+        --intro-top-gap: calc(clamp(18px, 6vw, 30px) + 1cm);
         --intro-stage-lift: .8cm;
         --callout-width: calc(100vw - 24px);
       }
@@ -4493,7 +4493,7 @@
         justify-content: flex-start;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1px;
+        gap: 3px;
         min-width: 0;
       }
 
@@ -4503,14 +4503,14 @@
         margin-left: 0;
         overflow: hidden;
         color: rgba(80, 97, 102, .78);
-        font-size: clamp(.34rem, 1.4vw, .48rem);
+        font-size: clamp(.38rem, 1.55vw, .54rem);
         line-height: 1.05;
         text-overflow: clip;
         white-space: nowrap;
       }
 
       .brand-name strong {
-        font-size: clamp(.95rem, 4.2vw, 1.18rem);
+        font-size: clamp(1.02rem, 4.45vw, 1.28rem);
         line-height: 1.02;
       }
 
@@ -4647,12 +4647,12 @@
       }
 
       .brand-name strong {
-        font-size: clamp(.88rem, 4vw, 1rem);
+        font-size: clamp(.94rem, 4.18vw, 1.08rem);
       }
 
       .brand-subtitle {
         max-width: 100%;
-        font-size: .37rem;
+        font-size: .4rem;
       }
 
       .nav-visual-link,
