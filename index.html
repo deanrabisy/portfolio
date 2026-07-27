@@ -7305,7 +7305,8 @@
       const cueCompleteAt = Math.max(1, (storyParagraphs.length - 1) * beatDistance + exitStart);
       const cueExitPhase = easeInOut((storyProgress - cueCompleteAt) / exitDistance);
       const cueLead = Math.max(80, beatDistance * .16);
-      const cueProgress = Math.max(0, Math.min(1, storyProgress / cueCompleteAt));
+      const cueProgressLead = Math.max(90, beatDistance * .12);
+      const cueProgress = Math.max(0, Math.min(1, (storyProgress + cueProgressLead) / (cueCompleteAt + cueProgressLead)));
       const cueIntro = Math.max(0, Math.min(1, (storyProgress + cueLead) / cueLead));
       const cueExitFade = 1 - Math.max(0, Math.min(1, (cueExitPhase - .12) / .88));
       const cueOpacity = storyProgress < cueCompleteAt + exitDistance ? cueIntro * cueExitFade : 0;
