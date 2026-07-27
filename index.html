@@ -5016,7 +5016,7 @@
 
       .inline-flow-nav {
         top: 58px;
-        padding: 6px 0 10px;
+        padding: 10px 0 14px;
         z-index: 55;
       }
 
@@ -5025,31 +5025,31 @@
         width: calc(100% - 1cm);
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         align-items: stretch;
         min-height: 0;
       }
 
       .inline-flow-identity,
       .research-paper-story .inline-flow-identity {
-        grid-template-columns: 48px minmax(0, 1fr);
-        gap: 10px;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: 12px;
       }
 
       .inline-flow-identity img,
       .research-paper-story .inline-flow-identity img,
       .research-summary-logo-loop {
-        width: 48px;
-        height: 48px;
+        width: 56px;
+        height: 56px;
       }
 
       .inline-flow-identity span {
-        font-size: .56rem;
+        font-size: .62rem;
       }
 
       .inline-flow-identity strong,
       .research-paper-story .inline-flow-identity strong {
-        font-size: clamp(1.05rem, 5.2vw, 1.38rem);
+        font-size: clamp(1.18rem, 5.8vw, 1.54rem);
         line-height: 1.04;
       }
 
@@ -5061,7 +5061,7 @@
         height: auto;
         min-height: 0;
         margin: 0;
-        padding: 16px 0 4px;
+        padding: 18px 0 6px;
         justify-self: auto;
         overflow: visible;
       }
@@ -5098,19 +5098,27 @@
         inset: auto;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
       }
 
       .inline-stage-link {
         position: relative;
         left: auto;
         top: auto;
-        width: min(190px, 62%);
-        min-height: 42px;
+        width: min(220px, 68%);
+        min-height: 48px;
         aspect-ratio: auto;
         place-self: center;
         display: grid;
         transform: none;
+      }
+
+      .inline-stage-number {
+        font-size: .62rem;
+      }
+
+      .inline-stage-label {
+        font-size: .72rem;
       }
 
       .inline-stage-link:hover,
