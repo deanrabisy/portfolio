@@ -5215,6 +5215,52 @@
         height: clamp(230px, 72vw, 340px);
       }
 
+      .mobile-inline-panel .progressing-sentence-strip {
+        width: calc(100% + 28px);
+        max-width: calc(100% + 28px);
+        margin: 18px -14px 0;
+      }
+
+      .mobile-inline-panel .inline-case-media.case-process-image img[src*="Progressing Sentence Example"] {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 8px;
+      }
+
+      .mobile-inline-panel .progressing-spacer {
+        display: none;
+      }
+
+      .mobile-inline-panel .progressing-split-row,
+      .mobile-inline-panel .progressing-stagger-row,
+      .mobile-inline-panel .progressing-wrap-row {
+        display: block;
+      }
+
+      .mobile-inline-panel .progressing-guide-card,
+      .mobile-inline-panel .progressing-float-media,
+      .mobile-inline-panel .progressing-stagger-row .inline-case-media.contain {
+        width: min(260px, 76%);
+        max-width: min(260px, 76%);
+        margin: 18px auto 0;
+        justify-self: center;
+      }
+
+      .mobile-inline-panel .progressing-guide-card {
+        width: min(310px, 86%);
+        max-width: min(310px, 86%);
+      }
+
+      .mobile-inline-panel .progressing-guide-card img,
+      .mobile-inline-panel .progressing-float-media img,
+      .mobile-inline-panel .progressing-stagger-row .inline-case-media.contain img {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 8px;
+      }
+
       .mobile-inline-panel .case-end-ornament,
       .mobile-inline-panel .research-summary-end-art {
         display: none;
@@ -5820,7 +5866,7 @@
                 <p>Rather than adapting an existing game, I designed an original system built around the structure of a sentence itself.</p>
                 <p>Each sentence was divided into modular cards representing subject, "to be", verb, "-ing" ending, and time expression.</p>
               </div>
-              <figure class="inline-case-media case-process-image">
+              <figure class="inline-case-media case-process-image progressing-sentence-strip">
                 <img src="Progressing/Progressing Sentence Example.png" alt="Progressing complete sentence card sequence">
                 <figcaption>A completed sentence sequence built from color-coded cards, making grammar roles visible during play.</figcaption>
               </figure>
