@@ -1068,7 +1068,7 @@
       background: var(--surface);
       box-shadow: var(--shadow);
       overflow: hidden;
-      cursor: pointer;
+      cursor: default;
     }
 
     .project-media:has(video) {
@@ -1387,8 +1387,7 @@
     }
 
     .pipeline-card:hover,
-    .pipeline-card:focus-visible,
-    .pipeline-card.is-open {
+    .pipeline-card:focus-visible {
       transform: translateY(-4px);
       filter: drop-shadow(0 16px 18px rgba(23, 34, 36, .12));
       border-color: rgba(23, 34, 36, .24);
@@ -1419,9 +1418,14 @@
       transition: transform .3s cubic-bezier(.2, .75, .24, 1), filter .3s ease;
     }
 
+    .pipeline-card:first-child .pipeline-art img {
+      width: 88%;
+      height: 88%;
+      margin: auto;
+    }
+
     .pipeline-card:hover .pipeline-art img,
-    .pipeline-card:focus-visible .pipeline-art img,
-    .pipeline-card.is-open .pipeline-art img {
+    .pipeline-card:focus-visible .pipeline-art img {
       transform: scale(1.055) rotate(-1deg);
       filter: drop-shadow(0 10px 12px rgba(23, 34, 36, .1));
     }
@@ -1442,8 +1446,7 @@
     }
 
     .pipeline-card:hover .pipeline-popover,
-    .pipeline-card:focus-visible .pipeline-popover,
-    .pipeline-card.is-open .pipeline-popover {
+    .pipeline-card:focus-visible .pipeline-popover {
       opacity: 1;
       pointer-events: auto;
       transform: none;
@@ -1454,8 +1457,7 @@
     }
 
     .pipeline-card:nth-child(3n):hover .pipeline-popover,
-    .pipeline-card:nth-child(3n):focus-visible .pipeline-popover,
-    .pipeline-card:nth-child(3n).is-open .pipeline-popover {
+    .pipeline-card:nth-child(3n):focus-visible .pipeline-popover {
       transform: none;
     }
 
@@ -5360,9 +5362,30 @@
         padding: 8px;
       }
 
+      .mobile-inline-panel:has(.case-end-ornament),
+      .mobile-inline-panel:has(.research-summary-end-art) {
+        min-height: calc(100svh - 178px);
+        padding-bottom: calc(3.4cm + env(safe-area-inset-bottom));
+      }
+
       .mobile-inline-panel .case-end-ornament,
       .mobile-inline-panel .research-summary-end-art {
-        display: none;
+        display: block;
+        width: min(260px, 72%);
+        margin: 32px auto 0;
+        opacity: .62;
+        transform: none !important;
+      }
+
+      .mobile-inline-panel .research-summary-end-art.is-reduced {
+        width: min(230px, 66%);
+      }
+
+      .mobile-inline-panel .case-end-ornament img,
+      .mobile-inline-panel .research-summary-end-art img {
+        display: block;
+        width: 100%;
+        height: auto;
       }
 
       .inline-story > .wrap > .inline-case-section {
@@ -6266,7 +6289,7 @@
             <p>Some work is still in progress, some is being tested, and some needs a clearer story before it belongs here properly.</p>
           </div>
           <div class="pipeline-grid pipeline-grid-top" aria-label="Portfolio pipeline">
-            <button class="pipeline-card" type="button" aria-label="Read about Word Crush Duel">
+            <article class="pipeline-card" aria-label="Word Crush Duel">
               <span class="pipeline-art" aria-hidden="true">
                 <img src="Stay Tuned/logo-word-crush-duel-duel-only.png" alt="">
               </span>
@@ -6274,8 +6297,8 @@
                 <strong>Word Crush Duel</strong>
                 <span>A two-player word-search race with a shifting board, built for fast vocabulary recognition.</span>
               </span>
-            </button>
-            <button class="pipeline-card" type="button" aria-label="Read about NetWords">
+            </article>
+            <article class="pipeline-card" aria-label="NetWords">
               <span class="pipeline-art" aria-hidden="true">
                 <img src="Stay Tuned/networds-generated-option-a.png" alt="">
               </span>
@@ -6283,8 +6306,8 @@
                 <strong>NetWords</strong>
                 <span>A hex-board word strategy game about building connected paths through meaning and association.</span>
               </span>
-            </button>
-            <button class="pipeline-card" type="button" aria-label="Read about Reading Test Simulator">
+            </article>
+            <article class="pipeline-card" aria-label="Reading Test Simulator">
               <span class="pipeline-art" aria-hidden="true">
                 <img src="Stay Tuned/reading-simulator-generated.png" alt="">
               </span>
@@ -6292,8 +6315,8 @@
                 <strong>Reading Test Simulator</strong>
                 <span>A tool for turning reading files into structured practice, question by question.</span>
               </span>
-            </button>
-            <button class="pipeline-card" type="button" aria-label="Read about Sound Twins">
+            </article>
+            <article class="pipeline-card" aria-label="Sound Twins">
               <span class="pipeline-art" aria-hidden="true">
                 <img src="Stay Tuned/sound twins.png" alt="">
               </span>
@@ -6301,8 +6324,8 @@
                 <strong>Sound Twins</strong>
                 <span>A phonics matching game where students pair different words that share the same sound.</span>
               </span>
-            </button>
-            <button class="pipeline-card" type="button" aria-label="Read about Phonics Suite">
+            </article>
+            <article class="pipeline-card" aria-label="Phonics Suite">
               <span class="pipeline-art" aria-hidden="true">
                 <img src="Stay Tuned/phonics-suite-generated.png" alt="">
               </span>
@@ -6310,7 +6333,7 @@
                 <strong>Phonics Suite</strong>
                 <span>A growing set of phonics lessons connecting rules, sorting, matching, puzzles, and stories.</span>
               </span>
-            </button>
+            </article>
           </div>
         </div>
       </section>
@@ -7914,7 +7937,7 @@
     const projectJumpLinks = document.querySelectorAll("[data-projects-jump]");
     const internalSectionLinks = document.querySelectorAll('a[href^="#"]');
     const copyEmailButton = document.querySelector(".copy-email");
-    const pipelineCards = document.querySelectorAll(".pipeline-card");
+    const pipelineCards = [];
     let copyEmailResetTimer;
     let completeOpeningIntroForJump = () => {};
     const greetingLines = [
@@ -8186,19 +8209,19 @@
     function getSectionOffset(id) {
       const viewportScale = getViewportScale();
       const sectionOffsets = {
-        gophish: 0,
-        ihave: 0,
-        progressing: Math.round(.5 * 37.795 * viewportScale),
-        recall: 0,
+        gophish: -Math.round(.5 * 37.795),
+        ihave: -Math.round(.5 * 37.795),
+        progressing: -Math.round(.5 * 37.795),
+        recall: -Math.round(.5 * 37.795),
         "gophish-story": Math.round(2 * 3.7795),
         "ihave-story": Math.round(2 * 3.7795),
         "progressing-story": Math.round(2 * 3.7795),
         "recall-story": Math.round(2 * 3.7795),
         pipeline: Math.round(1.5 * 37.795 * viewportScale),
         research: Math.round(2 * 37.795 * viewportScale),
-        "research-mindfulness-paper": 0,
-        "research-inner-speech-paper": 0,
-        "research-visq-paper": 0,
+        "research-mindfulness-paper": -Math.round(.5 * 37.795),
+        "research-inner-speech-paper": -Math.round(.5 * 37.795),
+        "research-visq-paper": -Math.round(.5 * 37.795),
         "research-mindfulness-story": Math.round(2 * 3.7795),
         "research-inner-speech-story": Math.round(2 * 3.7795),
         "research-visq-story": Math.round(2 * 3.7795)
