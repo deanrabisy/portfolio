@@ -5417,6 +5417,25 @@
       .copy-email.copied .copy-email-note {
         transform: translate(-50%, 0);
       }
+
+      .closing {
+        min-height: 100svh;
+        align-items: start;
+        padding: calc(var(--nav-height, 64px) + .65cm) 0 clamp(48px, 8svh, 72px);
+        background:
+          radial-gradient(circle at 12% 20%, rgba(255, 255, 255, .78), rgba(255, 255, 255, 0) 34%),
+          url("assets/next-bg-option-5.png") right bottom / auto 100% no-repeat,
+          linear-gradient(135deg, #f1fbfb, #d9f0f0 55%, #c6e7e7);
+      }
+
+      .closing-inner {
+        transform: none;
+      }
+
+      .built-corner-mark {
+        width: min(1290px, 144vw);
+        right: -18vw;
+      }
     }
 
     @media (max-width: 370px) {
@@ -8251,7 +8270,7 @@
         const curveClearance = Math.round(1 * 37.795) + 42;
         return target.offsetTop + curveClearance;
       }
-      if (target.id === "next") {
+      if (target.id === "next" && (window.innerWidth || document.documentElement.clientWidth) > 1100) {
         return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       }
       if (target === openingSection || target.id === "top") {
