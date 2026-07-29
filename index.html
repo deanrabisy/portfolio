@@ -5364,15 +5364,22 @@
 
       .mobile-inline-panel:has(.case-end-ornament),
       .mobile-inline-panel:has(.research-summary-end-art) {
+        display: none;
+        flex-direction: column;
         min-height: calc(100svh - 178px);
         padding-bottom: calc(3.4cm + env(safe-area-inset-bottom));
+      }
+
+      .mobile-inline-panel.is-open:has(.case-end-ornament),
+      .mobile-inline-panel.is-open:has(.research-summary-end-art) {
+        display: flex;
       }
 
       .mobile-inline-panel .case-end-ornament,
       .mobile-inline-panel .research-summary-end-art {
         display: block;
         width: min(260px, 72%);
-        margin: 32px auto 0;
+        margin: auto auto 0;
         opacity: .62;
         transform: none !important;
       }
@@ -8209,24 +8216,29 @@
     function getSectionOffset(id) {
       const viewportScale = getViewportScale();
       const sectionOffsets = {
-        gophish: -Math.round(.5 * 37.795),
-        ihave: -Math.round(.5 * 37.795),
-        progressing: -Math.round(.5 * 37.795),
-        recall: -Math.round(.5 * 37.795),
+        gophish: 0,
+        ihave: 0,
+        progressing: 0,
+        recall: 0,
         "gophish-story": Math.round(2 * 3.7795),
         "ihave-story": Math.round(2 * 3.7795),
         "progressing-story": Math.round(2 * 3.7795),
         "recall-story": Math.round(2 * 3.7795),
         pipeline: Math.round(1.5 * 37.795 * viewportScale),
         research: Math.round(2 * 37.795 * viewportScale),
-        "research-mindfulness-paper": -Math.round(.5 * 37.795),
-        "research-inner-speech-paper": -Math.round(.5 * 37.795),
-        "research-visq-paper": -Math.round(.5 * 37.795),
+        "research-mindfulness-paper": 0,
+        "research-inner-speech-paper": 0,
+        "research-visq-paper": 0,
         "research-mindfulness-story": Math.round(2 * 3.7795),
         "research-inner-speech-story": Math.round(2 * 3.7795),
         "research-visq-story": Math.round(2 * 3.7795)
       };
       return sectionOffsets[id] || 0;
+    }
+
+    function isHandheldLandingTarget(target) {
+      if (!target || (window.innerWidth || document.documentElement.clientWidth) > 1100) return false;
+      return target.matches(".project-strip, .research-paper");
     }
 
     function getTargetScrollTop(target) {
@@ -8244,6 +8256,10 @@
       }
       if (target === openingSection || target.id === "top") {
         return 0;
+      }
+      if (isHandheldLandingTarget(target)) {
+        const targetTop = window.scrollY + target.getBoundingClientRect().top;
+        return Math.max(0, targetTop - navHeight - Math.round(1 * 37.795));
       }
       const top = window.scrollY + target.getBoundingClientRect().top - navHeight - 8;
       return Math.max(0, top + getSectionOffset(target.id));
