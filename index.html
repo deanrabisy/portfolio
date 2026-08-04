@@ -6677,7 +6677,7 @@
             <p>A validation study adapting an inner-speech questionnaire for Hebrew-speaking participants.</p>
           </div>
           <div class="research-paper-meta-row">
-            <small class="research-paper-meta">Publication: Frontiers in Psychology (2022), "The Psychometric Properties of the Varieties of Inner Speech Questionnaire-Revised in Hebrew"</small>
+            <small class="research-paper-meta">Publication: <a href="https://doi.org/10.3389/fpsyg.2022.1092223" target="_blank" rel="noopener">Frontiers in Psychology (2023)</a>, "The Psychometric Properties of the Varieties of Inner Speech Questionnaire-Revised in Hebrew"</small>
             <div class="research-paper-side">
               <div class="research-paper-actions">
                 <a class="button case-study-button case-button-3" href="#research-visq-story">Read full research summary</a>
@@ -7953,7 +7953,7 @@
                 <li>The questionnaire demonstrated good convergent and divergent validity</li>
               </ul>
               <p>The findings support the Hebrew VISQ-R as a reliable research instrument and provide further evidence linking specific varieties of inner speech to executive functioning.</p>
-              <p class="research-publication">Publication: Frontiers in Psychology (2022), "The Psychometric Properties of the Varieties of Inner Speech Questionnaire-Revised in Hebrew"</p>
+              <p class="research-publication">Publication: <a href="https://doi.org/10.3389/fpsyg.2022.1092223" target="_blank" rel="noopener">Frontiers in Psychology (2023)</a>, "The Psychometric Properties of the Varieties of Inner Speech Questionnaire-Revised in Hebrew"</p>
             </div>
             <button class="close-modal case-end-close" type="button" aria-label="Close research summary">x</button>
           </section>
@@ -8255,20 +8255,21 @@
 
     function getSectionOffset(id) {
       const viewportScale = getViewportScale();
+      const landingDrop = (window.innerWidth || document.documentElement.clientWidth) > 1100 ? Math.round(-.5 * 37.795) : 0;
       const sectionOffsets = {
-        gophish: 0,
-        ihave: 0,
-        progressing: 0,
-        recall: 0,
+        gophish: landingDrop,
+        ihave: landingDrop,
+        progressing: landingDrop,
+        recall: landingDrop,
         "gophish-story": Math.round(2 * 3.7795),
         "ihave-story": Math.round(2 * 3.7795),
         "progressing-story": Math.round(2 * 3.7795),
         "recall-story": Math.round(2 * 3.7795),
         pipeline: Math.round(1.5 * 37.795 * viewportScale),
         research: Math.round(2 * 37.795 * viewportScale),
-        "research-mindfulness-paper": 0,
-        "research-inner-speech-paper": 0,
-        "research-visq-paper": 0,
+        "research-mindfulness-paper": landingDrop,
+        "research-inner-speech-paper": landingDrop,
+        "research-visq-paper": landingDrop,
         "research-mindfulness-story": Math.round(2 * 3.7795),
         "research-inner-speech-story": Math.round(2 * 3.7795),
         "research-visq-story": Math.round(2 * 3.7795),
