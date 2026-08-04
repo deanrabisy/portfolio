@@ -7996,6 +7996,7 @@
     ];
     const introProjectGap = Math.round(2 * 37.795);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const initialLocationHash = window.location.hash;
     const cssPreloadAssets = [
       "assets/flow-triangle-marker.png",
       "assets/intro-flow-cue-line-transparent-v4.png",
@@ -8179,16 +8180,25 @@
       if (!projects) return;
       completeOpeningIntroForJump();
       beginProgrammaticScroll();
+      updateUrlHash("projects");
       window.scrollTo({
         top: getTargetScrollTop(projects),
         behavior: reducedMotion ? "auto" : "smooth"
       });
     }
 
-    function scrollToInternalTarget(target, behavior = reducedMotion ? "auto" : "smooth") {
+    function updateUrlHash(id) {
+      if (!id) return;
+      const nextHash = `#${id}`;
+      if (window.location.hash === nextHash) return;
+      history.pushState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
+    }
+
+    function scrollToInternalTarget(target, behavior = reducedMotion ? "auto" : "smooth", options = {}) {
       if (!target) return;
       completeOpeningIntroForJump();
       beginProgrammaticScroll();
+      if (options.updateHash) updateUrlHash(target.id);
       window.scrollTo({
         top: getTargetScrollTop(target),
         behavior
@@ -8202,7 +8212,7 @@
       if (!target) return;
       event.preventDefault();
       if (event.currentTarget.matches("[data-projects-jump]")) return;
-      scrollToInternalTarget(target);
+      scrollToInternalTarget(target, reducedMotion ? "auto" : "smooth", { updateHash: true });
     }
 
     function copyTextFallback(text) {
@@ -8350,6 +8360,39 @@
     function scheduleLandingSnap() {
       window.clearTimeout(landingSnapTimer);
       landingSnapTimer = window.setTimeout(applyLandingSnap, 150);
+    }
+
+    function getHashTarget(hash = window.location.hash) {
+      if (!hash || hash === "#") return null;
+      let id = hash.slice(1);
+      try {
+        id = decodeURIComponent(id);
+      } catch (error) {
+        id = hash.slice(1);
+      }
+      return document.getElementById(id);
+    }
+
+    function alignToInitialHashTarget() {
+      if (!initialLocationHash || window.location.hash !== initialLocationHash) return;
+      const target = getHashTarget(initialLocationHash);
+      if (!target) return;
+      completeOpeningIntroForJump();
+      syncOpeningLayout();
+      updateOpeningState();
+      beginProgrammaticScroll(900);
+      window.scrollTo({
+        top: getTargetScrollTop(target),
+        behavior: "auto"
+      });
+    }
+
+    function scheduleInitialHashAlignment() {
+      if (!initialLocationHash) return;
+      [0, 80, 220, 520, 1000, 1700, 2600].forEach((delay) => {
+        window.setTimeout(alignToInitialHashTarget, delay);
+      });
+      window.requestAnimationFrame(alignToInitialHashTarget);
     }
 
     async function handleCopyEmail(event) {
@@ -8570,12 +8613,10 @@
 
     syncOpeningLayout();
     updateOpeningState();
-    if (window.location.hash) {
-      history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
-    }
     window.addEventListener("load", () => {
       syncOpeningLayout();
       updateOpeningState();
+      alignToInitialHashTarget();
       scheduleSiteAssetPreload();
     });
     window.addEventListener("scroll", updateOpeningState, { passive: true });
@@ -8974,6 +9015,7 @@
     }
 
     buildMobileInlinePanels();
+    scheduleInitialHashAlignment();
 
     function setActiveInlineFlow(id) {
       if (!id || activeInlineFlowId === id) return;
