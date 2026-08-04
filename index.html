@@ -8255,7 +8255,7 @@
 
     function getSectionOffset(id) {
       const viewportScale = getViewportScale();
-      const landingDrop = (window.innerWidth || document.documentElement.clientWidth) > 1100 ? Math.round(-.5 * 37.795) : 0;
+      const landingDrop = (window.innerWidth || document.documentElement.clientWidth) > 1100 ? Math.round(.5 * 37.795) : 0;
       const sectionOffsets = {
         gophish: landingDrop,
         ihave: landingDrop,
