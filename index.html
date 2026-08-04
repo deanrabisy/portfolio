@@ -8373,9 +8373,9 @@
       return document.getElementById(id);
     }
 
-    function alignToInitialHashTarget() {
-      if (!initialLocationHash || window.location.hash !== initialLocationHash) return;
-      const target = getHashTarget(initialLocationHash);
+    function alignToHashTarget(hash = window.location.hash) {
+      if (!hash || window.location.hash !== hash) return;
+      const target = getHashTarget(hash);
       if (!target) return;
       completeOpeningIntroForJump();
       syncOpeningLayout();
@@ -8387,12 +8387,16 @@
       });
     }
 
-    function scheduleInitialHashAlignment() {
-      if (!initialLocationHash) return;
+    function scheduleHashAlignment(hash = window.location.hash) {
+      if (!hash || hash === "#") return;
       [0, 80, 220, 520, 1000, 1700, 2600].forEach((delay) => {
-        window.setTimeout(alignToInitialHashTarget, delay);
+        window.setTimeout(() => alignToHashTarget(hash), delay);
       });
-      window.requestAnimationFrame(alignToInitialHashTarget);
+      window.requestAnimationFrame(() => alignToHashTarget(hash));
+    }
+
+    function scheduleInitialHashAlignment() {
+      scheduleHashAlignment(initialLocationHash);
     }
 
     async function handleCopyEmail(event) {
@@ -8616,7 +8620,7 @@
     window.addEventListener("load", () => {
       syncOpeningLayout();
       updateOpeningState();
-      alignToInitialHashTarget();
+      alignToHashTarget(initialLocationHash);
       scheduleSiteAssetPreload();
     });
     window.addEventListener("scroll", updateOpeningState, { passive: true });
@@ -8625,6 +8629,9 @@
       syncOpeningLayout();
       updateOpeningState();
       window.clearTimeout(landingSnapTimer);
+    });
+    window.addEventListener("hashchange", () => {
+      scheduleHashAlignment(window.location.hash);
     });
     internalSectionLinks.forEach((link) => {
       link.addEventListener("click", handleInternalSectionLink);
