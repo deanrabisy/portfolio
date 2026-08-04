@@ -7997,6 +7997,7 @@
     const introProjectGap = Math.round(2 * 37.795);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const initialLocationHash = window.location.hash;
+    let observedLocationHash = initialLocationHash;
     const cssPreloadAssets = [
       "assets/flow-triangle-marker.png",
       "assets/intro-flow-cue-line-transparent-v4.png",
@@ -8399,6 +8400,13 @@
       scheduleHashAlignment(initialLocationHash);
     }
 
+    function handlePotentialHashChange() {
+      const currentHash = window.location.hash;
+      if (currentHash === observedLocationHash) return;
+      observedLocationHash = currentHash;
+      scheduleHashAlignment(currentHash);
+    }
+
     async function handleCopyEmail(event) {
       if (!copyEmailButton) return;
       event.preventDefault();
@@ -8631,8 +8639,10 @@
       window.clearTimeout(landingSnapTimer);
     });
     window.addEventListener("hashchange", () => {
-      scheduleHashAlignment(window.location.hash);
+      observedLocationHash = window.location.hash;
+      scheduleHashAlignment(observedLocationHash);
     });
+    window.setInterval(handlePotentialHashChange, 250);
     internalSectionLinks.forEach((link) => {
       link.addEventListener("click", handleInternalSectionLink);
     });
