@@ -7981,12 +7981,10 @@
     const introStorySpacer = document.querySelector(".intro-story-spacer");
     const storyParagraphs = Array.from(document.querySelectorAll(".intro-body-callout p"));
     const typingTarget = document.querySelector(".typing-text");
-    const projectJumpLinks = document.querySelectorAll("[data-projects-jump]");
     const internalSectionLinks = document.querySelectorAll('a[href^="#"]');
     const copyEmailButton = document.querySelector(".copy-email");
     const pipelineCards = [];
     let copyEmailResetTimer;
-    let completeOpeningIntroForJump = () => {};
     const greetingLines = [
       "Hi,",
       "Welcome to my portfolio."
@@ -7994,9 +7992,10 @@
     const taglineLines = [
       "I notice when a product, system, or operation is not working as optimally as it should, and I enjoy investigating why, testing solutions, and improving the experience."
     ];
+    let completeOpeningIntroForJump = completeOpeningIntroFallback;
     const introProjectGap = Math.round(2 * 37.795);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const initialLocationHash = window.location.hash;
+    const initialLocationHash = window.location.hash || applyQueryDeepLinkHash();
     let observedLocationHash = initialLocationHash;
     const cssPreloadAssets = [
       "assets/flow-triangle-marker.png",
@@ -8014,6 +8013,32 @@
     }
     if (!window.location.hash) {
       window.scrollTo(0, 0);
+    }
+
+    function completeOpeningIntroFallback() {
+      if (!typingTarget) return;
+      typingTarget.classList.remove("is-fading");
+      typingTarget.style.opacity = "";
+      typingTarget.textContent = taglineLines.join("\n");
+      openingSection?.dataset && (openingSection.dataset.openingHookComplete = "true");
+      openingSection?.style.setProperty("--intro-story-marker-opacity", "1");
+      updateOpeningState?.();
+    }
+
+    function getQueryDeepLinkHash() {
+      const params = new URLSearchParams(window.location.search);
+      const rawTarget = params.get("target") || params.get("section") || params.get("project") || params.get("paper");
+      if (!rawTarget) return "";
+      const targetId = rawTarget.replace(/^#/, "").trim();
+      if (!targetId || !document.getElementById(targetId)) return "";
+      return `#${encodeURIComponent(targetId)}`;
+    }
+
+    function applyQueryDeepLinkHash() {
+      const queryHash = getQueryDeepLinkHash();
+      if (!queryHash) return "";
+      history.replaceState(null, "", `${window.location.pathname}${window.location.search}${queryHash}`);
+      return queryHash;
     }
 
     function warmImageAsset(src) {
@@ -8212,7 +8237,10 @@
       const target = document.querySelector(href);
       if (!target) return;
       event.preventDefault();
-      if (event.currentTarget.matches("[data-projects-jump]")) return;
+      if (event.currentTarget.matches("[data-projects-jump]")) {
+        scrollToProjects(event);
+        return;
+      }
       scrollToInternalTarget(target, reducedMotion ? "auto" : "smooth", { updateHash: true });
     }
 
@@ -8540,8 +8568,7 @@
 
       function releaseGreetingForInteractiveClick(event) {
         if (!greetingLocked || !event.target.closest("a, button")) return;
-        removeGreetingLock();
-        if (releaseOpeningLock) releaseOpeningLock();
+        completeOpeningIntroEndState();
       }
 
       function waitForOpeningRelease() {
@@ -8645,9 +8672,6 @@
     window.setInterval(handlePotentialHashChange, 250);
     internalSectionLinks.forEach((link) => {
       link.addEventListener("click", handleInternalSectionLink);
-    });
-    projectJumpLinks.forEach((link) => {
-      link.addEventListener("click", scrollToProjects);
     });
     if (copyEmailButton) {
       copyEmailButton.addEventListener("click", handleCopyEmail);
