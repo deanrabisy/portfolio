@@ -2064,6 +2064,13 @@
         linear-gradient(135deg, #f1fbfb, #d9f0f0 55%, #c6e7e7);
     }
 
+    @media (min-width: 1101px) {
+      .closing {
+        min-height: calc(100svh - 64px);
+        align-items: start;
+      }
+    }
+
     .closing-inner {
       position: relative;
       z-index: 1;
@@ -8333,7 +8340,7 @@
         return target.offsetTop + curveClearance;
       }
       if (target.id === "next" && (window.innerWidth || document.documentElement.clientWidth) > 1100) {
-        return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        return Math.max(0, window.scrollY + target.getBoundingClientRect().top - navHeight);
       }
       if (target === openingSection || target.id === "top") {
         return 0;
